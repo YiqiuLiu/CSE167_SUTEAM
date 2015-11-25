@@ -7,20 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41559A9F1C056D6400648F2C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41559A9E1C056D6400648F2C /* AppDelegate.m */; };
-		41559AA41C056D6400648F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41559AA31C056D6400648F2C /* Assets.xcassets */; };
-		41559AA71C056D6400648F2C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41559AA51C056D6400648F2C /* MainMenu.xib */; };
 		41559AAF1C056EFD00648F2C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AAE1C056EFD00648F2C /* main.cpp */; };
+		41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB11C0572BC00648F2C /* OpenGL.framework */; };
+		41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
+		41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
+		41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
+		41559ABC1C05744200648F2C /* libGLEW.1.12.0.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		41559ABA1C05742300648F2C /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				41559ABC1C05744200648F2C /* libGLEW.1.12.0.dylib in Copy Files */,
+				41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		41559A9A1C056D6400648F2C /* TankBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		41559A9D1C056D6400648F2C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		41559A9E1C056D6400648F2C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		41559AA31C056D6400648F2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		41559AA61C056D6400648F2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		41559AA81C056D6400648F2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41559AAE1C056EFD00648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		41559AB11C0572BC00648F2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
+		41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = /usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */,
+				41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */,
+				41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +55,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				41559AB71C05732800648F2C /* Frameworks */,
 				41559A9C1C056D6400648F2C /* TankBattle */,
 				41559A9B1C056D6400648F2C /* Products */,
 			);
@@ -53,22 +72,19 @@
 		41559A9C1C056D6400648F2C /* TankBattle */ = {
 			isa = PBXGroup;
 			children = (
-				41559A9D1C056D6400648F2C /* AppDelegate.h */,
-				41559A9E1C056D6400648F2C /* AppDelegate.m */,
-				41559AA31C056D6400648F2C /* Assets.xcassets */,
-				41559AA51C056D6400648F2C /* MainMenu.xib */,
-				41559AA81C056D6400648F2C /* Info.plist */,
-				41559AA01C056D6400648F2C /* Supporting Files */,
+				41559AAE1C056EFD00648F2C /* main.cpp */,
 			);
 			path = TankBattle;
 			sourceTree = "<group>";
 		};
-		41559AA01C056D6400648F2C /* Supporting Files */ = {
+		41559AB71C05732800648F2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				41559AAE1C056EFD00648F2C /* main.cpp */,
+				41559AB11C0572BC00648F2C /* OpenGL.framework */,
+				41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */,
+				41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */,
 			);
-			name = "Supporting Files";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -81,6 +97,8 @@
 				41559A961C056D6400648F2C /* Sources */,
 				41559A971C056D6400648F2C /* Frameworks */,
 				41559A981C056D6400648F2C /* Resources */,
+				41559ABA1C05742300648F2C /* Copy Files */,
+				41559ABD1C05769900648F2C /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -128,12 +146,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41559AA41C056D6400648F2C /* Assets.xcassets in Resources */,
-				41559AA71C056D6400648F2C /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41559ABD1C05769900648F2C /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -id @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ninstall_name_tool -id @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.12.0.dylib\"\ninstall_name_tool -change /usr/local/lib/libglfw3.3.dylib @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ninstall_name_tool -change /usr/local/lib/libGLEW.1.12.0.dylib @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.12.0.dylib\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41559A961C056D6400648F2C /* Sources */ = {
@@ -141,22 +174,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				41559AAF1C056EFD00648F2C /* main.cpp in Sources */,
-				41559A9F1C056D6400648F2C /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		41559AA51C056D6400648F2C /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				41559AA61C056D6400648F2C /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		41559AA91C056D6400648F2C /* Debug */ = {
@@ -241,10 +262,16 @@
 		41559AAC1C056D6400648F2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TankBattle/Info.plist;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/glew/1.12.0/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -253,10 +280,14 @@
 		41559AAD1C056D6400648F2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = TankBattle/Info.plist;
+				INFOPLIST_FILE = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/glew/1.12.0/lib,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -281,6 +312,7 @@
 				41559AAD1C056D6400648F2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

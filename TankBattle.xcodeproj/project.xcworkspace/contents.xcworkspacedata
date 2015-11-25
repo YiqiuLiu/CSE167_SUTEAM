@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TankBattle.xcodeproj">
+      location = "self:/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/TankBattle/TankBattle.xcodeproj">
    </FileRef>
 </Workspace>
