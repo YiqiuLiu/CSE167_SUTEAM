@@ -15,3 +15,5 @@ profile
 DerivedData
 *.hmap
 *.xccheckout
+*.log
+*.opensdf
