@@ -21,3 +21,5 @@ DerivedData
 /Debug/*
 *.sdf
 *.suo
+*.vcxproj
+*.filters
