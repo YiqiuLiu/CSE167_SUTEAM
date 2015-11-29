@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41559AAF1C056EFD00648F2C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AAE1C056EFD00648F2C /* main.cpp */; };
 		41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB11C0572BC00648F2C /* OpenGL.framework */; };
 		41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
 		41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
@@ -19,6 +18,7 @@
 		41559ACA1C0B96B500648F2C /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC41C0B96B500648F2C /* shader.cpp */; };
 		41559ACB1C0B96B500648F2C /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC61C0B96B500648F2C /* texture.cpp */; };
 		41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */; };
+		41559ACF1C0BA54500648F2C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559ACE1C0BA54500648F2C /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		41559A9A1C056D6400648F2C /* TankBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		41559AAE1C056EFD00648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = TankBattle/main.cpp; sourceTree = "<group>"; };
 		41559AB11C0572BC00648F2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
 		41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = /usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<absolute>"; };
@@ -52,6 +51,7 @@
 		41559AC61C0B96B500648F2C /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		41559AC71C0B96B500648F2C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSOIL.1.07.dylib; path = ../../../../../../../../usr/local/Cellar/libsoil/1.07/lib/libSOIL.1.07.dylib; sourceTree = "<group>"; };
+		41559ACE1C0BA54500648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 				41559AC51C0B96B500648F2C /* shader.h */,
 				41559AC61C0B96B500648F2C /* texture.cpp */,
 				41559AC71C0B96B500648F2C /* texture.h */,
-				41559AAE1C056EFD00648F2C /* main.cpp */,
+				41559ACE1C0BA54500648F2C /* main.cpp */,
 				41559AB71C05732800648F2C /* Frameworks */,
 				41559A9B1C056D6400648F2C /* Products */,
 			);
@@ -193,8 +193,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41559AAF1C056EFD00648F2C /* main.cpp in Sources */,
 				41559AC81C0B96B500648F2C /* Game.cpp in Sources */,
+				41559ACF1C0BA54500648F2C /* main.cpp in Sources */,
 				41559ACA1C0B96B500648F2C /* shader.cpp in Sources */,
 				41559AC91C0B96B500648F2C /* resource_manager.cpp in Sources */,
 				41559ACB1C0B96B500648F2C /* texture.cpp in Sources */,
