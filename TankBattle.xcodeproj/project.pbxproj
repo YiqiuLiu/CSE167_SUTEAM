@@ -14,6 +14,11 @@
 		41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
 		41559ABC1C05744200648F2C /* libGLEW.1.12.0.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
 		41559ABF1C05792000648F2C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ABE1C05792000648F2C /* SDL2.framework */; };
+		41559AC81C0B96B500648F2C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC01C0B96B500648F2C /* Game.cpp */; };
+		41559AC91C0B96B500648F2C /* resource_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC21C0B96B500648F2C /* resource_manager.cpp */; };
+		41559ACA1C0B96B500648F2C /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC41C0B96B500648F2C /* shader.cpp */; };
+		41559ACB1C0B96B500648F2C /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC61C0B96B500648F2C /* texture.cpp */; };
+		41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +43,15 @@
 		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
 		41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = /usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<absolute>"; };
 		41559ABE1C05792000648F2C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		41559AC01C0B96B500648F2C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		41559AC11C0B96B500648F2C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		41559AC21C0B96B500648F2C /* resource_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resource_manager.cpp; sourceTree = "<group>"; };
+		41559AC31C0B96B500648F2C /* resource_manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resource_manager.h; sourceTree = "<group>"; };
+		41559AC41C0B96B500648F2C /* shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		41559AC51C0B96B500648F2C /* shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
+		41559AC61C0B96B500648F2C /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		41559AC71C0B96B500648F2C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
+		41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSOIL.1.07.dylib; path = ../../../../../../../../usr/local/Cellar/libsoil/1.07/lib/libSOIL.1.07.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */,
 				41559ABF1C05792000648F2C /* SDL2.framework in Frameworks */,
 				41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */,
 				41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */,
@@ -58,6 +73,14 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				41559AC01C0B96B500648F2C /* Game.cpp */,
+				41559AC11C0B96B500648F2C /* Game.h */,
+				41559AC21C0B96B500648F2C /* resource_manager.cpp */,
+				41559AC31C0B96B500648F2C /* resource_manager.h */,
+				41559AC41C0B96B500648F2C /* shader.cpp */,
+				41559AC51C0B96B500648F2C /* shader.h */,
+				41559AC61C0B96B500648F2C /* texture.cpp */,
+				41559AC71C0B96B500648F2C /* texture.h */,
 				41559AB71C05732800648F2C /* Frameworks */,
 				41559A9C1C056D6400648F2C /* TankBattle */,
 				41559A9B1C056D6400648F2C /* Products */,
@@ -83,6 +106,7 @@
 		41559AB71C05732800648F2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */,
 				41559ABE1C05792000648F2C /* SDL2.framework */,
 				41559AB11C0572BC00648F2C /* OpenGL.framework */,
 				41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */,
@@ -178,6 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				41559AAF1C056EFD00648F2C /* main.cpp in Sources */,
+				41559AC81C0B96B500648F2C /* Game.cpp in Sources */,
+				41559ACA1C0B96B500648F2C /* shader.cpp in Sources */,
+				41559AC91C0B96B500648F2C /* resource_manager.cpp in Sources */,
+				41559ACB1C0B96B500648F2C /* texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +307,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.12.0/lib,
+					/usr/local/Cellar/libsoil/1.07/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -299,6 +328,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.12.0/lib,
+					/usr/local/Cellar/libsoil/1.07/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
