@@ -19,6 +19,9 @@
 		41559ACB1C0B96B500648F2C /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC61C0B96B500648F2C /* texture.cpp */; };
 		41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */; };
 		41559ACF1C0BA54500648F2C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559ACE1C0BA54500648F2C /* main.cpp */; };
+		41559ADF1C0BC0ED00648F2C /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */; };
+		41559AE11C0BC12100648F2C /* obj in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE01C0BC12100648F2C /* obj */; };
+		41559AE31C0BC23900648F2C /* shader in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE21C0BC23900648F2C /* shader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +57,10 @@
 		41559ACE1C0BA54500648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		41559ADB1C0BBC0000648F2C /* Mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		41559ADC1C0BBC1A00648F2C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		41559ADD1C0BBFD900648F2C /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = ../../../../../../../../usr/local/Cellar/assimp/3.1.1/lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
+		41559AE01C0BC12100648F2C /* obj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = obj; sourceTree = "<group>"; };
+		41559AE21C0BC23900648F2C /* shader */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shader; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41559ADF1C0BC0ED00648F2C /* libassimp.3.1.1.dylib in Frameworks */,
 				41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */,
 				41559ABF1C05792000648F2C /* SDL2.framework in Frameworks */,
 				41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */,
@@ -75,6 +83,8 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				41559AE21C0BC23900648F2C /* shader */,
+				41559AE01C0BC12100648F2C /* obj */,
 				41559ADA1C0BBB8A00648F2C /* Src */,
 				41559AB71C05732800648F2C /* Frameworks */,
 				41559A9B1C056D6400648F2C /* Products */,
@@ -92,6 +102,7 @@
 		41559AB71C05732800648F2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */,
 				41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */,
 				41559ABE1C05792000648F2C /* SDL2.framework */,
 				41559AB11C0572BC00648F2C /* OpenGL.framework */,
@@ -115,6 +126,7 @@
 				41559ACE1C0BA54500648F2C /* main.cpp */,
 				41559ADB1C0BBC0000648F2C /* Mesh.h */,
 				41559ADC1C0BBC1A00648F2C /* Model.h */,
+				41559ADD1C0BBFD900648F2C /* Camera.h */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -178,6 +190,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41559AE11C0BC12100648F2C /* obj in Resources */,
+				41559AE31C0BC23900648F2C /* shader in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +326,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.12.0/lib,
 					/usr/local/Cellar/libsoil/1.07/lib,
+					/usr/local/Cellar/assimp/3.1.1/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -333,6 +348,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.12.0/lib,
 					/usr/local/Cellar/libsoil/1.07/lib,
+					/usr/local/Cellar/assimp/3.1.1/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
