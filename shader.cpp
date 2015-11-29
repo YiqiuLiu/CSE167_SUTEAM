@@ -10,6 +10,11 @@
 
 #include <iostream>
 
+Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath)
+{
+    Compile(vertexPath, fragmentPath);
+}
+
 Shader &Shader::Use()
 {
 	glUseProgram(this->ID);

@@ -52,6 +52,8 @@
 		41559AC71C0B96B500648F2C /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSOIL.1.07.dylib; path = ../../../../../../../../usr/local/Cellar/libsoil/1.07/lib/libSOIL.1.07.dylib; sourceTree = "<group>"; };
 		41559ACE1C0BA54500648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		41559ADB1C0BBC0000648F2C /* Mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		41559ADC1C0BBC1A00648F2C /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,8 @@
 				41559AC61C0B96B500648F2C /* texture.cpp */,
 				41559AC71C0B96B500648F2C /* texture.h */,
 				41559ACE1C0BA54500648F2C /* main.cpp */,
+				41559ADB1C0BBC0000648F2C /* Mesh.h */,
+				41559ADC1C0BBC1A00648F2C /* Model.h */,
 			);
 			name = Src;
 			sourceTree = "<group>";

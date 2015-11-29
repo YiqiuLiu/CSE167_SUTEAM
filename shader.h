@@ -25,7 +25,7 @@ public:
 	// State
 	GLuint ID;
 	// Constructor
-	Shader() { }
+	Shader(const GLchar* vertexPath, const GLchar* fragmentPath);
 	// Sets the current shader as active
 	Shader  &Use();
 	// Compiles the shader from given source code
