@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		41559A9A1C056D6400648F2C /* TankBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		41559AAE1C056EFD00648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		41559AAE1C056EFD00648F2C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = TankBattle/main.cpp; sourceTree = "<group>"; };
 		41559AB11C0572BC00648F2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
 		41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = /usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<absolute>"; };
@@ -81,8 +81,8 @@
 				41559AC51C0B96B500648F2C /* shader.h */,
 				41559AC61C0B96B500648F2C /* texture.cpp */,
 				41559AC71C0B96B500648F2C /* texture.h */,
+				41559AAE1C056EFD00648F2C /* main.cpp */,
 				41559AB71C05732800648F2C /* Frameworks */,
-				41559A9C1C056D6400648F2C /* TankBattle */,
 				41559A9B1C056D6400648F2C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,14 +93,6 @@
 				41559A9A1C056D6400648F2C /* TankBattle.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		41559A9C1C056D6400648F2C /* TankBattle */ = {
-			isa = PBXGroup;
-			children = (
-				41559AAE1C056EFD00648F2C /* main.cpp */,
-			);
-			path = TankBattle;
 			sourceTree = "<group>";
 		};
 		41559AB71C05732800648F2C /* Frameworks */ = {
