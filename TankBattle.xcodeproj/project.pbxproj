@@ -73,15 +73,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
-				41559AC01C0B96B500648F2C /* Game.cpp */,
-				41559AC11C0B96B500648F2C /* Game.h */,
-				41559AC21C0B96B500648F2C /* resource_manager.cpp */,
-				41559AC31C0B96B500648F2C /* resource_manager.h */,
-				41559AC41C0B96B500648F2C /* shader.cpp */,
-				41559AC51C0B96B500648F2C /* shader.h */,
-				41559AC61C0B96B500648F2C /* texture.cpp */,
-				41559AC71C0B96B500648F2C /* texture.h */,
-				41559ACE1C0BA54500648F2C /* main.cpp */,
+				41559ADA1C0BBB8A00648F2C /* Src */,
 				41559AB71C05732800648F2C /* Frameworks */,
 				41559A9B1C056D6400648F2C /* Products */,
 			);
@@ -105,6 +97,22 @@
 				41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		41559ADA1C0BBB8A00648F2C /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				41559AC01C0B96B500648F2C /* Game.cpp */,
+				41559AC11C0B96B500648F2C /* Game.h */,
+				41559AC21C0B96B500648F2C /* resource_manager.cpp */,
+				41559AC31C0B96B500648F2C /* resource_manager.h */,
+				41559AC41C0B96B500648F2C /* shader.cpp */,
+				41559AC51C0B96B500648F2C /* shader.h */,
+				41559AC61C0B96B500648F2C /* texture.cpp */,
+				41559AC71C0B96B500648F2C /* texture.h */,
+				41559ACE1C0BA54500648F2C /* main.cpp */,
+			);
+			name = Src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
