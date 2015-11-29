@@ -18,3 +18,4 @@ DerivedData
 *.log
 *.opensdf
 /Release/*
+/Debug/*
