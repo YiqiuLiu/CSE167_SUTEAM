@@ -24,6 +24,9 @@ public:
 	void Update(GLfloat dt);
 	void Render();
     
+    glm::vec3 lightPos;
+    GLuint lightVAO;
+    
     bool keys[1024];
     
     //debug
