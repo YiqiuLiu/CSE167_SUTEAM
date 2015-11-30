@@ -79,7 +79,7 @@ int main()
         
         glfwPollEvents();
         
-        
+        myGame.ProcessInput(deltaTime);
         
         // Clear the colorbuffer
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
@@ -122,10 +122,13 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastX = xpos;
     lastY = ypos;
     
+    myGame.processMouseMovement(xoffset, yoffset, true);
+    
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
+    myGame.ProcessMouseScroll(yoffset);
 }
 
 #pragma endregion

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <GLFW/glfw3.h>
 
 Game::Game(GLuint width, GLuint height){
 	this->Width = width;
@@ -16,6 +17,29 @@ void Game::Init()
 Game::~Game()
 {
 }
+
+void Game::ProcessInput(GLfloat dt)
+{
+    if(keys[GLFW_KEY_W])
+        camera.ProcessKeyboard(FORWARD, dt);
+    if(keys[GLFW_KEY_S])
+        camera.ProcessKeyboard(BACKWARD, dt);
+    if(keys[GLFW_KEY_A])
+        camera.ProcessKeyboard(LEFT, dt);
+    if(keys[GLFW_KEY_D])
+        camera.ProcessKeyboard(RIGHT, dt);
+}
+
+void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
+{
+    camera.processMouseMovement(xoffset, yoffset, constrainPitch);
+}
+
+void Game::ProcessMouseScroll(GLfloat yoffset)
+{
+    camera.ProcessMouseScroll(yoffset);
+}
+
 
 void Game::Render(){
 	Shader shader = ResourceManager::GetShader("model");
