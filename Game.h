@@ -1,9 +1,17 @@
 #include <GL/glew.h>
+
+#include "Model.h"
+#include "Camera.h"
+#include "resource_manager.h"
+
 class Game
 {
 public:
 	// Game state
 	//GameState  State;
+	Model tank;
+	Camera camera;
+
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
 	// Constructor/Destructor

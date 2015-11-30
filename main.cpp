@@ -12,6 +12,7 @@
 #include "shader.h"
 #include "Camera.h"
 #include "Model.h"
+#include "Game.h"
 
 // GLM Mathemtics
 #include <glm/glm.hpp>
@@ -21,7 +22,7 @@
 // Other Libs
 #include <SOIL/SOIL.h>
 
-#include "resource_manager.h"
+//#include "resource_manager.h"
 
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
@@ -76,11 +77,13 @@ int main()
     // Setup and compile our shaders
 //    Shader shader = Shader();
 //    shader.Compile("./shader/model_loading.vs", "./shader/model_loading.frag");
-    ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
-    Shader shader = ResourceManager::GetShader("model");
+    //ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
+    //Shader shader = ResourceManager::GetShader("model");
     // Load models
-    Model ourModel("./obj/tank_whole_no_texture.obj");
+   // Model ourModel("./obj/tank_whole_no_texture.obj");
     
+	Game myGame(screenWidth, screenHeight);
+
     // Draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
@@ -99,7 +102,7 @@ int main()
         // Clear the colorbuffer
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+		/*
         shader.Use();   // <-- Don't forget this one!
         // Transformation matrices
         glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth/(float)screenHeight, 0.1f, 100.0f);
@@ -113,7 +116,7 @@ int main()
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
         glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
         ourModel.Draw(shader);
-        
+        */
         // Swap the buffers
         glfwSwapBuffers(window);
     }
