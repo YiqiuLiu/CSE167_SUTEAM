@@ -3,11 +3,13 @@
 Game::Game(GLuint width, GLuint height){
 	this->Width = width;
 	this->Height = height;
-	ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
-	//Shader shader = ResourceManager::GetShader("model");
-	// Load models
-	tank = Model("./obj/tank_whole_no_texture.obj");
-	camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+}
+
+void Game::Init()
+{
+    camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
+    tank = Model("./obj/tank_whole_no_texture.obj");
 }
 
 
@@ -17,7 +19,7 @@ Game::~Game()
 
 void Game::Render(){
 	Shader shader = ResourceManager::GetShader("model");
-	shader.Use();   // <-- Don't forget this one!
+	shader.Use();
 	// Transformation matrices
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();

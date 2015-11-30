@@ -1,8 +1,8 @@
-#include <GL/glew.h>
-
+#ifndef GAME_H
+#define GAME_H
 #include "Model.h"
 #include "Camera.h"
-#include "resource_manager.h"
+#include "Resource_manager.h"
 
 class Game
 {
@@ -23,4 +23,14 @@ public:
 	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
 	void Render();
+    
+    bool keys[1024];
+    
+    //debug
+    void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
+    void processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch);
+    
+    // Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
+    void ProcessMouseScroll(GLfloat yoffset);
 };
+#endif
