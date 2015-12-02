@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <GLFW/glfw3.h>
+#include "Tank.h"
 
 Game::Game(GLuint width, GLuint height){
 	this->Width = width;
@@ -62,12 +63,13 @@ void Game::Render(){
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
 	// Draw the loaded model
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-	tank.Draw(shader);
+//	glm::mat4 model;
+//	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+//	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+//	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    Tank t = Tank();
+    t.draw();
+//	tank.Draw(shader);
     //glBindVertexArray(0);
 
 }
