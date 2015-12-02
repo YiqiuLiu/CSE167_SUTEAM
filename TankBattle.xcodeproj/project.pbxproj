@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		413925551C0EB5BF00485E73 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */; };
-		413925571C0EB68E00485E73 /* libGLEW.1.13.0.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */; };
 		41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB11C0572BC00648F2C /* OpenGL.framework */; };
 		41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
 		41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
@@ -34,7 +33,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				413925571C0EB68E00485E73 /* libGLEW.1.13.0.dylib in Copy Files */,
 				41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */,
 			);
 			name = "Copy Files";
@@ -44,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
-		413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		41559A9A1C056D6400648F2C /* TankBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41559AB11C0572BC00648F2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
@@ -90,7 +87,6 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
-				413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */,
 				41559AE21C0BC23900648F2C /* shader */,
 				41559AE01C0BC12100648F2C /* obj */,
 				41559ADA1C0BBB8A00648F2C /* Src */,
@@ -153,7 +149,6 @@
 				41559A971C056D6400648F2C /* Frameworks */,
 				41559A981C056D6400648F2C /* Resources */,
 				41559ABA1C05742300648F2C /* Copy Files */,
-				41559ABD1C05769900648F2C /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -207,23 +202,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		41559ABD1C05769900648F2C /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "install_name_tool -id @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ninstall_name_tool -id @executable_path/../Resources/libGLEW.1.13.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.13.0.dylib\"\ninstall_name_tool -change /usr/local/lib/libglfw3.3.dylib @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ninstall_name_tool -change /usr/local/lib/libGLEW.1.12.0.dylib @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.13.0.dylib\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41559A961C056D6400648F2C /* Sources */ = {
