@@ -12,7 +12,10 @@ void Game::Init()
     camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
-    tank = new Tank();
+	topModel = new Model("./obj/tank_top_no_texture.obj");
+	botModel = new Model("./obj/tank_bottm_no_texture.obj");
+	
+	tank = new Tank(topModel,botModel);
 }
 
 

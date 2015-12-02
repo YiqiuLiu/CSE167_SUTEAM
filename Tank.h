@@ -17,7 +17,7 @@
 
 class Tank{
 public:
-    Tank();
+	Tank(Model* top, Model*bot);
     ~Tank();
     glm::mat4 world;
     glm::vec3 position;
@@ -27,8 +27,8 @@ public:
     void spinTop(GLfloat angle);
 	void spinBot(GLfloat dt);
 private:
-    Model bot;
-    Model top;
+    Model* bot;
+    Model* top;
     Shader shader;
     glm::mat4 topWorld;
     float topAngle;

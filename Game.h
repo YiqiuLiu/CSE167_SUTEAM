@@ -11,6 +11,10 @@ class Game
 public:
 	// Game state
 	//GameState  State;
+	Model* botModel;
+	Model* topModel;
+	Model* bulletModel;
+
 	Tank* tank;
 	Camera camera;
 	Light light;
