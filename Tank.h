@@ -22,6 +22,8 @@ public:
     glm::mat4 world;
     glm::vec3 position;
     void draw();
+    void move(GLfloat x, GLfloat y, GLfloat z);
+    void spin(GLfloat angle);
 private:
     Model bot;
     Model top;

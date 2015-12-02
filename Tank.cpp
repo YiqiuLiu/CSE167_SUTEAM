@@ -35,3 +35,13 @@ void Tank::draw()
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     top.Draw(shader);
 }
+
+void Tank::move(GLfloat x, GLfloat y, GLfloat z)
+{
+    this->position += glm::vec3(x, y, z);
+}
+
+void Tank::spin(GLfloat angle)
+{
+    this->topAngle += angle;
+}
