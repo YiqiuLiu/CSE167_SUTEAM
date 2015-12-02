@@ -63,4 +63,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\model_loading.frag" />
+    <None Include="shader\model_loading.vs" />
+  </ItemGroup>
 </Project>
