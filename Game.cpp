@@ -9,13 +9,9 @@ Game::Game(GLuint width, GLuint height){
 void Game::Init()
 {
     camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     tank = Model("./obj/tank_whole_no_texture.obj");
-    
-    lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
-    
-    glGenVertexArrays(1, &lightVAO);
-    glBindVertexArray(lightVAO);
 }
 
 
@@ -55,10 +51,9 @@ void Game::Render(){
     GLint lightPosLoc    = glGetUniformLocation(shader.ID, "lightPos");
     GLint viewPosLoc     = glGetUniformLocation(shader.ID, "viewPos");
     glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-    glUniform3f(lightColorLoc,  1.0f, 1.0f, 1.0f);
-    glUniform3f(lightPosLoc,    lightPos.x, lightPos.y, lightPos.z);
+	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
+    glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
-    
     
 	// Transformation matrices
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
@@ -71,9 +66,8 @@ void Game::Render(){
 	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    
-    glBindVertexArray(lightVAO);
+
 	tank.Draw(shader);
-    glBindVertexArray(0);
+    //glBindVertexArray(0);
 
 }

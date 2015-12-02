@@ -2,6 +2,7 @@
 #define GAME_H
 #include "Model.h"
 #include "Camera.h"
+#include "Light.h"
 #include "Resource_manager.h"
 
 class Game
@@ -11,6 +12,7 @@ public:
 	//GameState  State;
 	Model tank;
 	Camera camera;
+	Light light;
 
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
@@ -23,10 +25,7 @@ public:
 	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
 	void Render();
-    
-    glm::vec3 lightPos;
-    GLuint lightVAO;
-    
+   
     bool keys[1024];
     
     //debug
