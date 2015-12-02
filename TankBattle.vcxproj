@@ -85,6 +85,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Resource_manager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +96,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Resource_manager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Tank.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>

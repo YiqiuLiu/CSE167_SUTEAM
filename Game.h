@@ -3,6 +3,7 @@
 #include "Model.h"
 #include "Camera.h"
 #include "Light.h"
+#include "Tank.h"
 #include "Resource_manager.h"
 
 class Game
@@ -10,7 +11,7 @@ class Game
 public:
 	// Game state
 	//GameState  State;
-	Model tank;
+	Tank* tank;
 	Camera camera;
 	Light light;
 
@@ -28,11 +29,16 @@ public:
    
     bool keys[1024];
     
-    //debug
+    
+
+
     void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
     void processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch);
-    
     // Processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
     void ProcessMouseScroll(GLfloat yoffset);
+
+private:
+	void setLight(GLuint);
+	void setPVmatrix(GLuint);
 };
 #endif
