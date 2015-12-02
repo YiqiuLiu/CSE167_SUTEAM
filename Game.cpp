@@ -30,11 +30,26 @@ void Game::ProcessInput(GLfloat dt)
         camera.ProcessKeyboard(LEFT, dt);
     if(keys[GLFW_KEY_D])
         camera.ProcessKeyboard(RIGHT, dt);
+	if (keys[GLFW_KEY_UP]){
+		tank->move(dt);
+	}
+	if (keys[GLFW_KEY_DOWN]){
+		tank->move(-dt);
+	}
+	if (keys[GLFW_KEY_LEFT]){
+		tank->spinBot(dt);
+	}
+	if (keys[GLFW_KEY_RIGHT]){
+		tank->spinBot(-dt);
+	}
 }
 
 void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
 {
-    camera.processMouseMovement(xoffset, yoffset, constrainPitch);
+	if (keys[GLFW_KEY_O]){
+		tank->spinTop(yoffset);
+	}
+	else	camera.processMouseMovement(xoffset, yoffset, constrainPitch);
 }
 
 void Game::ProcessMouseScroll(GLfloat yoffset)

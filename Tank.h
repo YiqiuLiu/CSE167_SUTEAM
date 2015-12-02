@@ -21,15 +21,20 @@ public:
     ~Tank();
     glm::mat4 world;
     glm::vec3 position;
+
     void draw();
-    void move(GLfloat x, GLfloat y, GLfloat z);
-    void spin(GLfloat angle);
+    void move(float dt);
+    void spinTop(GLfloat angle);
+	void spinBot(GLfloat dt);
 private:
     Model bot;
     Model top;
     Shader shader;
     glm::mat4 topWorld;
     float topAngle;
+	float botAngle;
+	float moveSpeed;
+	float spinSpeed;
     glm::mat4 botWorld;
     
 };
