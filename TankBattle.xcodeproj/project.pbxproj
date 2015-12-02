@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413925551C0EB5BF00485E73 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */; };
+		413925571C0EB68E00485E73 /* libGLEW.1.13.0.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */; };
 		41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB11C0572BC00648F2C /* OpenGL.framework */; };
 		41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
-		41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
 		41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */; };
-		41559ABC1C05744200648F2C /* libGLEW.1.12.0.dylib in Copy Files */ = {isa = PBXBuildFile; fileRef = 41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */; };
 		41559ABF1C05792000648F2C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ABE1C05792000648F2C /* SDL2.framework */; };
 		41559AC81C0B96B500648F2C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC01C0B96B500648F2C /* Game.cpp */; };
 		41559AC91C0B96B500648F2C /* Resource_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41559AC21C0B96B500648F2C /* Resource_manager.cpp */; };
@@ -34,7 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				41559ABC1C05744200648F2C /* libGLEW.1.12.0.dylib in Copy Files */,
+				413925571C0EB68E00485E73 /* libGLEW.1.13.0.dylib in Copy Files */,
 				41559ABB1C05743F00648F2C /* libglfw3.3.1.dylib in Copy Files */,
 			);
 			name = "Copy Files";
@@ -43,10 +43,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
+		413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		41559A9A1C056D6400648F2C /* TankBattle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TankBattle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41559AB11C0572BC00648F2C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = /usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<absolute>"; };
-		41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.12.0.dylib; path = /usr/local/Cellar/glew/1.12.0/lib/libGLEW.1.12.0.dylib; sourceTree = "<absolute>"; };
 		41559ABE1C05792000648F2C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		41559AC01C0B96B500648F2C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		41559AC11C0B96B500648F2C /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
@@ -74,10 +75,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				413925551C0EB5BF00485E73 /* libGLEW.1.13.0.dylib in Frameworks */,
 				41559ADF1C0BC0ED00648F2C /* libassimp.3.1.1.dylib in Frameworks */,
 				41559ACD1C0BA45500648F2C /* libSOIL.1.07.dylib in Frameworks */,
 				41559ABF1C05792000648F2C /* SDL2.framework in Frameworks */,
-				41559AB61C05731600648F2C /* libGLEW.1.12.0.dylib in Frameworks */,
 				41559AB41C0572F700648F2C /* libglfw3.3.1.dylib in Frameworks */,
 				41559AB21C0572BC00648F2C /* OpenGL.framework in Frameworks */,
 			);
@@ -89,6 +90,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				413925561C0EB68E00485E73 /* libGLEW.1.13.0.dylib */,
 				41559AE21C0BC23900648F2C /* shader */,
 				41559AE01C0BC12100648F2C /* obj */,
 				41559ADA1C0BBB8A00648F2C /* Src */,
@@ -108,12 +110,12 @@
 		41559AB71C05732800648F2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */,
 				41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */,
 				41559ACC1C0BA45500648F2C /* libSOIL.1.07.dylib */,
 				41559ABE1C05792000648F2C /* SDL2.framework */,
 				41559AB11C0572BC00648F2C /* OpenGL.framework */,
 				41559AB31C0572F700648F2C /* libglfw3.3.1.dylib */,
-				41559AB51C05731600648F2C /* libGLEW.1.12.0.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,7 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_name_tool -id @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ninstall_name_tool -id @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.12.0.dylib\"\ninstall_name_tool -change /usr/local/lib/libglfw3.3.dylib @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ninstall_name_tool -change /usr/local/lib/libGLEW.1.12.0.dylib @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.12.0.dylib\"";
+			shellScript = "install_name_tool -id @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ninstall_name_tool -id @executable_path/../Resources/libGLEW.1.13.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.13.0.dylib\"\ninstall_name_tool -change /usr/local/lib/libglfw3.3.dylib @executable_path/../Resources/libglfw3.3.1.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ninstall_name_tool -change /usr/local/lib/libGLEW.1.12.0.dylib @executable_path/../Resources/libGLEW.1.12.0.dylib \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/MacOS/$PRODUCT_NAME\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libglfw3.3.1.dylib\"\ncodesign --force --sign - --preserve-metadata=identifier,entitlements \"$TARGET_BUILD_DIR/$TARGET_NAME.app/Contents/Resources/libGLEW.1.13.0.dylib\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -336,9 +338,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw3/3.1.2/lib,
-					/usr/local/Cellar/glew/1.12.0/lib,
 					/usr/local/Cellar/libsoil/1.07/lib,
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -358,9 +360,9 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glfw3/3.1.2/lib,
-					/usr/local/Cellar/glew/1.12.0/lib,
 					/usr/local/Cellar/libsoil/1.07/lib,
 					/usr/local/Cellar/assimp/3.1.1/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = con.SUTeam.TankBattle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
