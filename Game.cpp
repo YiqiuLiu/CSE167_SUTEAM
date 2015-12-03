@@ -13,12 +13,15 @@ void Game::Init()
     camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
+    ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
+    
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
     SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
+    skybox = new Skybox;
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
@@ -78,7 +81,7 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 
 
 void Game::Render(){
-	Shader shader = ResourceManager::GetShader("model");
+	Shader shader = ResourceManager::GetShader("sky");
 	shader.Use();
     //uniform
     GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
@@ -97,9 +100,10 @@ void Game::Render(){
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	//tank->draw(shader);
-	for (auto it : sceneList){
-		it->draw(shader);
-	}
+    skybox->draw(shader);
+//	for (auto it : sceneList){
+//		it->draw(shader);
+//	}
 }
 
 void Game::setLight(GLuint sID){
