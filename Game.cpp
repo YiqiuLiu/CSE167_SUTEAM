@@ -16,7 +16,8 @@ void Game::Init()
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
-	tank = new Tank(topModel,botModel,bulletModel);
+    SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
+    tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }

@@ -8,7 +8,7 @@
 #include "Bullet.h"
 #include "Tank.h"
 #include "Resource_manager.h"
-
+#include "HeightMap.h"
 class Game
 {
 public:
@@ -24,7 +24,8 @@ public:
 
 	Camera camera;
 	Light light;
-
+    HeightMap SanDiego;
+    
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
 	// Constructor/Destructor
