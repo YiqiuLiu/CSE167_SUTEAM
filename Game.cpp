@@ -104,7 +104,17 @@ void Game::setPVmatrix(GLuint sID){
 }
 
 void Game::Update(float dt){
-	for (auto it : sceneList){
-		it->update(dt);
+	Drawable* del;
+	for (auto it = sceneList.begin(); it != sceneList.end();++it){
+		if ((*it) == 0){
+			continue;
+		}
+		if ((*it)->state == Drawable::ALIVE)
+			(*it)->update(dt);
+		else if ((*it)->state == Drawable::DEAD){
+			del = *it;
+			sceneList.erase(it);
+			delete (del);
+		}
 	}
 }

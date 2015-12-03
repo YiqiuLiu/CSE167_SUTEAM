@@ -12,6 +12,7 @@ public:
 	float angle;
 	Model* bulletModel;
 
+	int deathCount;
 	float speed;
 
 	//Shader* shader;

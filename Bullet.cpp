@@ -7,6 +7,7 @@ Bullet::Bullet(glm::vec3 position,float angle, Model* model) : Drawable()
 	this->angle = angle;
 	this->bulletModel = model;
 	this->speed = 1.0;
+	this->deathCount = 100;
 	//shader = &ResourceManager::GetShader("model");
 }
 
@@ -27,4 +28,8 @@ void Bullet::draw(Shader shader){
 void Bullet::update(float dt){
 	float pi = glm::pi<float>();
 	position += glm::vec3(dt*speed*sinf(angle / 180.0*pi), 0, dt*speed*cosf(angle / 180.0*pi));
+	deathCount--;
+	if (deathCount <= 0){
+		state = DEAD;
+	}
 }
