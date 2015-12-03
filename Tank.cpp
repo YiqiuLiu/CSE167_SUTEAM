@@ -9,11 +9,11 @@
 #include "Tank.h"
 
 
-Tank::Tank(Model* top, Model*bot)
+Tank::Tank(Model* top, Model*bot) : Drawable()
 {
     this->top = top;
     this->bot = bot;
-    shader = ResourceManager::GetShader("model");
+    //shader = ResourceManager::GetShader("model");
     position = glm::vec3(0.0, 0.0, 0.0);
     topAngle = 0.0;
 	botAngle = 0.0;
@@ -26,7 +26,7 @@ Tank::~Tank()
     
 }
 
-void Tank::draw()
+void Tank::draw(Shader shader)
 {
     glm::mat4 model = glm::mat4(1.0);
 	glm::mat4 rotate = glm::rotate(model, botAngle, glm::vec3(0.0, 1.0, 0.0));

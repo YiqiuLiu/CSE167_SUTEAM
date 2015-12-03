@@ -1,8 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
+
+#include <vector>
 #include "Model.h"
 #include "Camera.h"
 #include "Light.h"
+#include "Bullet.h"
 #include "Tank.h"
 #include "Resource_manager.h"
 
@@ -15,7 +18,10 @@ public:
 	Model* topModel;
 	Model* bulletModel;
 
+	Bullet* bullet;
 	Tank* tank;
+	std::vector<Drawable*> sceneList;
+
 	Camera camera;
 	Light light;
 

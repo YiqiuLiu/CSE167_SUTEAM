@@ -10,29 +10,30 @@
 #ifndef Tank_h
 #define Tank_h
 
+#include "Drawable.h"
 #include "Model.h"
 #include <glm/glm.hpp>
 #include "Shader.h"
-#include "Resource_manager.h"
+//#include "Resource_manager.h"
 
-class Tank{
+class Tank: public Drawable{
 public:
 	Tank(Model* top, Model*bot);
     ~Tank();
     glm::mat4 world;
     glm::vec3 position;
+	float topAngle;
+	float botAngle;
 
-    void draw();
+    void draw(Shader);
     void move(float dt);
     void spinTop(GLfloat angle);
 	void spinBot(GLfloat dt);
 private:
     Model* bot;
     Model* top;
-    Shader shader;
+    //Shader shader;
     glm::mat4 topWorld;
-    float topAngle;
-	float botAngle;
 	float moveSpeed;
 	float spinSpeed;
     glm::mat4 botWorld;

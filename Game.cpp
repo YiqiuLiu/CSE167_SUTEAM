@@ -14,8 +14,9 @@ void Game::Init()
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
-	
+	bulletModel = new Model("./obj/missel.obj");
 	tank = new Tank(topModel,botModel);
+	bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
 
@@ -79,8 +80,8 @@ void Game::Render(){
 	glm::mat4 view = camera.GetViewMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	tank->draw();
-
+	tank->draw(shader);
+	bullet->draw(shader);
 }
 
 void Game::setLight(GLuint sID){
