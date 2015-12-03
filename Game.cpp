@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <GLFW/glfw3.h>
+#include <glm/gtx/string_cast.hpp>
 
 
 Game::Game(GLuint width, GLuint height){
@@ -9,13 +10,14 @@ Game::Game(GLuint width, GLuint height){
 
 void Game::Init()
 {
-    camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+    camera = Camera(glm::vec3(0.0f, -10.0f, 10.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
 	tank = new Tank(topModel,botModel,bulletModel);
+    camera.updateCamera(tank->position);
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
@@ -26,34 +28,43 @@ Game::~Game()
 
 void Game::ProcessInput(GLfloat dt)
 {
-    if(keys[GLFW_KEY_W])
+    if(keys[GLFW_KEY_W]) {
         camera.ProcessKeyboard(FORWARD, dt);
-    if(keys[GLFW_KEY_S])
+    }
+    if(keys[GLFW_KEY_S]) {
         camera.ProcessKeyboard(BACKWARD, dt);
-    if(keys[GLFW_KEY_A])
+    }
+    if(keys[GLFW_KEY_A]) {
         camera.ProcessKeyboard(LEFT, dt);
-    if(keys[GLFW_KEY_D])
+    }
+    if(keys[GLFW_KEY_D]) {
         camera.ProcessKeyboard(RIGHT, dt);
+    }
 	if (keys[GLFW_KEY_UP]){
 		tank->move(dt);
+        camera.updateCamera(tank->position);
 	}
 	if (keys[GLFW_KEY_DOWN]){
 		tank->move(-dt);
+        camera.updateCamera(tank->position);
 	}
 	if (keys[GLFW_KEY_LEFT]){
 		tank->spinBot(dt);
+        camera.updateCamera(tank->position);
 	}
 	if (keys[GLFW_KEY_RIGHT]){
 		tank->spinBot(-dt);
+        camera.updateCamera(tank->position);
 	}
 	if (keys[GLFW_KEY_SPACE]){
 		sceneList.push_back(tank->fire());
 	}
+    std::cout<<glm::to_string(tank->position)<<std::endl;
 }
 
 void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
 {
-	if (keys[GLFW_KEY_O]){
+	if (!keys[GLFW_KEY_C]){
 		tank->spinTop(yoffset);
 	}
 	else	camera.processMouseMovement(xoffset, yoffset, constrainPitch);
@@ -61,7 +72,7 @@ void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean cons
 
 void Game::ProcessMouseScroll(GLfloat yoffset)
 {
-    camera.ProcessMouseScroll(yoffset);
+//    camera.ProcessMouseScroll(yoffset);
 }
 
 
@@ -114,6 +125,7 @@ void Game::Update(float dt){
 		else if ((*it)->state == Drawable::DEAD){
 			del = *it;
 			sceneList.erase(it);
+            it --;
 			delete (del);
 		}
 	}
