@@ -9,6 +9,8 @@
 #include "Tank.h"
 #include "Resource_manager.h"
 #include "HeightMap.h"
+#include "Skybox.h"
+
 class Game
 {
 public:
@@ -25,6 +27,7 @@ public:
 	Camera camera;
 	Light light;
     HeightMap SanDiego;
+    Skybox* skybox;
     
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
