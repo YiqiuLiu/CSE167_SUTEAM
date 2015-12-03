@@ -27,6 +27,8 @@
 		41FD96901C0C1A6F0025D456 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD968F1C0C1A6F0025D456 /* Camera.cpp */; };
 		41FD96921C0C1D970025D456 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD96911C0C1D970025D456 /* Mesh.cpp */; };
 		41FD96941C0C1EA80025D456 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD96931C0C1EA70025D456 /* Model.cpp */; };
+		790F1E9E1C102BDB008DE3AC /* PPM in Resources */ = {isa = PBXBuildFile; fileRef = 790F1E9D1C102BDB008DE3AC /* PPM */; };
+		790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +77,9 @@
 		41FD968F1C0C1A6F0025D456 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		41FD96911C0C1D970025D456 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		41FD96931C0C1EA70025D456 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		790F1E9D1C102BDB008DE3AC /* PPM */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PPM; sourceTree = "<group>"; };
+		790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeightMap.cpp; sourceTree = "<group>"; };
+		790F1EA01C102BE5008DE3AC /* HeightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeightMap.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +102,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				790F1E9D1C102BDB008DE3AC /* PPM */,
 				41559AE21C0BC23900648F2C /* shader */,
 				41559AE01C0BC12100648F2C /* obj */,
 				41559ADA1C0BBB8A00648F2C /* Src */,
@@ -129,6 +135,8 @@
 		41559ADA1C0BBB8A00648F2C /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */,
+				790F1EA01C102BE5008DE3AC /* HeightMap.h */,
 				4139255E1C0FC35E00485E73 /* Bullet.cpp */,
 				4139255F1C0FC35E00485E73 /* Bullet.h */,
 				413925601C0FC35E00485E73 /* Drawable.cpp */,
@@ -214,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790F1E9E1C102BDB008DE3AC /* PPM in Resources */,
 				41559AE11C0BC12100648F2C /* obj in Resources */,
 				41559AE31C0BC23900648F2C /* shader in Resources */,
 			);
@@ -238,6 +247,7 @@
 				41559AC91C0B96B500648F2C /* Resource_manager.cpp in Sources */,
 				41FD96901C0C1A6F0025D456 /* Camera.cpp in Sources */,
 				41559ACB1C0B96B500648F2C /* Texture.cpp in Sources */,
+				790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
