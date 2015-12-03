@@ -47,6 +47,7 @@ void Tank::move(GLfloat dt)
 {
 	float pi = glm::pi<float>();
 	float scale = dt*moveSpeed;
+//    std::cout<<botAngle<<std::endl;
 	this->position += glm::vec3(scale*sinf(botAngle / 180.0*pi), 0, scale*cosf(botAngle / 180.0*pi));
 }
 void Tank::spinTop(GLfloat angle)

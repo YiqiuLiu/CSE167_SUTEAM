@@ -10,7 +10,7 @@ Game::Game(GLuint width, GLuint height){
 
 void Game::Init()
 {
-    camera = Camera(glm::vec3(0.0f, -10.0f, 10.0f));
+    camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
 	topModel = new Model("./obj/tank_top_no_texture.obj");
@@ -59,7 +59,7 @@ void Game::ProcessInput(GLfloat dt)
 	if (keys[GLFW_KEY_SPACE]){
 		sceneList.push_back(tank->fire());
 	}
-    std::cout<<glm::to_string(tank->position)<<std::endl;
+//    std::cout<<glm::to_string(tank->position)<<std::endl;
 }
 
 void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
@@ -87,6 +87,7 @@ void Game::Render(){
     glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
     glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
+    
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
     
 	// Transformation matrices
