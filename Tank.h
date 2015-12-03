@@ -14,11 +14,12 @@
 #include "Model.h"
 #include <glm/glm.hpp>
 #include "Shader.h"
+#include "Bullet.h"
 //#include "Resource_manager.h"
 
 class Tank: public Drawable{
 public:
-	Tank(Model* top, Model*bot);
+	Tank(Model* top, Model*bot,Model* bullet);
     ~Tank();
     glm::mat4 world;
     glm::vec3 position;
@@ -29,9 +30,11 @@ public:
     void move(float dt);
     void spinTop(GLfloat angle);
 	void spinBot(GLfloat dt);
+	Bullet* fire();
 private:
     Model* bot;
     Model* top;
+	Model* bulletModel;
     //Shader shader;
     glm::mat4 topWorld;
 	float moveSpeed;

@@ -14,5 +14,5 @@ Drawable::~Drawable()
 void Drawable::draw(Shader shader){
 }
 
-void Drawable::update(){
+void Drawable::update(float dt){
 }

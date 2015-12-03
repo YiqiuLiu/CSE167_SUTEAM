@@ -15,8 +15,8 @@ void Game::Init()
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
-	tank = new Tank(topModel,botModel);
-	bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
+	tank = new Tank(topModel,botModel,bulletModel);
+	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
 
@@ -45,6 +45,9 @@ void Game::ProcessInput(GLfloat dt)
 	}
 	if (keys[GLFW_KEY_RIGHT]){
 		tank->spinBot(-dt);
+	}
+	if (keys[GLFW_KEY_SPACE]){
+		sceneList.push_back(tank->fire());
 	}
 }
 
@@ -81,7 +84,9 @@ void Game::Render(){
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 	tank->draw(shader);
-	bullet->draw(shader);
+	for (auto it : sceneList){
+		it->draw(shader);
+	}
 }
 
 void Game::setLight(GLuint sID){
@@ -96,4 +101,10 @@ void Game::setPVmatrix(GLuint sID){
 	glm::mat4 view = camera.GetViewMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(sID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(sID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+}
+
+void Game::Update(float dt){
+	for (auto it : sceneList){
+		it->update(dt);
+	}
 }

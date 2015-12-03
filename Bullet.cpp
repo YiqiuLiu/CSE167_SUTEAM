@@ -24,7 +24,7 @@ void Bullet::draw(Shader shader){
 	bulletModel->Draw(shader);
 }
 
-void Bullet::update(){
+void Bullet::update(float dt){
 	float pi = glm::pi<float>();
-	position += glm::vec3(speed*sinf(angle / 180.0*pi), 0, speed*cosf(angle / 180.0*pi));
+	position += glm::vec3(dt*speed*sinf(angle / 180.0*pi), 0, dt*speed*cosf(angle / 180.0*pi));
 }

@@ -80,7 +80,7 @@ int main()
         glfwPollEvents();
         
         myGame.ProcessInput(deltaTime);
-        
+		myGame.Update(deltaTime);
         // Clear the colorbuffer
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

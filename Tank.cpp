@@ -9,10 +9,11 @@
 #include "Tank.h"
 
 
-Tank::Tank(Model* top, Model*bot) : Drawable()
+Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
 {
     this->top = top;
     this->bot = bot;
+	this->bulletModel = bullet;
     //shader = ResourceManager::GetShader("model");
     position = glm::vec3(0.0, 0.0, 0.0);
     topAngle = 0.0;
@@ -55,4 +56,9 @@ void Tank::spinTop(GLfloat angle)
 
 void Tank::spinBot(GLfloat dt){
 	this->botAngle += dt*spinSpeed;
+}
+
+Bullet* Tank::fire(){
+	Bullet* bullet = new Bullet(this->position,this->topAngle,this->bulletModel);
+	return bullet;
 }

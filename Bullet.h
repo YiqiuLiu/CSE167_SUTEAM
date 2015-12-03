@@ -18,6 +18,6 @@ public:
 	Bullet(glm::vec3, float, Model*);
 	~Bullet();
 	void draw(Shader);
-	void update();
+	void update(float dt);
 };
 

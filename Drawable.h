@@ -13,6 +13,6 @@ public:
 	Drawable();
 	~Drawable();
 	virtual void draw(Shader);
-	virtual void update();
+	virtual void update(float);
 };
 
