@@ -16,6 +16,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #define BUFFER_OFFSET(i) ((void*)(i))
 
 using namespace std;
@@ -27,13 +28,14 @@ public:
     HeightMap(void);
     HeightMap(char* filename);
     void buildMap();
+    void buildMap_test();
+    void buildMap_test2();
 private:
     unsigned char* tdata;
-    GLuint VertexVBOID;
+    GLuint VertexVBOID,IndexVBOID;
     int width, height;
     glm::vec3 vRenderScale;
     
     void render();
-    
 };
 #endif /* HeightMap_hpp */

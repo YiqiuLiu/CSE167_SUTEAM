@@ -96,7 +96,7 @@ void Game::Render(){
 	glm::mat4 view = camera.GetViewMatrix();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	tank->draw(shader);
+	//tank->draw(shader);
 	for (auto it : sceneList){
 		it->draw(shader);
 	}

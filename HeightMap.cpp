@@ -23,11 +23,61 @@ HeightMap::HeightMap(char* filename)
     tdata = LoadPPM(filename, width, height);
     if(tdata == NULL || width == 0 || height == 0 )
         std::cout<< "error reading ppm file, no data retrieved. " << std::endl;
+    buildMap_test2();
+    //buildMap();
+}
+void HeightMap::buildMap_test2() {
+    static const GLsizeiptr PositionSize = 6 * 2 * sizeof(GLfloat);
+    static const GLfloat PositionData[] =
+    {
+        -1.0f,-1.0f,
+        1.0f,-1.0f,
+        1.0f, 1.0f,
+        1.0f, 1.0f,
+        -1.0f, 1.0f,
+        -1.0f,-1.0f,
+    };
+    
+    static const GLsizeiptr ColorSize = 6 * 3 * sizeof(GLubyte);
+    static const GLubyte ColorData[] =
+    {
+        255,   0,   0,
+        255, 255,   0,
+        0, 255,   0,
+        0, 255,   0,
+        0,   0, 255,
+        255,   0,   0
+    };
+    static const int BufferSize = 2;
+    static GLuint BufferName[BufferSize];
+    
+    static const GLsizei VertexCount = 6;
+    
+    enum
+    {
+        POSITION_OBJECT = 0,
+        COLOR_OBJECT = 1
+    };
+    glBindBuffer(GL_ARRAY_BUFFER, BufferName[COLOR_OBJECT]);
+    glBufferData(GL_ARRAY_BUFFER, ColorSize, ColorData, GL_STREAM_DRAW);
+    glColorPointer(3, GL_UNSIGNED_BYTE, 0, 0);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, BufferName[POSITION_OBJECT]);
+    glBufferData(GL_ARRAY_BUFFER, PositionSize, PositionData, GL_STREAM_DRAW);
+    glVertexPointer(2, GL_FLOAT, 0, 0);
+    
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    
+    glDrawArrays(GL_TRIANGLES, 0, VertexCount);
+    
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void HeightMap::buildMap()
+void HeightMap::buildMap_test()
 {
-    
+    glDisable(GL_BLEND);
     struct MyVertex
     {
         float x, y, z;        //Vertex
@@ -68,10 +118,16 @@ void HeightMap::buildMap()
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex)*3, &pvertex[0].x, GL_STATIC_DRAW);
     
+    ushort pindices[3];
+    pindices[0] = 0;
+    pindices[1] = 1;
+    pindices[2] = 2;
     
-    //Define this somewhere in your header file
-    #define BUFFER_OFFSET(i) ((void*)(i))
+    glGenBuffers(1, &IndexVBOID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ushort)*3, pindices, GL_STATIC_DRAW);
     
+        
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, sizeof(MyVertex), BUFFER_OFFSET(0));   //The starting point of the VBO, for the vertices
@@ -81,13 +137,121 @@ void HeightMap::buildMap()
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glTexCoordPointer(2, GL_FLOAT, sizeof(MyVertex), BUFFER_OFFSET(24));   //The starting point of texcoords, 24 bytes away
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VertexVBOID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
+    //To render, we can either use glDrawElements or glDrawRangeElements
+    //The is the number of indices. 3 indices needed to make a single triangle
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+    
+}
+
+void HeightMap::buildMap()
+{
+    glDisable(GL_BLEND);
+    struct MyVertex
+    {
+        glm::vec3 vert;        //Vertex
+        glm::vec3 norm;     //Normal
+        glm::vec2 txtr;         //Texcoord0
+    };
+    
+    MyVertex *pvertex = new MyVertex[width*height];
+    float fTextureU = float(width)*0.1f;
+    float fTextureV = float(height)*0.1f;
+    
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            float fScaleC = float(j)/float(width-1);
+            float fScaleR = float(i)/float(height-1);
+            float fVertexHeight = float(tdata[i*width+j])/255.0f;
+            pvertex[i*width + j].vert = glm::vec3(-0.5f+fScaleC, fVertexHeight, -0.5f+fScaleR);
+            pvertex[i*width + j].txtr = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
+        }
+    }
+    // normal calculation
+    vector< vector<glm::vec3> > vNormals[2];
+    for(int i = 0; i < 2; i++) vNormals[i] = vector< vector<glm::vec3> >(height-1, vector<glm::vec3>(width-1));
+    for (int i = 0; i < height - 1; i++)
+    {
+        for (int j = 0; j < width - 1; j++)
+        {
+            glm::vec3 vTriangle0[] =
+            {
+                pvertex[i*width + j].vert,
+                pvertex[(i+1)*width + j].vert,
+                pvertex[(i+1)*width + j+1].vert
+            };
+            glm::vec3 vTriangle1[] =
+            {
+                pvertex[(i+1)*width + j+1].vert,
+                pvertex[i*width + j+1].vert,
+                pvertex[i*width + j].vert
+            };
+            
+            glm::vec3 vTriangleNorm0 = glm::cross(vTriangle0[0]-vTriangle0[1], vTriangle0[1]-vTriangle0[2]);
+            glm::vec3 vTriangleNorm1 = glm::cross(vTriangle1[0]-vTriangle1[1], vTriangle1[1]-vTriangle1[2]);
+            
+            vNormals[0][i][j] = glm::normalize(vTriangleNorm0);
+            vNormals[1][i][j] = glm::normalize(vTriangleNorm1); 
+        } 
+    }
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            glm::vec3 vFinalNormal = glm::vec3(0.0f, 0.0f, 0.0f);
+        
+            // Look for upper-left triangles
+            if(j != 0 && i != 0)
+                for(int k = 0; k < 2; k++)vFinalNormal += vNormals[k][i-1][j-1];
+            // Look for upper-right triangles
+            if(i != 0 && j != width-1) vFinalNormal += vNormals[0][i-1][j];
+            // Look for bottom-right triangles
+            if(i != height-1 && j != height-1)
+                for(int k = 0; k < 2; k++)vFinalNormal += vNormals[k][i][j];
+            // Look for bottom-left triangles
+            if(i != height-1 && j != 0)
+                vFinalNormal += vNormals[1][i][j-1];
+            vFinalNormal = glm::normalize(vFinalNormal);
+        
+            pvertex[i*width + j].norm = vFinalNormal; // Store final normal of j-th vertex in i-th row
+        }
+    }
+    
+    glGenBuffers(1, &VertexVBOID);
+    glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex)*width*height, pvertex, GL_STATIC_DRAW);
+    
+    
+    
+    glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    // type, stride size, offset
+    glVertexPointer(3, GL_FLOAT, sizeof(MyVertex), 0);   //The starting point of the VBO, for the vertices
+    
+    //test
+    //glEnableClientState(GL_COLOR_ARRAY);
+    //glColorPointer(3,GL_FLOAT, sizeof(MyVertex), (void*)sizeof(glm::vec3));
+    
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glNormalPointer(GL_FLOAT, sizeof(MyVertex), (void*)sizeof(glm::vec3));
+    
+    glClientActiveTexture(GL_TEXTURE0);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glTexCoordPointer(2, GL_FLOAT, sizeof(MyVertex), (void*)(sizeof(glm::vec3)+sizeof(glm::vec2)));
+    
+    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, VertexVBOID);
     //To render, we can either use glDrawElements or glDrawRangeElements
     //The is the number of indices. 3 indices needed to make a single triangle
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));   //The starting point of the IBO
     //0 and 3 are the first and last vertices
     //glDrawRangeElements(GL_TRIANGLES, 0, 3, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));   //The starting point of the IBO
     //glDrawRangeElements may or may not give a performance advantage over glDrawElements
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    delete pvertex;
 }
 
 unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
