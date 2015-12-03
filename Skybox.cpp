@@ -8,6 +8,7 @@
 
 #include "Skybox.h"
 #include <SOIL/SOIL.h>
+#include <glm/gtx/string_cast.hpp>
 
 
 Skybox::Skybox() : Drawable()
@@ -109,9 +110,9 @@ void Skybox::draw(Shader shader)
     // Draw skybox first
     glDepthMask(GL_FALSE);// Remember to turn depth writing off
     glm::mat4 model;
-    model = glm::scale(model, glm::vec3(0.2,0.2,0.2));
+    model = glm::scale(model, glm::vec3(50, 50, 50));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-                       
+    std::cout<<glm::to_string(model)<<std::endl;
     glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
     
     
