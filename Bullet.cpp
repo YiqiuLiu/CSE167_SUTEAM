@@ -26,8 +26,8 @@ void Bullet::draw(Shader shader){
 }
 
 void Bullet::update(float dt){
-	float pi = glm::pi<float>();
-	position += glm::vec3(dt*speed*sinf(angle / 180.0*pi), 0, dt*speed*cosf(angle / 180.0*pi));
+	position += glm::vec3(dt*speed*sinf(angle), 0, dt*speed*cosf(angle));
+//    std::cout<<"angle"<<angle<<std::endl;
 	deathCount--;
 	if (deathCount <= 0){
 		state = DEAD;
