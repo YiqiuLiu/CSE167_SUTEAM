@@ -77,6 +77,15 @@ void Camera::ProcessMouseScroll(GLfloat yoffset)
         this->Zoom = 45.0f;
 }
 
+void Camera::updateCamera(glm::vec3 pos)
+{
+    this->Position = pos - glm::vec3(0, -10, 10);
+    this->Front = glm::vec3(0, -10, 10);
+    this->Right = glm::normalize(glm::cross(this->Front, this->WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+    this->Up    = glm::normalize(glm::cross(this->Right, this->Front));
+
+}
+
 void Camera::updateCameraVectors()
 {
     // Calculate the new Front vector

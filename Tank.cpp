@@ -19,7 +19,7 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     topAngle = 0.0;
 	botAngle = 0.0;
 	moveSpeed = 3.0;
-	spinSpeed = 30.0;
+	spinSpeed = 0.1;
 }
 
 Tank::~Tank()
