@@ -55,6 +55,7 @@ void Game::ProcessInput(GLfloat dt)
 	if (keys[GLFW_KEY_LEFT]){
 		tank->spinBot(dt);
         camera.updateCamera(tank->position);
+//        camera.RotateCamera(0.5 * dt, tank->position);
 	}
 	if (keys[GLFW_KEY_RIGHT]){
 		tank->spinBot(-dt);
@@ -81,8 +82,9 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 
 
 void Game::Render(){
-	Shader shader = ResourceManager::GetShader("sky");
-	shader.Use();
+	Shader shader = ResourceManager::GetShader("model");
+    Shader skyshader = ResourceManager::GetShader("sky");
+	skyshader.Use();
     //uniform
     GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
     GLint lightColorLoc  = glGetUniformLocation(shader.ID, "lightColor");
@@ -97,10 +99,17 @@ void Game::Render(){
 	// Transformation matrices
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
+    
+    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    skybox->draw(skyshader);
+    
+    shader.Use();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	//tank->draw(shader);
-    skybox->draw(shader);
+	tank->draw(shader);
+    
+    
 //	for (auto it : sceneList){
 //		it->draw(shader);
 //	}

@@ -19,7 +19,7 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     topAngle = 0.0;
 	botAngle = 0.0;
 	moveSpeed = 3.0;
-	spinSpeed = 0.1;
+	spinSpeed = 0.5;
 }
 
 Tank::~Tank()
@@ -45,10 +45,8 @@ void Tank::draw(Shader shader)
 
 void Tank::move(GLfloat dt)
 {
-	float pi = glm::pi<float>();
 	float scale = dt*moveSpeed;
-//    std::cout<<botAngle<<std::endl;
-	this->position += glm::vec3(scale*sinf(botAngle / 180.0*pi), 0, scale*cosf(botAngle / 180.0*pi));
+	this->position += glm::vec3(scale*sinf(botAngle), 0, scale*cosf(botAngle));
 }
 void Tank::spinTop(GLfloat angle)
 {

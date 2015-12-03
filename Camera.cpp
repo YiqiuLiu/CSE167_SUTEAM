@@ -86,6 +86,11 @@ void Camera::updateCamera(glm::vec3 pos)
 
 }
 
+void Camera::RotateCamera(GLfloat angle, glm::vec3 pos)
+{
+
+}
+
 void Camera::updateCameraVectors()
 {
     // Calculate the new Front vector
