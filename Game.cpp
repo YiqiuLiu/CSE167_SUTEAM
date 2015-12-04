@@ -99,7 +99,7 @@ void Game::Render(){
 	// Transformation matrices
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-    
+    //SanDiego.render();
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     skybox->draw(skyshader);

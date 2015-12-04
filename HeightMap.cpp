@@ -23,7 +23,7 @@ HeightMap::HeightMap(char* filename)
     tdata = LoadPPM(filename, width, height);
     if(tdata == NULL || width == 0 || height == 0 )
         std::cout<< "error reading ppm file, no data retrieved. " << std::endl;
-    buildMap_test2();
+    buildMap();
     //buildMap();
 }
 void HeightMap::buildMap_test2() {
@@ -147,16 +147,16 @@ void HeightMap::buildMap_test()
 void HeightMap::buildMap()
 {
     glDisable(GL_BLEND);
-    struct MyVertex
-    {
-        glm::vec3 vert;        //Vertex
-        glm::vec3 norm;     //Normal
-        glm::vec2 txtr;         //Texcoord0
-    };
+    
     
     MyVertex *pvertex = new MyVertex[width*height];
+    
+    //test
+    AttVertex = pvertex;
     float fTextureU = float(width)*0.1f;
     float fTextureV = float(height)*0.1f;
+    
+    float RED=0.3, GREEN=0.59, BLUE=0.11;
     
     for (int i = 0; i < height; i++)
     {
@@ -164,7 +164,14 @@ void HeightMap::buildMap()
         {
             float fScaleC = float(j)/float(width-1);
             float fScaleR = float(i)/float(height-1);
-            float fVertexHeight = float(tdata[i*width+j])/255.0f;
+            float fVertexHeight = float(int(tdata[(i*width+j)*3])*RED +
+                                        int(tdata[(i*width+j)*3+1])*GREEN +
+                                        int(tdata[(i*width+j)*3+2])*BLUE)/255.0f;
+            if (!j) {
+                std::cout <<int(tdata[(i*width+j)*3])<<":"<<int(tdata[(i*width+j)*3+1])<<":"<<int(tdata[(i*width+j)*3+2])<<std::endl;
+
+            std::cout << -0.5f+fScaleC<<" "<<fVertexHeight<<" "<<-0.5f+fScaleR<<std::endl;
+            }
             pvertex[i*width + j].vert = glm::vec3(-0.5f+fScaleC, fVertexHeight, -0.5f+fScaleR);
             pvertex[i*width + j].txtr = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
         }
@@ -251,7 +258,7 @@ void HeightMap::buildMap()
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    delete pvertex;
+    //delete pvertex;
 }
 
 unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
@@ -314,5 +321,37 @@ unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
 
 void HeightMap::render()
 {
-    //TODO
+    float size = 1;
+    glMatrixMode(GL_MODELVIEW);
+    float *a = new float[16];
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4;j++)
+        {
+            if (i == j)
+                a[i*4+j] = 1.0;
+            else
+                a[i*4+j] = 0.0;
+        }
+
+    //Push a save state onto the matrix stack, and multiply in the toWorld matrix
+    glPushMatrix();
+    glMultMatrixf(a);
+    //gluPerspective(angle,640.0/480.0,1,1000);
+    glMatrixMode(GL_MODELVIEW);
+    for(int i=0;i<height-1;i++)
+        for(int j=0;j<width-1;j++)
+        {
+            glBegin(GL_TRIANGLE_STRIP);
+            /*
+            std::cout<<"i:"<<i<<"j:"<<j<<AttVertex[i*width + j].vert.x<<" "<<AttVertex[i*width + j].vert.y<<" "<<AttVertex[i*width + j].vert.z<<std::endl;
+             */
+            glColor3f(AttVertex[i*width + j].vert.y,AttVertex[i*width + j].vert.y,AttVertex[i*width + j].vert.y);
+            glVertex3f(i*size,AttVertex[i*width + j].vert.y,j*size);
+            glVertex3f((i+1)*size,AttVertex[(i+1)*width + j].vert.y,j*size);
+            glVertex3f(i*size,AttVertex[i*width + j+1].vert.y,(j+1)*size);
+            glVertex3f((i+1)*size,AttVertex[(i+1)*width + j+1].vert.y,(j+1)*size);
+            glEnd();
+        }
+    glPopMatrix();
+
 }
