@@ -26,17 +26,17 @@ HeightMap::HeightMap(char* filename)
     buildMap_test();
     //buildMap();
 }
+struct MyVertex__1
+{
+    float x, y, z;        //Vertex
+    float nx, ny, nz;     //Normal
+    float s0, t0;         //Texcoord0
+};
 
 void HeightMap::buildMap_test()
 {
     glDisable(GL_BLEND);
-    struct MyVertex__1
-    {
-        float x, y, z;        //Vertex
-        float nx, ny, nz;     //Normal
-        float s0, t0;         //Texcoord0
-    };
-    
+        
     MyVertex__1 pvertex[3];
     //VERTEX 0
     pvertex[0].x = 0.0;
@@ -302,12 +302,35 @@ GLint HeightMap::TextureFromFile(const char* path, string directory)
 
 void HeightMap::render(Shader shader)
 {
-    glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
-    glBindVertexArray(IndexVBOID);
+    //glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
+    glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
+    
+    // Step 2
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    
+    // Step 3
+    glVertexPointer(3, GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(0));   //The starting point of the VBO, for the vertices
+    glNormalPointer(GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(12));   //The starting point of normals, 12 bytes away
+    glTexCoordPointer(2, GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(24));   //The starting point of texcoords, 24 bytes away
+    
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
     //To render, we can either use glDrawElements or glDrawRangeElements
     //The is the number of indices. 3 indices needed to make a single triangle
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+    
+    // Step 4
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+    
+    // Step 5
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    
+    //To render, we can either use glDrawElements or glDrawRangeElements
+    //The is the number of indices. 3 indices needed to make a single triangle
     glBindVertexArray(0);
 
 }

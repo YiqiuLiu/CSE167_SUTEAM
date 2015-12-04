@@ -117,7 +117,7 @@ void Game::Render(){
     for (auto it : sceneList){
         it->draw(shader);
     }
-//    SanDiego.render(shader);
+    //SanDiego.render(shader);
     
     
 
