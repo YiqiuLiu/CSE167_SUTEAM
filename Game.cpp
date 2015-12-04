@@ -22,6 +22,10 @@ void Game::Init()
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
     skybox = new Skybox;
+    
+    SanDiego. InitGeometry();
+    SanDiego. InitVBO();
+    
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
@@ -91,13 +95,13 @@ void Game::Render(){
 	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-    
     //SanDiego.render(terrainshader);
     
     //render the skybox using skyshader
     skyshader.Use();
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+
     skybox->draw(skyshader);
     
     //render objects using shader
@@ -113,13 +117,12 @@ void Game::Render(){
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	tank->draw(shader);
+    //SanDiego.display(shader);
+    tank->draw(shader);
+
     for (auto it : sceneList){
         it->draw(shader);
     }
-    //SanDiego.render(shader);
-    
-    
 
 }
 

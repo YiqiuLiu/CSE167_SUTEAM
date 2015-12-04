@@ -38,6 +38,10 @@ public:
     void buildMap_test();
     void render(Shader);
     GLint TextureFromFile(const char* path, string directory);
+    //test
+    void InitGeometry();
+    void InitVBO();
+    void display(Shader shader);
 
 private:
     unsigned char* tdata;
