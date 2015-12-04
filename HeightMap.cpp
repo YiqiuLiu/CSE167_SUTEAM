@@ -23,69 +23,21 @@ HeightMap::HeightMap(char* filename)
     tdata = LoadPPM(filename, width, height);
     if(tdata == NULL || width == 0 || height == 0 )
         std::cout<< "error reading ppm file, no data retrieved. " << std::endl;
-    buildMap();
+    buildMap_test();
     //buildMap();
-}
-void HeightMap::buildMap_test2() {
-    static const GLsizeiptr PositionSize = 6 * 2 * sizeof(GLfloat);
-    static const GLfloat PositionData[] =
-    {
-        -1.0f,-1.0f,
-        1.0f,-1.0f,
-        1.0f, 1.0f,
-        1.0f, 1.0f,
-        -1.0f, 1.0f,
-        -1.0f,-1.0f,
-    };
-    
-    static const GLsizeiptr ColorSize = 6 * 3 * sizeof(GLubyte);
-    static const GLubyte ColorData[] =
-    {
-        255,   0,   0,
-        255, 255,   0,
-        0, 255,   0,
-        0, 255,   0,
-        0,   0, 255,
-        255,   0,   0
-    };
-    static const int BufferSize = 2;
-    static GLuint BufferName[BufferSize];
-    
-    static const GLsizei VertexCount = 6;
-    
-    enum
-    {
-        POSITION_OBJECT = 0,
-        COLOR_OBJECT = 1
-    };
-    glBindBuffer(GL_ARRAY_BUFFER, BufferName[COLOR_OBJECT]);
-    glBufferData(GL_ARRAY_BUFFER, ColorSize, ColorData, GL_STREAM_DRAW);
-    glColorPointer(3, GL_UNSIGNED_BYTE, 0, 0);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, BufferName[POSITION_OBJECT]);
-    glBufferData(GL_ARRAY_BUFFER, PositionSize, PositionData, GL_STREAM_DRAW);
-    glVertexPointer(2, GL_FLOAT, 0, 0);
-    
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    
-    glDrawArrays(GL_TRIANGLES, 0, VertexCount);
-    
-    glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 void HeightMap::buildMap_test()
 {
     glDisable(GL_BLEND);
-    struct MyVertex
+    struct MyVertex__1
     {
         float x, y, z;        //Vertex
         float nx, ny, nz;     //Normal
         float s0, t0;         //Texcoord0
     };
     
-    MyVertex pvertex[3];
+    MyVertex__1 pvertex[3];
     //VERTEX 0
     pvertex[0].x = 0.0;
     pvertex[0].y = 0.0;
@@ -116,7 +68,7 @@ void HeightMap::buildMap_test()
     
     glGenBuffers(1, &VertexVBOID);
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex)*3, &pvertex[0].x, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex__1)*3, &pvertex[0].x, GL_STATIC_DRAW);
     
     ushort pindices[3];
     pindices[0] = 0;
@@ -130,17 +82,19 @@ void HeightMap::buildMap_test()
         
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, sizeof(MyVertex), BUFFER_OFFSET(0));   //The starting point of the VBO, for the vertices
+    glVertexPointer(3, GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(0));   //The starting point of the VBO, for the vertices
     glEnableClientState(GL_NORMAL_ARRAY);
-    glNormalPointer(GL_FLOAT, sizeof(MyVertex), BUFFER_OFFSET(12));   //The starting point of normals, 12 bytes away
+    glNormalPointer(GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(12));   //The starting point of normals, 12 bytes away
     glClientActiveTexture(GL_TEXTURE0);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glTexCoordPointer(2, GL_FLOAT, sizeof(MyVertex), BUFFER_OFFSET(24));   //The starting point of texcoords, 24 bytes away
+    glTexCoordPointer(2, GL_FLOAT, sizeof(MyVertex__1), BUFFER_OFFSET(24));   //The starting point of texcoords, 24 bytes away
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
     //To render, we can either use glDrawElements or glDrawRangeElements
     //The is the number of indices. 3 indices needed to make a single triangle
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+    
+    std::cout<<"sssss"<<std::endl;
     
 }
 
@@ -258,6 +212,8 @@ void HeightMap::buildMap()
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glBindVertexArray(0);
+
     //delete pvertex;
 }
 
@@ -318,40 +274,40 @@ unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
     return rawData;
 }
 
+GLint HeightMap::TextureFromFile(const char* path, string directory)
 
-void HeightMap::render()
 {
-    float size = 1;
-    glMatrixMode(GL_MODELVIEW);
-    float *a = new float[16];
-    for(int i=0;i<4;i++)
-        for(int j=0;j<4;j++)
-        {
-            if (i == j)
-                a[i*4+j] = 1.0;
-            else
-                a[i*4+j] = 0.0;
-        }
+    //Generate texture ID and load texture data
+    string filename = string(path);
+    filename = directory + '/' + filename;
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    int width,height;
+    unsigned char* image = SOIL_load_image(filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
+    // Assign texture to ID
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    
+    // Parameters
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    SOIL_free_image_data(image);
+    TEXTURE_id = textureID;
+    return textureID;
+}
 
-    //Push a save state onto the matrix stack, and multiply in the toWorld matrix
-    glPushMatrix();
-    glMultMatrixf(a);
-    //gluPerspective(angle,640.0/480.0,1,1000);
-    glMatrixMode(GL_MODELVIEW);
-    for(int i=0;i<height-1;i++)
-        for(int j=0;j<width-1;j++)
-        {
-            glBegin(GL_TRIANGLE_STRIP);
-            /*
-            std::cout<<"i:"<<i<<"j:"<<j<<AttVertex[i*width + j].vert.x<<" "<<AttVertex[i*width + j].vert.y<<" "<<AttVertex[i*width + j].vert.z<<std::endl;
-             */
-            glColor3f(AttVertex[i*width + j].vert.y,AttVertex[i*width + j].vert.y,AttVertex[i*width + j].vert.y);
-            glVertex3f(i*size,AttVertex[i*width + j].vert.y,j*size);
-            glVertex3f((i+1)*size,AttVertex[(i+1)*width + j].vert.y,j*size);
-            glVertex3f(i*size,AttVertex[i*width + j+1].vert.y,(j+1)*size);
-            glVertex3f((i+1)*size,AttVertex[(i+1)*width + j+1].vert.y,(j+1)*size);
-            glEnd();
-        }
-    glPopMatrix();
+void HeightMap::render(Shader shader)
+{
+    glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
+    glBindVertexArray(IndexVBOID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
+    //To render, we can either use glDrawElements or glDrawRangeElements
+    //The is the number of indices. 3 indices needed to make a single triangle
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, BUFFER_OFFSET(0));
+    glBindVertexArray(0);
 
 }
