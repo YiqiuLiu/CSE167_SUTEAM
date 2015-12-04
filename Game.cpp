@@ -70,7 +70,7 @@ void Game::ProcessInput(GLfloat dt)
 void Game::processMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
 {
 	if (!keys[GLFW_KEY_C]){
-		tank->spinTop(yoffset);
+		tank->spinTop(-xoffset);
 	}
 	else	camera.processMouseMovement(xoffset, yoffset, constrainPitch);
 }
@@ -86,41 +86,41 @@ void Game::Render(){
     Shader skyshader = ResourceManager::GetShader("sky");
     Shader terrainshader = ResourceManager::GetShader("do_nothing");
 
-//	skyshader.Use();
+    glDisable(GL_LIGHTING);
+    
+	// Projection and view matrix
+	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
+	glm::mat4 view = camera.GetViewMatrix();
+    
+    //SanDiego.render(terrainshader);
+    
+    //render the skybox using skyshader
+    skyshader.Use();
+    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    skybox->draw(skyshader);
+    
+    //render objects using shader
+    shader.Use();
     //uniform
     GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
     GLint lightColorLoc  = glGetUniformLocation(shader.ID, "lightColor");
     GLint lightPosLoc    = glGetUniformLocation(shader.ID, "lightPos");
     GLint viewPosLoc     = glGetUniformLocation(shader.ID, "viewPos");
     glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
+    glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
     glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
-    
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
-    
-    glDisable(GL_LIGHTING);
-    
-	// Transformation matrices
-	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
-	glm::mat4 view = camera.GetViewMatrix();
-    
-    
-    //SanDiego.render(terrainshader);
-    
-//    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-//    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-//    skybox->draw(skyshader);
-    
-    shader.Use();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	//tank->draw(shader);
-    SanDiego.render(shader);
-
+	tank->draw(shader);
+    for (auto it : sceneList){
+        it->draw(shader);
+    }
+//    SanDiego.render(shader);
     
-//	for (auto it : sceneList){
-//		it->draw(shader);
-//	}
+    
+
 }
 
 void Game::setLight(GLuint sID){

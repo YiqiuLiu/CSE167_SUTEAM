@@ -112,7 +112,6 @@ void Skybox::draw(Shader shader)
     glm::mat4 model;
     model = glm::scale(model, glm::vec3(50, 50, 50));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    std::cout<<glm::to_string(model)<<std::endl;
     glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
     
     
