@@ -13,9 +13,11 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
+#include <SOIL/SOIL.h>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include "Shader.h"
 #include <vector>
 #define BUFFER_OFFSET(i) ((void*)(i))
 
@@ -34,12 +36,12 @@ public:
     HeightMap(char* filename);
     void buildMap();
     void buildMap_test();
-    void buildMap_test2();
-    void render();
+    void render(Shader);
+    GLint TextureFromFile(const char* path, string directory);
 
 private:
     unsigned char* tdata;
-    GLuint VertexVBOID,IndexVBOID;
+    GLuint VertexVBOID,IndexVBOID,TEXTURE_id;
     int width, height;
     glm::vec3 vRenderScale;
     MyVertex *AttVertex;

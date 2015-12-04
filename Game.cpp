@@ -14,7 +14,7 @@ void Game::Init()
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
-    
+    ResourceManager::LoadShader("./shader/do_nothing.vert", "./shader/do_nothing.frag", nullptr, "do_nothing");
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
@@ -84,6 +84,8 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 void Game::Render(){
 	Shader shader = ResourceManager::GetShader("model");
     Shader skyshader = ResourceManager::GetShader("sky");
+    Shader terrainshader = ResourceManager::GetShader("do_nothing");
+
 //	skyshader.Use();
     //uniform
     GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
@@ -96,10 +98,15 @@ void Game::Render(){
     
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
     
+    glDisable(GL_LIGHTING);
+    
 	// Transformation matrices
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-    //SanDiego.render();
+    
+    
+    //SanDiego.render(terrainshader);
+    
 //    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 //    glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 //    skybox->draw(skyshader);
@@ -107,9 +114,9 @@ void Game::Render(){
     shader.Use();
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-	tank->draw(shader);
-    SanDiego.render();
-    
+	//tank->draw(shader);
+    SanDiego.render(shader);
+
     
 //	for (auto it : sceneList){
 //		it->draw(shader);
