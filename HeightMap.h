@@ -43,6 +43,19 @@ public:
     void InitVBO();
     void display(Shader shader);
 
+    
+    typedef struct
+    {
+        float location[4];
+        float color[4];
+    } Vertex;
+    Vertex verts[6]; // triangle vertices
+    GLubyte tindices[6]; // triangle vertex indices
+    GLuint vboHandle[1]; // a VBO that contains interleaved positions and colors
+    GLuint indexVBO;
+    GLuint VAO;
+    
+    
 private:
     unsigned char* tdata;
     GLuint VertexVBOID,IndexVBOID,TEXTURE_id;

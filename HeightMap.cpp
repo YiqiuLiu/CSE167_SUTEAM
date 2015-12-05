@@ -336,15 +336,7 @@ void HeightMap::render(Shader shader)
 }
 
 //test
-typedef struct
-{
-    float location[4];
-    float color[4];
-} Vertex;
-Vertex verts[6]; // triangle vertices
-GLubyte tindices[6]; // triangle vertex indices
-GLuint vboHandle[1]; // a VBO that contains interleaved positions and colors
-GLuint indexVBO;
+
 
 void HeightMap::InitGeometry()
 {
@@ -368,35 +360,98 @@ void HeightMap::InitGeometry()
 void  HeightMap::InitVBO()
 {
     
-    glGenBuffers(1, vboHandle); // create two VBO handles, one position, one color handle
-    glBindBuffer(GL_ARRAY_BUFFER, vboHandle[0]); // bind the first handle
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*6, verts, GL_STATIC_DRAW); // allocate space and copy the
-    // position data over
-    glBindBuffer(GL_ARRAY_BUFFER, 0); // clean up
-    glGenBuffers(1, &indexVBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
-    cout<<"VBO HANDLE:"<<vboHandle[0]<<"indexVBOL"<<indexVBO<<endl;
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*6, tindices, GL_STATIC_DRAW); // load the
-    // index data
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); // clean up
-    // by now, we moved the position and color data over to the graphics card. There will be no redundant data
-    // copy at drawing time
+    bool test = 1;
+    if (!test) {
+        glGenBuffers(1, vboHandle); // create two VBO handles, one position, one color handle
+        glGenVertexArrays(1, &this->VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, vboHandle[0]); // bind the first handle
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*6, verts, GL_STATIC_DRAW); // allocate space and copy the
+        // position data over
+        glBindBuffer(GL_ARRAY_BUFFER, 0); // clean up
+        glGenBuffers(1, &indexVBO);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
+        cout<<" INIT VBO HANDLE:"<<vboHandle[0]<<"indexVBOL"<<indexVBO<<endl;
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte)*6, tindices, GL_STATIC_DRAW); // load the
+        // index data
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0); // clean up
+        // by now, we moved the position and color data over to the graphics card. There will be no redundant data
+        // copy at drawing time
+        cout<<"InitVBO complete"<<endl;
+    
+    }
+    else {
+        glGenVertexArrays(1, &this->VAO);
+        glGenBuffers(1, vboHandle);
+        glGenBuffers(1, &this->indexVBO);
+        
+        glBindVertexArray(this->VAO);
+        // Load data into vertex buffers
+        glBindBuffer(GL_ARRAY_BUFFER, this->indexVBO);
+        // A great thing about structs is that their memory layout is sequential for all its items.
+        // The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
+        // again translates to 3/2 floats which translates to a byte array.
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*6, verts, GL_STATIC_DRAW);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexVBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER,  sizeof(GLubyte)*6, tindices, GL_STATIC_DRAW);
+        
+        // Set the vertex attribute pointers
+        // Vertex Positions
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,sizeof(Vertex), (char*) NULL+ 0);
+        // Vertex Normals
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (char*) NULL+ 16);
+        // Vertex Texture Coords
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (char*) NULL+ 16);
+        
+        glBindVertexArray(0);
+        cout<<"InitVBO complete"<<endl;
+
+    }
+    
+    
 }
 
 void  HeightMap::display(Shader shader)
 {
-    glClearColor(0,0,1,1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
-    glBindBuffer(GL_ARRAY_BUFFER, vboHandle[0]);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
-    glEnableClientState(GL_VERTEX_ARRAY); // enable the vertex array on the client side
-    glEnableClientState(GL_COLOR_ARRAY); // enable the color array on the client side
-    // number of coordinates per vertex (4 here), type of the coordinates,
-    // stride between consecutive vertices, and pointers to the first coordinate
-    glColorPointer(4, GL_FLOAT, sizeof(Vertex), (char*) NULL+ 16);
-    glVertexPointer(4,GL_FLOAT, sizeof(Vertex), (char*) NULL+ 0);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (char*) NULL+0);
-    glDisableClientState(GL_VERTEX_ARRAY); glDisableClientState(GL_COLOR_ARRAY);
+    bool test = 1;
+    if (!test) {
+        glClearColor(0,0,1,1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
+        glBindBuffer(GL_ARRAY_BUFFER, vboHandle[0]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexVBO);
+        glEnableClientState(GL_VERTEX_ARRAY); // enable the vertex array on the client side
+        glEnableClientState(GL_COLOR_ARRAY); // enable the color array on the client side
+        // number of coordinates per vertex (4 here), type of the coordinates,
+        // stride between consecutive vertices, and pointers to the first coordinate
+        glColorPointer(4, GL_FLOAT, sizeof(Vertex), (char*) NULL+ 16);
+        glVertexPointer(4,GL_FLOAT, sizeof(Vertex), (char*) NULL+ 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (char*) NULL+0);
+        glDisableClientState(GL_VERTEX_ARRAY); glDisableClientState(GL_COLOR_ARRAY);
+        cout<<"VBO HANDLE:"<<vboHandle[0]<<"indexVBOL"<<indexVBO<<endl;
+
+        cout<<"display complete"<<endl;
+    }
+    else {
+        glUniform1f(glGetUniformLocation(shader.ID, "material.shininess"), 16.0f);
+        
+        // Draw mesh
+        glBindVertexArray(this->VAO);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, (char*) NULL+0);
+        glBindVertexArray(0);
+        
+        // Always good practice to set everything back to defaults once configured.
+        for (GLuint i = 0; i < 1; i++)
+        {
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
+        cout<<"display complete"<<endl;
+
+    }
     //glutSwapBuffers();
 }
