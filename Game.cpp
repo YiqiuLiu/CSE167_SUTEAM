@@ -3,6 +3,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 
+
 Game::Game(GLuint width, GLuint height){
 	this->Width = width;
 	this->Height = height;
@@ -15,6 +16,8 @@ void Game::Init()
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
     ResourceManager::LoadShader("./shader/do_nothing.vert", "./shader/do_nothing.frag", nullptr, "do_nothing");
+    ResourceManager::LoadShader("./shader/particle.vs", "./shader/particle.frag", nullptr, "part");
+    
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
@@ -22,6 +25,7 @@ void Game::Init()
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
     skybox = new Skybox;
+    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 10);
     
     SanDiego. InitGeometry();
     SanDiego. InitVBO();
@@ -101,7 +105,7 @@ void Game::Render(){
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
 
-    skybox->draw(skyshader);
+//    skybox->draw(skyshader);
     
     //render objects using shader
     shader.Use();
@@ -117,13 +121,21 @@ void Game::Render(){
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     //SanDiego.display(shader);
-    SanDiego.display(shader);
+//    SanDiego.display(shader);
 
     //tank->draw(shader);
 
-    for (auto it : sceneList){
-        it->draw(shader);
-    }
+//    for (auto it : sceneList){
+//        it->draw(shader);
+//    }
+    
+    Shader partShader = ResourceManager::GetShader("part");
+    partShader.Use();
+    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    
+    testParticle->draw(partShader);
+    
 
 }
 

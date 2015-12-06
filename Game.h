@@ -10,6 +10,7 @@
 #include "Resource_manager.h"
 #include "HeightMap.h"
 #include "Skybox.h"
+#include "Particle.h"
 
 class Game
 {
@@ -43,7 +44,7 @@ public:
    
     bool keys[1024];
     
-    
+    Particle* testParticle;
 
 
     void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
