@@ -25,7 +25,7 @@ void Game::Init()
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
     skybox = new Skybox;
-    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 10);
+    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
     
     SanDiego. InitGeometry();
     SanDiego. InitVBO();
@@ -154,6 +154,7 @@ void Game::setPVmatrix(GLuint sID){
 }
 
 void Game::Update(float dt){
+    testParticle->update(dt);
 	Drawable* del;
 	for (auto it = sceneList.begin(); it != sceneList.end();++it){
 		if ((*it) == 0){

@@ -16,8 +16,8 @@ Particle::Particle(glm::vec3 pos, glm::vec3 vel, GLfloat li) : Drawable()
     this->velocity = vel;
     this->life = li;
     this->setup();
-    this->moveSpeed = 0.01f;
-    this->dieSpeed = 0.01f;
+    this->moveSpeed = 0.1f;
+    this->dieSpeed = 0.05f;
 }
 
 Particle::~Particle()
@@ -29,9 +29,11 @@ void Particle::draw(Shader shader)
 {
     glm::mat4 model;
     model = glm::translate(model, this->position);
-    model = glm::scale(model, glm::vec3(30, 30, 30));
+    model = glm::scale(model, glm::vec3(3, 3, 3));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glm::vec4 color(1.0, 1.0, 0.0, 1.0);
+    glm::vec4 color_yellow(1.0, 1.0, 0.0, 1.0);
+    glm::vec4 color_red(1.0, 0, 0, 1.0);
+    glm::vec4 color = life * color_red + (1 - life) * color_yellow;
     
     glUniform4fv(glGetUniformLocation(shader.ID, "color_calculate"), 1, glm::value_ptr(color));
     glBindVertexArray(VAO);
