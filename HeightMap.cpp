@@ -70,14 +70,14 @@ void HeightMap::buildMap_test()
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(MyVertex__1)*3, &pvertex[0].x, GL_STATIC_DRAW);
     
-    ushort pindices[3];
+    unsigned short pindices[3];
     pindices[0] = 0;
     pindices[1] = 1;
     pindices[2] = 2;
     
     glGenBuffers(1, &IndexVBOID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexVBOID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(ushort)*3, pindices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned short) * 3, pindices, GL_STATIC_DRAW);
     
         
     glBindBuffer(GL_ARRAY_BUFFER, VertexVBOID);
