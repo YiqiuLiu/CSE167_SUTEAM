@@ -12,6 +12,7 @@
 #include "Skybox.h"
 #include "Particle.h"
 #include "ShadowMap.h"
+#include "ParticleManager.h"
 
 class Game
 {
@@ -46,7 +47,8 @@ public:
    
     bool keys[1024];
     
-    Particle* testParticle;
+//    Particle* testParticle;
+    ParticleManager* pm;
 
 
     void ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime);
