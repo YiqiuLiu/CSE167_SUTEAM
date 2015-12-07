@@ -25,6 +25,7 @@
 		41559ADF1C0BC0ED00648F2C /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */; };
 		41559AE11C0BC12100648F2C /* obj in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE01C0BC12100648F2C /* obj */; };
 		41559AE31C0BC23900648F2C /* shader in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE21C0BC23900648F2C /* shader */; };
+		41A377761C157567006165C5 /* ShadowMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A377741C157567006165C5 /* ShadowMap.cpp */; };
 		41BA478F1C10D5DF009A0D34 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA47891C10D5DF009A0D34 /* back.png */; };
 		41BA47901C10D5DF009A0D34 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA478A1C10D5DF009A0D34 /* down.png */; };
 		41BA47911C10D5DF009A0D34 /* front.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA478B1C10D5DF009A0D34 /* front.png */; };
@@ -86,6 +87,8 @@
 		41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = ../../../../../../../../usr/local/Cellar/assimp/3.1.1/lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
 		41559AE01C0BC12100648F2C /* obj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = obj; sourceTree = "<group>"; };
 		41559AE21C0BC23900648F2C /* shader */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shader; sourceTree = "<group>"; };
+		41A377741C157567006165C5 /* ShadowMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShadowMap.cpp; sourceTree = "<group>"; };
+		41A377751C157567006165C5 /* ShadowMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowMap.h; sourceTree = "<group>"; };
 		41BA47891C10D5DF009A0D34 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		41BA478A1C10D5DF009A0D34 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		41BA478B1C10D5DF009A0D34 /* front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = front.png; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 		41559ADA1C0BBB8A00648F2C /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				41A377741C157567006165C5 /* ShadowMap.cpp */,
+				41A377751C157567006165C5 /* ShadowMap.h */,
 				41BA47951C10D6F5009A0D34 /* Skybox.cpp */,
 				41BA47961C10D6F5009A0D34 /* Skybox.h */,
 				790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */,
@@ -303,6 +308,7 @@
 				41FD96901C0C1A6F0025D456 /* Camera.cpp in Sources */,
 				41559ACB1C0B96B500648F2C /* Texture.cpp in Sources */,
 				790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */,
+				41A377761C157567006165C5 /* ShadowMap.cpp in Sources */,
 				41C45D8D1C14DC660073258C /* ParticleManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

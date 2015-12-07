@@ -10,17 +10,19 @@
 #include <GL/glew.h>
 #include <iostream>
 
-Tree::Tree() : Drawable(){
+Tree::Tree(glm::vec3 pos) : Drawable(){
+    this->pos = pos;
     this->angle = glm::radians(30.0f);
     this->length = 0.5;
     this->str = "X";
     this->trees = new vector<string>();
     this->active = glm::mat4(1.0f);
+    this->active = glm::translate(active, this->pos);
     this->lineWidth = 10;
     this->depth = 6;
     for(int i = 0;i <= 6;++ i) {
         float num = (float) rand()/RAND_MAX;
-        this->expand(0.6);
+        this->expand(num);
     }
     this->init();
     
@@ -68,7 +70,10 @@ void Tree::init()
         GLfloat g_vertex_buffer_data[] = {
             0.0f,  0.5f, 0.0f,
             0.0f,  0.0f, 0.0f,
-            0.0f,  0.0f, 0.1f
+            0.0f,  0.0f, 0.2f,
+            0.0f,  0.5f, 0.0f,
+            0.0f,  0.5f, 0.2f,
+            0.0f,  0.0f, 0.2f
         };
     
     glBindVertexArray(VAO1);
@@ -151,7 +156,8 @@ void Tree::rotR()
 void Tree::draw(Shader shader)
 {
     modelStack.clear();
-    active = glm::mat4();
+    this->active = glm::mat4(1.0f);
+    this->active = glm::translate(active, this->pos);
     string ch = "";
     string LSystem = trees->at(4);
     for (int i = 0; i < LSystem.length(); i++){
@@ -202,7 +208,7 @@ void Tree::drawLine(Shader shader)
 //    glDisableVertexAttribArray(0);
     
     modelStack.push_back(active);
-    active = glm::translate(active, glm::vec3(0,0.3,0));
+    active = glm::translate(active, glm::vec3(0,0.2,0));
 }
 
 void Tree::leaf(Shader shader)

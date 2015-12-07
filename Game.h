@@ -11,6 +11,7 @@
 #include "HeightMap.h"
 #include "Skybox.h"
 #include "Particle.h"
+#include "ShadowMap.h"
 #include "ParticleManager.h"
 #include "Tree.h"
 
@@ -32,6 +33,7 @@ public:
     HeightMap SanDiego;
     Skybox* skybox;
     Tree* tree;
+	ShadowMap shadowMap;
     
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
@@ -43,8 +45,8 @@ public:
 	// GameLoop
 	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
+	
 	void Render();
-   
     bool keys[1024];
     
 //    Particle* testParticle;
@@ -59,5 +61,8 @@ public:
 private:
 	void setLight(GLuint);
 	void setPVmatrix(GLuint);
+	void buildShadowMap();
+	void RenderScene();
+	void shadowRender(Shader);
 };
 #endif

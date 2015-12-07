@@ -54,10 +54,12 @@ void HeightMap::buildMap()
             vertices.push_back(vtx);
             
             glm::vec3 prt = vtx.Position;
-            if (!j)
-                std::cout << "{"
-                << prt.x << " " << prt.y << " " << prt.z
-                << "}"<<endl;        };
+			/**/
+            //if (!j)
+            //    std::cout << "{"
+            //    << prt.x << " " << prt.y << " " << prt.z
+            //    << "}"<<endl;        
+		};
     }
     // normal calculation
     vector< vector<glm::vec3> > vNormals[2];

@@ -24,6 +24,7 @@ public:
     vector<string> *trees;
     string str;
     glm::mat4 active;
+    glm::vec3 pos;
     vector<glm::mat4> modelStack;
     float lineWidth;
     
@@ -47,11 +48,7 @@ public:
     GLuint VBO1;
     
     
-    GLuint LeafArrayID;
-    GLuint Leafbuffer;
-    
-    
-    Tree();
+    Tree(glm::vec3);
     ~Tree();
 };
 
