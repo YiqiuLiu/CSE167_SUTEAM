@@ -25,16 +25,14 @@ void Game::Init()
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
+    
     SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
     skybox = new Skybox;
     testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
     
-    SanDiego. InitGeometry();
-    SanDiego. InitVBO();
 	shadowMap.init();
-	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
 
@@ -101,9 +99,8 @@ void Game::Render(){
     glDisable(GL_LIGHTING);
     
 	// Projection and view matrix
-	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 100.0f);
+	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-    //SanDiego.render(terrainshader);
     //render the skybox using skyshader
     skyshader.Use();
     glUniformMatrix4fv(glGetUniformLocation(skyshader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -124,10 +121,11 @@ void Game::Render(){
     glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    //SanDiego.display(shader);
-//    SanDiego.display(shader);
+    
+    
+    SanDiego.Draw(terrainshader);
 
-    //tank->draw(shader);
+    tank->draw(shader);
 
 //    for (auto it : sceneList){
 //        it->draw(shader);
@@ -138,7 +136,7 @@ void Game::Render(){
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     
-    testParticle->draw(partShader);
+    //testParticle->draw(partShader);
     
 
 }

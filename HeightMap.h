@@ -9,59 +9,67 @@
 #ifndef HeightMap_hpp
 #define HeightMap_hpp
 
-#include <stdio.h>
-#include <GL/glew.h>
-#include <glm/glm.hpp>
-#include <GLFW/glfw3.h>
-#include <SOIL/SOIL.h>
 #include <string>
-#include <iostream>
 #include <fstream>
-#include "Shader.h"
+#include <sstream>
+#include <iostream>
 #include <vector>
-#define BUFFER_OFFSET(i) ((void*)(i))
-
 using namespace std;
-struct MyVertex
-{
-    glm::vec3 vert;        //Vertex
-    glm::vec3 norm;     //Normal
-    glm::vec2 txtr;         //Texcoord0
-};
-class HeightMap
-{
+// GL Includes
+#include <GL/glew.h> // Contains all the necessery OpenGL includes
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include "glm/gtx/string_cast.hpp"
+#include <assimp/types.h>
+
+#include "Shader.h"
+
+
+
+class HeightMap {
 public:
+    struct Vertex {
+        // Position
+        glm::vec3 Position;
+        // Normal
+        glm::vec3 Normal;
+        // TexCoords
+        glm::vec2 TexCoords;
+    };
+    
+    struct Texture {
+        GLuint id;
+        string type;
+        aiString path;
+    };
+
+    /*  HeightMap Data  */
+    vector<Vertex> vertices;
+    vector<GLuint> indices;
+    vector<Texture> textures;
+    
+    /*  Functions  */
+    // Constructor
+    HeightMap(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
+    
     unsigned char* LoadPPM(char* sImagePath, int &width,int &height);
     HeightMap(void);
     HeightMap(char* filename);
+    
     void buildMap();
-    void buildMap_test();
-    void render(Shader);
-    GLint TextureFromFile(const char* path, string directory);
-    //test
-    void InitGeometry();
-    void InitVBO();
-    void display(Shader shader);
-
-    
-    typedef struct
-    {
-        float location[4];
-        float color[4];
-    } Vertex;
-    Vertex verts[6]; // triangle vertices
-    GLubyte tindices[6]; // triangle vertex indices
-    GLuint vboHandle[1]; // a VBO that contains interleaved positions and colors
-    GLuint indexVBO;
-    GLuint VAO;
-    
+    // Render the HeightMap
+    void Draw(Shader shader);
     
 private:
+    /*  Render data  */
+    GLuint VAO, VBO, EBO;
+    int width,height;
+    /*  Functions    */
+    // Initializes all the buffer objects/arrays
+    void setupHeightMap();
     unsigned char* tdata;
-    GLuint VertexVBOID,IndexVBOID,TEXTURE_id;
-    int width, height;
-    glm::vec3 vRenderScale;
-    MyVertex *AttVertex;
 
 };
+
+
 #endif /* HeightMap_hpp */
