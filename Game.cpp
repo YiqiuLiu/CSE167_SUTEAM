@@ -147,7 +147,7 @@ void Game::RenderScene(){
 	shader.SetVector3f("viewPos", camera.Position, false);
 	shader.SetMatrix4("projection", projection, true);
 	shader.SetMatrix4("view", view, true);
-    //tank->draw(shader);
+    tank->draw(shader);
 
 	terrainshader.Use();
 	terrainshader.SetVector3f("viewPos", camera.Position, true);
@@ -155,7 +155,7 @@ void Game::RenderScene(){
 	terrainshader.SetMatrix4("view", view, true);
 	terrainshader.SetVector3f("lightPos", light.position);
 	terrainshader.SetVector3f("viewPos", camera.Position);
-	glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 100.0f);
+	glm::mat4 lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, 1.0f, 100.0f);
 	glm::mat4 lightView = glm::lookAt(light.getPosition(), tank->position, glm::vec3(1.0));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 	terrainshader.SetMatrix4("lightSpaceMatrix", lightSpaceMatrix, true);
@@ -166,8 +166,8 @@ void Game::RenderScene(){
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D,shadowMap.getShadowMap());
 	glUniform1i(glGetUniformLocation(terrainshader.ID, "shadowMap"), 0);
-	//SanDiego.Draw(terrainshader);
-	
+	SanDiego.Draw(terrainshader);
+	/*
 	Shader testShader = ResourceManager::GetShader("test");
 	testShader.Use();
 	glm::mat4 model = glm::mat4(1.0);
@@ -178,6 +178,7 @@ void Game::RenderScene(){
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, shadowMap.getShadowMap());
 	RenderQuad();
+	*/
 	
 
 
@@ -234,7 +235,7 @@ void Game::buildShadowMap(){
 	glm::mat4 lightSpaceMatrix;
 	GLfloat near_plane = 1.0f;
 	GLfloat far_plane = 100.0f;
-	lightProjection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,near_plane,far_plane);
+	lightProjection = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,near_plane,far_plane);
 	lightView = glm::lookAt(light.getPosition(), tank->position, glm::vec3(1.0));
 	lightSpaceMatrix = lightProjection * lightView;
 	
