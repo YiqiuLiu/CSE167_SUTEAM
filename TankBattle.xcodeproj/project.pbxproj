@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41310A8C1C151A75006A12E0 /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41310A8B1C151A75006A12E0 /* Tree.cpp */; };
 		413925551C0EB5BF00485E73 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */; };
 		4139255A1C0F6DC000485E73 /* Tank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413925591C0F6DC000485E73 /* Tank.cpp */; };
 		4139255D1C0F761A00485E73 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4139255B1C0F761A00485E73 /* Light.cpp */; };
@@ -54,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41310A8A1C151A5E006A12E0 /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
+		41310A8B1C151A75006A12E0 /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tree.cpp; sourceTree = "<group>"; };
 		413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		413925581C0F6DAC00485E73 /* Tank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tank.h; sourceTree = "<group>"; };
 		413925591C0F6DC000485E73 /* Tank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tank.cpp; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				41D5BF1B1C14ADFA00ACB881 /* Particle.cpp */,
 				41C45D8B1C14DC510073258C /* ParticleManager.h */,
 				41C45D8C1C14DC660073258C /* ParticleManager.cpp */,
+				41310A8A1C151A5E006A12E0 /* Tree.h */,
+				41310A8B1C151A75006A12E0 /* Tree.cpp */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				413925631C0FC35E00485E73 /* Drawable.cpp in Sources */,
 				41559ACF1C0BA54500648F2C /* main.cpp in Sources */,
 				41559ACA1C0B96B500648F2C /* Shader.cpp in Sources */,
+				41310A8C1C151A75006A12E0 /* Tree.cpp in Sources */,
 				41FD96941C0C1EA80025D456 /* Model.cpp in Sources */,
 				41FD96921C0C1D970025D456 /* Mesh.cpp in Sources */,
 				413925621C0FC35E00485E73 /* Bullet.cpp in Sources */,

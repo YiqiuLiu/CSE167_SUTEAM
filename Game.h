@@ -12,6 +12,7 @@
 #include "Skybox.h"
 #include "Particle.h"
 #include "ParticleManager.h"
+#include "Tree.h"
 
 class Game
 {
@@ -30,6 +31,7 @@ public:
 	Light light;
     HeightMap SanDiego;
     Skybox* skybox;
+    Tree* tree;
     
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;

@@ -11,7 +11,7 @@ Game::Game(GLuint width, GLuint height){
 
 void Game::Init()
 {
-    camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
+    camera = Camera(glm::vec3(0.0f, 0.0f, -30.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
@@ -24,9 +24,10 @@ void Game::Init()
     
     SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     tank = new Tank(topModel,botModel,bulletModel);
-    camera.updateCamera(tank->position);
+//    camera.updateCamera(tank->position);
     skybox = new Skybox;
-    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
+//    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
+    tree = new Tree();
     
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
@@ -91,6 +92,7 @@ void Game::Render(){
 	Shader shader = ResourceManager::GetShader("model");
     Shader skyshader = ResourceManager::GetShader("sky");
     Shader terrainshader = ResourceManager::GetShader("do_nothing");
+    Shader part_Shader = ResourceManager::GetShader("part");
 
     glDisable(GL_LIGHTING);
     
@@ -119,9 +121,11 @@ void Game::Render(){
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     
     
-    SanDiego.Draw(terrainshader);
+    
+//    SanDiego.Draw(terrainshader);
 
-    tank->draw(shader);
+//    tank->draw(shader);
+//    std::cout<<tree->trees->size()<<std::endl;
 
 //    for (auto it : sceneList){
 //        it->draw(shader);
@@ -131,7 +135,9 @@ void Game::Render(){
     partShader.Use();
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    
+//    tree->drawLine(part_Shader);
+//    tree->leaf(part_Shader);
+    tree->draw(part_Shader);
     //testParticle->draw(partShader);
     
 
@@ -152,7 +158,7 @@ void Game::setPVmatrix(GLuint sID){
 }
 
 void Game::Update(float dt){
-    testParticle->update(dt);
+//    testParticle->update(dt);
 	Drawable* del;
 	for (auto it = sceneList.begin(); it != sceneList.end();++it){
 		if ((*it) == 0){
