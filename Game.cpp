@@ -91,7 +91,8 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 
 
 void Game::Render(){
-	buildShadowMap();
+	//buildShadowMap();
+	RenderScene();
 }
 
 void Game::RenderScene(){
@@ -99,7 +100,8 @@ void Game::RenderScene(){
     Shader skyshader = ResourceManager::GetShader("sky");
     Shader terrainshader = ResourceManager::GetShader("do_nothing");
 
-    glDisable(GL_LIGHTING);
+	glViewport(0, 0, Width, Height);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
 	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
