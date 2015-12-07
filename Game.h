@@ -11,6 +11,7 @@
 #include "HeightMap.h"
 #include "Skybox.h"
 #include "Particle.h"
+#include "ShadowMap.h"
 
 class Game
 {
@@ -29,6 +30,7 @@ public:
 	Light light;
     HeightMap SanDiego;
     Skybox* skybox;
+	ShadowMap shadowMap;
     
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
@@ -55,5 +57,6 @@ public:
 private:
 	void setLight(GLuint);
 	void setPVmatrix(GLuint);
+	void buildShadowMap();
 };
 #endif

@@ -13,11 +13,15 @@ void Game::Init()
 {
     camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
 	light = Light(glm::vec3(1.2f, 1.0f, 2.0f));
+	shadowMap = ShadowMap(Width,Height);
+
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
     ResourceManager::LoadShader("./shader/do_nothing.vert", "./shader/do_nothing.frag", nullptr, "do_nothing");
     ResourceManager::LoadShader("./shader/particle.vs", "./shader/particle.frag", nullptr, "part");
-    
+	ResourceManager::LoadShader("./shader/shadowMapShader.vs","./shader/shadowMapShader.frag",nullptr,"shadowMap");
+
+
 	topModel = new Model("./obj/tank_top_no_texture.obj");
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
@@ -29,7 +33,7 @@ void Game::Init()
     
     SanDiego. InitGeometry();
     SanDiego. InitVBO();
-    
+	shadowMap.init();
 	//bullet = new Bullet(tank->position,tank->topAngle,bulletModel);
 }
 
@@ -169,4 +173,21 @@ void Game::Update(float dt){
 			delete (del);
 		}
 	}
+}
+
+void Game::buildShadowMap(){
+	Shader shader = ResourceManager::GetShader("shadowMap");
+	glm::mat4 lightProjection, lightView;
+	glm::mat4 lightSpaceMatrix;
+	GLfloat near_plane = 1.0f;
+	GLfloat far_plane = 100.0f;
+	lightProjection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,near_plane,far_plane);
+	lightView = glm::lookAt(light.getPosition(), glm::vec3(0.0f), glm::vec3(1.0));
+	lightSpaceMatrix = lightProjection * lightView;
+	
+	shader.SetMatrix4("lightSpaceMatrix",lightSpaceMatrix,true);
+	glViewport(0, 0, shadowMap.width, shadowMap.height);
+	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap.getFBO());
+	glClear(GL_DEPTH_BUFFER_BIT);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
