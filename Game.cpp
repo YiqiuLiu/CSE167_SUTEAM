@@ -92,6 +92,10 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 
 
 void Game::Render(){
+	buildShadowMap();
+}
+
+void Game::RenderScene(){
 	Shader shader = ResourceManager::GetShader("model");
     Shader skyshader = ResourceManager::GetShader("sky");
     Shader terrainshader = ResourceManager::GetShader("do_nothing");
@@ -156,7 +160,7 @@ void Game::setPVmatrix(GLuint sID){
 }
 
 void Game::Update(float dt){
-    testParticle->update(dt);
+    //testParticle->update(dt);
 	Drawable* del;
 	for (auto it = sceneList.begin(); it != sceneList.end();++it){
 		if ((*it) == 0){
@@ -187,5 +191,12 @@ void Game::buildShadowMap(){
 	glViewport(0, 0, shadowMap.width, shadowMap.height);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap.getFBO());
 	glClear(GL_DEPTH_BUFFER_BIT);
+	shadowRender(shader);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void Game::shadowRender(Shader shader){
+	shader.Use();
+	SanDiego.Draw(shader);
+	tank->draw(shader);
 }

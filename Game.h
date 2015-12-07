@@ -43,8 +43,8 @@ public:
 	// GameLoop
 	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
+	
 	void Render();
-   
     bool keys[1024];
     
 //    Particle* testParticle;
@@ -60,5 +60,7 @@ private:
 	void setLight(GLuint);
 	void setPVmatrix(GLuint);
 	void buildShadowMap();
+	void RenderScene();
+	void shadowRender(Shader);
 };
 #endif
