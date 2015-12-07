@@ -27,18 +27,20 @@ Particle::~Particle()
 
 void Particle::draw(Shader shader)
 {
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glm::mat4 model;
     model = glm::translate(model, this->position);
     model = glm::scale(model, glm::vec3(3, 3, 3));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    glm::vec4 color_yellow(1.0, 1.0, 0.0, 1.0);
-    glm::vec4 color_red(1.0, 0, 0, 1.0);
-    glm::vec4 color = life * color_red + (1 - life) * color_yellow;
+    glm::vec3 color_yellow(1.0, 1.0, 0.0);
+    glm::vec3 color_red(1.0, 0, 0);
+    glm::vec4 color = glm::vec4(life * color_red + (1 - life) * color_yellow, life);
     
     glUniform4fv(glGetUniformLocation(shader.ID, "color_calculate"), 1, glm::value_ptr(color));
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void Particle::update(GLfloat dt)
@@ -52,9 +54,9 @@ void Particle::setup()
     glGenVertexArrays(1, &this->VAO);
     glGenBuffers(1, &this->VBO);
     GLfloat vertices[] = {
-        0.05f,  0.05f, 0.0f,
-        0.0f, 0.05f, 0.05f,
-        0.0f,  0.05f, 0.00f
+        0.02f,  0.02f, 0.0f,
+        0.0f, 0.02f, 0.02f,
+        0.00f,  0.02f, 0.00f
     };
     
     glBindVertexArray(VAO);
