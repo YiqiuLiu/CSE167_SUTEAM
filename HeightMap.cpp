@@ -23,6 +23,7 @@ HeightMap::HeightMap(char* filename)
     tdata = LoadPPM(filename, width, height);
     if(tdata == NULL || width == 0 || height == 0 )
         std::cout<< "error reading ppm file, no data retrieved. " << std::endl;
+    
     buildMap();
 }
 
