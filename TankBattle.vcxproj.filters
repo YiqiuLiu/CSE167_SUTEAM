@@ -114,5 +114,15 @@
   <ItemGroup>
     <None Include="shader\model_loading.frag" />
     <None Include="shader\model_loading.vs" />
+    <None Include="shader\do_nothing.frag" />
+    <None Include="shader\do_nothing.vert" />
+    <None Include="shader\particle.frag" />
+    <None Include="shader\particle.vs" />
+    <None Include="shader\shadowMapShader.frag" />
+    <None Include="shader\shadowMapShader.vs" />
+    <None Include="shader\sky.frag" />
+    <None Include="shader\sky.vs" />
+    <None Include="shader\test.frag" />
+    <None Include="shader\test.vs" />
   </ItemGroup>
 </Project>
