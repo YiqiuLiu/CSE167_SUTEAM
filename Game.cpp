@@ -30,7 +30,6 @@ void Game::Init()
     tank = new Tank(topModel,botModel,bulletModel);
     camera.updateCamera(tank->position);
     skybox = new Skybox;
-    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
     
 	shadowMap.init();
 }
