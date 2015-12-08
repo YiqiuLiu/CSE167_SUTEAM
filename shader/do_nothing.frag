@@ -5,8 +5,14 @@ in VS_OUT {
     vec3 FragPos;
     vec3 Normal;
     vec4 FragPosLightSpace;
+    vec2 TexCoord;
 } fs_in;
 
+uniform sampler2D gSampler0;
+uniform sampler2D gSampler1;
+uniform sampler2D gSampler2;
+uniform sampler2D gSampler3;
+uniform sampler2D gSampler4;
 uniform sampler2D shadowMap;
 
 uniform vec3 lightPos;
@@ -15,6 +21,9 @@ uniform vec3 lightColor;
 uniform vec3 objectColor;
 
 uniform bool shadows;
+uniform float fRenderHeight;
+uniform float fMaxTextureU;
+uniform float fMaxTextureV;
 
 float ShadowCalculation(vec4 fragPosLightSpace)
 {
@@ -53,6 +62,73 @@ float ShadowCalculation(vec4 fragPosLightSpace)
 }
 void main()
 {
+    // terrain shader
+    vec3 vNormalized = normalize(fs_in.Normal);
+    
+    vec4 vTexColor = vec4(0.0);
+    
+    float fScale = fs_in.FragPos.y/fRenderHeight;
+    
+    const float fRange1 = 0.10f;
+    const float fRange2 = 0.15f;
+    const float fRange3 = 0.20f;
+    const float fRange4 = 0.30f;
+    const float fRange5 = 0.35f;
+    const float fRange6 = 0.45f;
+    const float fRange7 = 0.60f;
+    const float fRange8 = 0.65f;
+    if(fScale >= 0.0 && fScale <= fRange1)vTexColor = texture(gSampler0, fs_in.TexCoord);
+    else if(fScale <= fRange2)
+    {
+        fScale -= fRange1;
+        fScale /= (fRange2-fRange1);
+        
+        float fScale2 = fScale;
+        fScale = 1.0-fScale;
+        
+        vTexColor += texture(gSampler0, fs_in.TexCoord)*fScale;
+        vTexColor += texture(gSampler1, fs_in.TexCoord)*fScale2;
+    }
+    else if(fScale <= fRange3)vTexColor = texture(gSampler1, fs_in.TexCoord);
+    else if(fScale <= fRange4)
+    {
+        fScale -= fRange3;
+        fScale /= (fRange4-fRange3);
+        
+        float fScale2 = fScale;
+        fScale = 1.0-fScale;
+        
+        vTexColor += texture(gSampler1, fs_in.TexCoord)*fScale;
+        vTexColor += texture(gSampler2, fs_in.TexCoord)*fScale2;
+    }
+    else if(fScale <= fRange5)vTexColor = texture(gSampler2, fs_in.TexCoord);
+    else if(fScale <= fRange6)
+    {
+        fScale -= fRange5;
+        fScale /= (fRange6-fRange5);
+        
+        float fScale2 = fScale;
+        fScale = 1.0-fScale;
+        
+        vTexColor += texture(gSampler2, fs_in.TexCoord)*fScale;
+        vTexColor += texture(gSampler3, fs_in.TexCoord)*fScale2;
+    }
+    else if(fScale <= fRange7)vTexColor = texture(gSampler3, fs_in.TexCoord);
+    else if(fScale <= fRange8)
+    {
+        fScale -= fRange7;
+        fScale /= (fRange8-fRange7);
+        
+        float fScale2 = fScale;
+        fScale = 1.0-fScale;
+        
+        vTexColor += texture(gSampler3, fs_in.TexCoord)*fScale;
+        vTexColor += texture(gSampler4, fs_in.TexCoord)*fScale2;
+    }
+    else vTexColor = texture(gSampler4, fs_in.TexCoord);
+    
+    Fragcolor = vTexColor;
+    //terrain shader done
     
 	// Ambient
     float ambientStrength = 0.5f;
@@ -75,5 +151,5 @@ void main()
     shadow = min(shadow, 0.75); // reduce shadow strength a little: allow some diffuse/specular light in shadowed regions
     vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * objectColor;      
     
-    Fragcolor = vec4(lighting, 1.0f);
+    //Fragcolor = vec4(lighting, 1.0f);
 }

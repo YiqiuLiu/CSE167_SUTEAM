@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41310A8C1C151A75006A12E0 /* Tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41310A8B1C151A75006A12E0 /* Tree.cpp */; };
 		413925551C0EB5BF00485E73 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */; };
 		4139255A1C0F6DC000485E73 /* Tank.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 413925591C0F6DC000485E73 /* Tank.cpp */; };
 		4139255D1C0F761A00485E73 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4139255B1C0F761A00485E73 /* Light.cpp */; };
@@ -24,6 +25,7 @@
 		41559ADF1C0BC0ED00648F2C /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */; };
 		41559AE11C0BC12100648F2C /* obj in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE01C0BC12100648F2C /* obj */; };
 		41559AE31C0BC23900648F2C /* shader in Resources */ = {isa = PBXBuildFile; fileRef = 41559AE21C0BC23900648F2C /* shader */; };
+		41A377761C157567006165C5 /* ShadowMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41A377741C157567006165C5 /* ShadowMap.cpp */; };
 		41BA478F1C10D5DF009A0D34 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA47891C10D5DF009A0D34 /* back.png */; };
 		41BA47901C10D5DF009A0D34 /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA478A1C10D5DF009A0D34 /* down.png */; };
 		41BA47911C10D5DF009A0D34 /* front.png in Resources */ = {isa = PBXBuildFile; fileRef = 41BA478B1C10D5DF009A0D34 /* front.png */; };
@@ -38,6 +40,7 @@
 		41FD96941C0C1EA80025D456 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD96931C0C1EA70025D456 /* Model.cpp */; };
 		790F1E9E1C102BDB008DE3AC /* PPM in Resources */ = {isa = PBXBuildFile; fileRef = 790F1E9D1C102BDB008DE3AC /* PPM */; };
 		790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */; };
+		79F731821C16D496005628DF /* texture in Resources */ = {isa = PBXBuildFile; fileRef = 79F731811C16D496005628DF /* texture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41310A8A1C151A5E006A12E0 /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
+		41310A8B1C151A75006A12E0 /* Tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tree.cpp; sourceTree = "<group>"; };
 		413925541C0EB5BF00485E73 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		413925581C0F6DAC00485E73 /* Tank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tank.h; sourceTree = "<group>"; };
 		413925591C0F6DC000485E73 /* Tank.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tank.cpp; sourceTree = "<group>"; };
@@ -83,6 +88,8 @@
 		41559ADE1C0BC0ED00648F2C /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = ../../../../../../../../usr/local/Cellar/assimp/3.1.1/lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
 		41559AE01C0BC12100648F2C /* obj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = obj; sourceTree = "<group>"; };
 		41559AE21C0BC23900648F2C /* shader */ = {isa = PBXFileReference; lastKnownFileType = folder; path = shader; sourceTree = "<group>"; };
+		41A377741C157567006165C5 /* ShadowMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShadowMap.cpp; sourceTree = "<group>"; };
+		41A377751C157567006165C5 /* ShadowMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowMap.h; sourceTree = "<group>"; };
 		41BA47891C10D5DF009A0D34 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		41BA478A1C10D5DF009A0D34 /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		41BA478B1C10D5DF009A0D34 /* front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = front.png; sourceTree = "<group>"; };
@@ -101,6 +108,7 @@
 		790F1E9D1C102BDB008DE3AC /* PPM */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PPM; sourceTree = "<group>"; };
 		790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeightMap.cpp; sourceTree = "<group>"; };
 		790F1EA01C102BE5008DE3AC /* HeightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeightMap.h; sourceTree = "<group>"; };
+		79F731811C16D496005628DF /* texture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = texture; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +131,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				79F731811C16D496005628DF /* texture */,
 				41BA47881C10D5DF009A0D34 /* Skybox */,
 				790F1E9D1C102BDB008DE3AC /* PPM */,
 				41559AE21C0BC23900648F2C /* shader */,
@@ -157,6 +166,8 @@
 		41559ADA1C0BBB8A00648F2C /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				41A377741C157567006165C5 /* ShadowMap.cpp */,
+				41A377751C157567006165C5 /* ShadowMap.h */,
 				41BA47951C10D6F5009A0D34 /* Skybox.cpp */,
 				41BA47961C10D6F5009A0D34 /* Skybox.h */,
 				790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */,
@@ -188,6 +199,8 @@
 				41D5BF1B1C14ADFA00ACB881 /* Particle.cpp */,
 				41C45D8B1C14DC510073258C /* ParticleManager.h */,
 				41C45D8C1C14DC660073258C /* ParticleManager.cpp */,
+				41310A8A1C151A5E006A12E0 /* Tree.h */,
+				41310A8B1C151A75006A12E0 /* Tree.cpp */,
 			);
 			name = Src;
 			sourceTree = "<group>";
@@ -267,6 +280,7 @@
 				41BA47901C10D5DF009A0D34 /* down.png in Resources */,
 				41BA47931C10D5DF009A0D34 /* right.png in Resources */,
 				790F1E9E1C102BDB008DE3AC /* PPM in Resources */,
+				79F731821C16D496005628DF /* texture in Resources */,
 				41559AE11C0BC12100648F2C /* obj in Resources */,
 				41559AE31C0BC23900648F2C /* shader in Resources */,
 				41BA47941C10D5DF009A0D34 /* up.png in Resources */,
@@ -289,6 +303,7 @@
 				413925631C0FC35E00485E73 /* Drawable.cpp in Sources */,
 				41559ACF1C0BA54500648F2C /* main.cpp in Sources */,
 				41559ACA1C0B96B500648F2C /* Shader.cpp in Sources */,
+				41310A8C1C151A75006A12E0 /* Tree.cpp in Sources */,
 				41FD96941C0C1EA80025D456 /* Model.cpp in Sources */,
 				41FD96921C0C1D970025D456 /* Mesh.cpp in Sources */,
 				413925621C0FC35E00485E73 /* Bullet.cpp in Sources */,
@@ -297,6 +312,7 @@
 				41FD96901C0C1A6F0025D456 /* Camera.cpp in Sources */,
 				41559ACB1C0B96B500648F2C /* Texture.cpp in Sources */,
 				790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */,
+				41A377761C157567006165C5 /* ShadowMap.cpp in Sources */,
 				41C45D8D1C14DC660073258C /* ParticleManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

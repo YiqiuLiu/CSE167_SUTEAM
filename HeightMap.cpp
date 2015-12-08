@@ -38,7 +38,7 @@ void HeightMap::buildMap()
     
     float RED=0.3, GREEN=0.59, BLUE=0.11;
     float scaleF = 1000.0;
-    float scaleHeight = 10.0;
+    scaleHeight = 30.0;
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -52,14 +52,13 @@ void HeightMap::buildMap()
             vtx.Position = glm::vec3(scaleF*(-0.5f+fScaleC), scaleHeight * fVertexHeight, scaleF*(-0.5f+fScaleR));
             vtx.TexCoords = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
             vertices.push_back(vtx);
-            
             glm::vec3 prt = vtx.Position;
-			/**/
+            /**/
             //if (!j)
             //    std::cout << "{"
             //    << prt.x << " " << prt.y << " " << prt.z
-            //    << "}"<<endl;        
-		};
+            //    << "}"<<endl;
+        };
     }
     // normal calculation
     vector< vector<glm::vec3> > vNormals[2];
@@ -85,15 +84,15 @@ void HeightMap::buildMap()
             glm::vec3 vTriangleNorm1 = glm::cross(vTriangle1[0]-vTriangle1[1], vTriangle1[1]-vTriangle1[2]);
             
             vNormals[0][i][j] = glm::normalize(vTriangleNorm0);
-            vNormals[1][i][j] = glm::normalize(vTriangleNorm1); 
-        } 
+            vNormals[1][i][j] = glm::normalize(vTriangleNorm1);
+        }
     }
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
             glm::vec3 vFinalNormal = glm::vec3(0.0f, 0.0f, 0.0f);
-        
+            
             // Look for upper-left triangles
             if(j != 0 && i != 0)
                 for(int k = 0; k < 2; k++)vFinalNormal += vNormals[k][i-1][j-1];
@@ -106,7 +105,7 @@ void HeightMap::buildMap()
             if(i != height-1 && j != 0)
                 vFinalNormal += vNormals[1][i][j-1];
             vFinalNormal = glm::normalize(vFinalNormal);
-        
+            
             vertices[i*width + j].Normal = vFinalNormal; // Store final normal of j-th vertex in i-th row
         }
     }
@@ -139,9 +138,10 @@ void HeightMap::buildMap()
         this->indices.push_back(br);
         this->indices.push_back(tr);
     }
-
+    
     
     setupHeightMap();
+    
 }
 
 unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
@@ -154,7 +154,7 @@ unsigned char* HeightMap::LoadPPM(char* filename , int &width,int &height)
     char* retval_fgets;
     size_t retval_sscanf;
     
-   
+    
     if((fp=fopen(filename, "rb")) == NULL)
     {
         std::cerr << "error reading ppm file, could not locate " << filename << std::endl;
@@ -209,7 +209,7 @@ void HeightMap::Draw(Shader shader)
     
     glm::mat4 model = glm::mat4(1.0);
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
+    
     
     for(GLuint i = 0; i < this->textures.size(); i++)
     {
@@ -218,13 +218,9 @@ void HeightMap::Draw(Shader shader)
         stringstream ss;
         string number;
         string name = this->textures[i].type;
-        if(name == "texture_diffuse")
-            ss << diffuseNr++; // Transfer GLuint to stream
-        else if(name == "texture_specular")
-            ss << specularNr++; // Transfer GLuint to stream
-        number = ss.str();
         // Now set the sampler to the correct texture unit
-        glUniform1i(glGetUniformLocation(shader.ID, (name + number).c_str()), i);
+        //cout<<name<<endl;
+        glUniform1i(glGetUniformLocation(shader.ID, (name).c_str()), i);
         // And finally bind the texture
         glBindTexture(GL_TEXTURE_2D, this->textures[i].id);
     }

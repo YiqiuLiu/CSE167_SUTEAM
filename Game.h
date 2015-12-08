@@ -13,6 +13,7 @@
 #include "Particle.h"
 #include "ShadowMap.h"
 #include "ParticleManager.h"
+#include "Tree.h"
 
 class Game
 {
@@ -31,6 +32,7 @@ public:
 	Light light;
     HeightMap SanDiego;
     Skybox* skybox;
+    Tree* tree;
 	ShadowMap shadowMap;
     
 	GLboolean  Keys[1024];
