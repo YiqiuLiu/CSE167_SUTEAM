@@ -44,6 +44,7 @@ public:
     vector<Texture> textures;
     int width,height;
     float scaleHeight;
+    float fTextureU,fTextureV,mapScale;
     /*  Functions  */
     // Constructor
     HeightMap(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
@@ -51,7 +52,8 @@ public:
     unsigned char* LoadPPM(char* sImagePath, int &width,int &height);
     HeightMap(void);
     HeightMap(char* filename);
-    
+    float getHeight(float, float);
+
     void buildMap();
     // Render the HeightMap
     void Draw(Shader shader);
