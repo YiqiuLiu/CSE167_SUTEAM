@@ -21,7 +21,7 @@ using namespace std;
 #include <glm/gtc/matrix_transform.hpp>
 #include "glm/gtx/string_cast.hpp"
 #include <assimp/types.h>
-
+#include "Mesh.h"
 #include "Shader.h"
 
 
@@ -37,17 +37,13 @@ public:
         glm::vec2 TexCoords;
     };
     
-    struct Texture {
-        GLuint id;
-        string type;
-        aiString path;
-    };
-
+    
     /*  HeightMap Data  */
     vector<Vertex> vertices;
     vector<GLuint> indices;
     vector<Texture> textures;
-    
+    int width,height;
+    float scaleHeight;
     /*  Functions  */
     // Constructor
     HeightMap(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures);
@@ -63,12 +59,11 @@ public:
 private:
     /*  Render data  */
     GLuint VAO, VBO, EBO;
-    int width,height;
     /*  Functions    */
     // Initializes all the buffer objects/arrays
     void setupHeightMap();
     unsigned char* tdata;
-
+    
 };
 
 

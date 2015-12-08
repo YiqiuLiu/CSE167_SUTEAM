@@ -40,6 +40,7 @@
 		41FD96941C0C1EA80025D456 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FD96931C0C1EA70025D456 /* Model.cpp */; };
 		790F1E9E1C102BDB008DE3AC /* PPM in Resources */ = {isa = PBXBuildFile; fileRef = 790F1E9D1C102BDB008DE3AC /* PPM */; };
 		790F1EA11C102BE5008DE3AC /* HeightMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */; };
+		79F731821C16D496005628DF /* texture in Resources */ = {isa = PBXBuildFile; fileRef = 79F731811C16D496005628DF /* texture */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,6 +108,7 @@
 		790F1E9D1C102BDB008DE3AC /* PPM */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PPM; sourceTree = "<group>"; };
 		790F1E9F1C102BE5008DE3AC /* HeightMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeightMap.cpp; sourceTree = "<group>"; };
 		790F1EA01C102BE5008DE3AC /* HeightMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeightMap.h; sourceTree = "<group>"; };
+		79F731811C16D496005628DF /* texture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = texture; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		41559A911C056D6400648F2C = {
 			isa = PBXGroup;
 			children = (
+				79F731811C16D496005628DF /* texture */,
 				41BA47881C10D5DF009A0D34 /* Skybox */,
 				790F1E9D1C102BDB008DE3AC /* PPM */,
 				41559AE21C0BC23900648F2C /* shader */,
@@ -277,6 +280,7 @@
 				41BA47901C10D5DF009A0D34 /* down.png in Resources */,
 				41BA47931C10D5DF009A0D34 /* right.png in Resources */,
 				790F1E9E1C102BDB008DE3AC /* PPM in Resources */,
+				79F731821C16D496005628DF /* texture in Resources */,
 				41559AE11C0BC12100648F2C /* obj in Resources */,
 				41559AE31C0BC23900648F2C /* shader in Resources */,
 				41BA47941C10D5DF009A0D34 /* up.png in Resources */,

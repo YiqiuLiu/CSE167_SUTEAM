@@ -27,7 +27,6 @@ void Game::Init()
 	botModel = new Model("./obj/tank_bottm_no_texture.obj");
 	bulletModel = new Model("./obj/missel.obj");
     
-    SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     tank = new Tank(topModel,botModel,bulletModel);
 //    camera.updateCamera(tank->position);
     skybox = new Skybox;
@@ -35,7 +34,41 @@ void Game::Init()
 //    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
     tree = new Tree(glm::vec3(0,0,0));
 
-	shadowMap.init();
+    // terrain texture init
+    SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
+    Texture2D Text = ResourceManager::LoadTexture("./texture/sea.jpg", false, "sea");
+    Texture inputText;
+    inputText.id = Text.ID;
+    inputText.type ="gSampler0";
+    SanDiego.textures.push_back(inputText);
+    cout<<"sea text ID = "<<Text.ID<<endl;
+    Text = ResourceManager::LoadTexture("./texture/sand.jpg", false, "sand");
+    inputText.id = Text.ID;
+    inputText.type ="gSampler1";
+    cout<<"sand text ID = "<<Text.ID<<endl;
+    SanDiego.textures.push_back(inputText);
+    Text = ResourceManager::LoadTexture("./texture/sand_grass.jpg", false, "sand_grass");
+    inputText.id = Text.ID;
+    inputText.type ="gSampler2";
+    SanDiego.textures.push_back(inputText);
+    cout<<"sand_grass text ID = "<<Text.ID<<endl;
+    Text = ResourceManager::LoadTexture("./texture/rock.jpg", false, "rock");
+    inputText.id = Text.ID;
+    inputText.type ="gSampler3";
+    cout<<"rock text ID = "<<Text.ID<<endl;
+    SanDiego.textures.push_back(inputText);
+    Text = ResourceManager::LoadTexture("./texture/snow.jpg", false, "snow");
+    inputText.id = Text.ID;
+    inputText.type ="gSampler4";
+    cout<<"snow text ID = "<<Text.ID<<endl;
+    SanDiego.textures.push_back(inputText);
+    shadowMap.init();
+    inputText.id = shadowMap.getShadowMap();
+    inputText.type ="shadowMap";
+    cout<<"shadowMap text ID = "<<shadowMap.getShadowMap()<<endl;
+    SanDiego.textures.push_back(inputText);
+    
+    // texture init done
 }
 
 
@@ -185,10 +218,15 @@ void Game::RenderScene(){
 	
 	terrainshader.SetVector3f("objectColor", 1.0f, 0.5f, 0.31f, false);
 	terrainshader.SetVector3f("lightColor", light.getColor(), false);
-	
+    terrainshader.SetFloat("fRenderHeight", SanDiego.scaleHeight);
+    terrainshader.SetFloat("fMaxTextureU", float(SanDiego.height)*0.1f);
+    terrainshader.SetFloat("fMaxTextureV", float(SanDiego.width)*0.1f);
+	/*
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D,shadowMap.getShadowMap());
 	glUniform1i(glGetUniformLocation(terrainshader.ID, "shadowMap"), 0);
+     */
+    // texture binding moved in the Draw function
 	SanDiego.Draw(terrainshader);
 	/*
 	Shader testShader = ResourceManager::GetShader("test");
