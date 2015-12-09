@@ -24,9 +24,14 @@ void Game::Init()
 	ResourceManager::LoadShader("./shader/shadowMapShader.vs","./shader/shadowMapShader.frag",nullptr,"shadowMap");
 	ResourceManager::LoadShader("./shader/test.vs", "./shader/test.frag", nullptr, "test");
 
-	topModel = new Model("./obj/tank_top_no_texture.obj");
-	botModel = new Model("./obj/tank_bottm_no_texture.obj");
-	bulletModel = new Model("./obj/missel.obj");
+//	topModel = new Model("./obj/tank_top_no_texture.obj");
+//	botModel = new Model("./obj/tank_bottm_no_texture.obj");
+//	bulletModel = new Model("./obj/missel.obj");
+    
+    topModel = new Model("./obj/with_texture/tank_top_texture.obj");
+    botModel = new Model("./obj/with_texture/tank_bottm_texture.obj");
+    bulletModel = new Model("./obj/with_texture/missel_texture.obj");
+
     
     tank = new Tank(topModel,botModel,bulletModel);
 //    camera.updateCamera(tank->position);
@@ -34,11 +39,11 @@ void Game::Init()
 
 //    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
     tree = new Tree(glm::vec3(0,10,0));
-    cout<<"====debug===="<<endl;
-    cout<<tree->trees->at(0)<<endl;
-    cout<<tree->trees->at(1)<<endl;
-    cout<<tree->trees->at(2)<<endl;
-    cout<<"====debug===="<<endl;
+//    cout<<"====debug===="<<endl;
+//    cout<<tree->trees->at(0)<<endl;
+//    cout<<tree->trees->at(1)<<endl;
+//    cout<<tree->trees->at(2)<<endl;
+//    cout<<"====debug===="<<endl;
     // terrain texture init
     SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     Texture2D Text = ResourceManager::LoadTexture("./texture/sea.jpg", false, "sea");
@@ -46,31 +51,31 @@ void Game::Init()
     inputText.id = Text.ID;
     inputText.type ="gSampler0";
     SanDiego.textures.push_back(inputText);
-    cout<<"sea text ID = "<<Text.ID<<endl;
+//    cout<<"sea text ID = "<<Text.ID<<endl;
     Text = ResourceManager::LoadTexture("./texture/sand.jpg", false, "sand");
     inputText.id = Text.ID;
     inputText.type ="gSampler1";
-    cout<<"sand text ID = "<<Text.ID<<endl;
+//    cout<<"sand text ID = "<<Text.ID<<endl;
     SanDiego.textures.push_back(inputText);
     Text = ResourceManager::LoadTexture("./texture/sand_grass.jpg", false, "sand_grass");
     inputText.id = Text.ID;
     inputText.type ="gSampler2";
     SanDiego.textures.push_back(inputText);
-    cout<<"sand_grass text ID = "<<Text.ID<<endl;
+//    cout<<"sand_grass text ID = "<<Text.ID<<endl;
     Text = ResourceManager::LoadTexture("./texture/rock.jpg", false, "rock");
     inputText.id = Text.ID;
     inputText.type ="gSampler3";
-    cout<<"rock text ID = "<<Text.ID<<endl;
+//    cout<<"rock text ID = "<<Text.ID<<endl;
     SanDiego.textures.push_back(inputText);
     Text = ResourceManager::LoadTexture("./texture/snow.jpg", false, "snow");
     inputText.id = Text.ID;
     inputText.type ="gSampler4";
-    cout<<"snow text ID = "<<Text.ID<<endl;
+//    cout<<"snow text ID = "<<Text.ID<<endl;
     SanDiego.textures.push_back(inputText);
     shadowMap.init();
     inputText.id = shadowMap.getShadowMap();
     inputText.type ="shadowMap";
-    cout<<"shadowMap text ID = "<<shadowMap.getShadowMap()<<endl;
+//    cout<<"shadowMap text ID = "<<shadowMap.getShadowMap()<<endl;
     SanDiego.textures.push_back(inputText);
     
     // texture init done
@@ -209,6 +214,9 @@ void Game::RenderScene(){
 	shader.SetMatrix4("projection", projection, true);
 	shader.SetMatrix4("view", view, true);
     tank->draw(shader);
+    for (auto it : sceneList){
+        it->draw(shader);
+    }
 
 	terrainshader.Use();
 	terrainshader.SetVector3f("viewPos", camera.Position, true);
@@ -248,9 +256,7 @@ void Game::RenderScene(){
 	
 
 
-//    for (auto it : sceneList){
-//        it->draw(shader);
-//    }
+    
     
     Shader partShader = ResourceManager::GetShader("part");
 	

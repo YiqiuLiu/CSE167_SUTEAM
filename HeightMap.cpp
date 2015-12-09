@@ -52,12 +52,12 @@ void HeightMap::buildMap()
             vtx.Position = glm::vec3(mapScale*(-0.5f+fScaleC), scaleHeight * fVertexHeight, mapScale*(-0.5f+fScaleR));
             vtx.TexCoords = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
             vertices.push_back(vtx);
-            glm::vec3 prt = vtx.Position;
-            
-            if (j==3 && i == 1)
-                std::cout << "{"
-                << prt.x << " " << prt.y << " " << prt.z
-                << "}"<<endl;
+//            glm::vec3 prt = vtx.Position;
+//            
+//            if (j==3 && i == 1)
+//                std::cout << "{"
+//                << prt.x << " " << prt.y << " " << prt.z
+//                << "}"<<endl;
         };
     }
     // normal calculation
