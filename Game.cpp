@@ -242,12 +242,12 @@ void Game::RenderScene(){
 //
 //    
 //    
-//    Shader partShader = ResourceManager::GetShader("part");
-//	
-//    partShader.Use();
-//    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-//    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-//    tree->draw(part_Shader);
+    Shader partShader = ResourceManager::GetShader("part");
+//
+    partShader.Use();
+    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    tree->draw(part_Shader);
     
 
 }
