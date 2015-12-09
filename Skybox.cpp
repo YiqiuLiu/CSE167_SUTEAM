@@ -110,7 +110,10 @@ void Skybox::draw(Shader shader)
     // Draw skybox first
     glDepthMask(GL_FALSE);// Remember to turn depth writing off
     glm::mat4 model;
-    model = glm::scale(model, glm::vec3(50, 50, 50));
+    glm::mat4 model1;
+    model1 = glm::translate(model1, glm::vec3(0, 0.01, 0));
+        model = glm::scale(model, glm::vec3(300, 300, 300));
+    model = model * model1;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glDepthFunc(GL_LEQUAL);  // Change depth function so depth test passes when values are equal to depth buffer's content
     
@@ -123,4 +126,5 @@ void Skybox::draw(Shader shader)
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
 }

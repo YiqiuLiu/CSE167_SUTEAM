@@ -184,39 +184,9 @@ void Game::RenderScene(){
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 
-    skyshader.Use();
-	skyshader.SetMatrix4("projection", projection,false);
-	skyshader.SetMatrix4("projection", view, false);
+    
+    
 
-    shader.Use();
-    //uniform
-    GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
-    GLint lightColorLoc  = glGetUniformLocation(shader.ID, "lightColor");
-    GLint lightPosLoc    = glGetUniformLocation(shader.ID, "lightPos");
-    GLint viewPosLoc     = glGetUniformLocation(shader.ID, "viewPos");
-    glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-    glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
-    glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
-    glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
-	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    
-    
-    
-//    SanDiego.Draw(terrainshader);
-
-//    tank->draw(shader);
-//    std::cout<<tree->trees->size()<<std::endl;
-	shader.SetVector3f("objectColor",1.0f,0.5f,0.31f,false);
-	shader.SetVector3f("lightColor", light.getColor(), false);
-	shader.SetVector3f("lightPos", light.getPosition(), false);
-	shader.SetVector3f("viewPos", camera.Position, false);
-	shader.SetMatrix4("projection", projection, true);
-	shader.SetMatrix4("view", view, true);
-    tank->draw(shader);
-    for (auto it : sceneList){
-        it->draw(shader);
-    }
 
 	terrainshader.Use();
 	terrainshader.SetVector3f("viewPos", camera.Position, true);
@@ -234,39 +204,50 @@ void Game::RenderScene(){
     terrainshader.SetFloat("fRenderHeight", SanDiego.scaleHeight);
     terrainshader.SetFloat("fMaxTextureU", float(SanDiego.height)*0.1f);
     terrainshader.SetFloat("fMaxTextureV", float(SanDiego.width)*0.1f);
-	/*
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D,shadowMap.getShadowMap());
-	glUniform1i(glGetUniformLocation(terrainshader.ID, "shadowMap"), 0);
-     */
-    // texture binding moved in the Draw function
+	
 	SanDiego.Draw(terrainshader);
-	/*
-	Shader testShader = ResourceManager::GetShader("test");
-	testShader.Use();
-	glm::mat4 model = glm::mat4(1.0);
-	model = glm::scale(model, glm::vec3(10.0, 10.0, 10.0));
-	testShader.SetMatrix4("projection", projection, true);
-	testShader.SetMatrix4("view", view, true);
-	testShader.SetMatrix4("model", model, true);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, shadowMap.getShadowMap());
-	RenderQuad();
-	*/
-	
-
-
     
     
-    Shader partShader = ResourceManager::GetShader("part");
-	
-    partShader.Use();
-    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-//    tree->drawLine(part_Shader);
-//    tree->leaf(part_Shader);
-    tree->draw(part_Shader);
-    //testParticle->draw(partShader);
+        shader.Use();
+        //uniform
+        GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
+        GLint lightColorLoc  = glGetUniformLocation(shader.ID, "lightColor");
+        GLint lightPosLoc    = glGetUniformLocation(shader.ID, "lightPos");
+        GLint viewPosLoc     = glGetUniformLocation(shader.ID, "viewPos");
+        glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
+        glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
+        glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
+        glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
+    	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    
+    
+    	shader.SetVector3f("objectColor",1.0f,0.5f,0.31f,false);
+    	shader.SetVector3f("lightColor", light.getColor(), false);
+    	shader.SetVector3f("lightPos", light.getPosition(), false);
+    	shader.SetVector3f("viewPos", camera.Position, false);
+    	shader.SetMatrix4("projection", projection, true);
+    	shader.SetMatrix4("view", view, true);
+        tank->draw(shader);
+        for (auto it : sceneList){
+            it->draw(shader);
+        }
+    
+    
+    skyshader.Use();
+    skyshader.SetMatrix4("projection", projection,true);
+    skyshader.SetMatrix4("view", view, true);
+    skybox->draw(skyshader);
+
+//
+//    
+//    
+//    Shader partShader = ResourceManager::GetShader("part");
+//	
+//    partShader.Use();
+//    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+//    glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
+//    tree->draw(part_Shader);
     
 
 }
