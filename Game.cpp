@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtx/string_cast.hpp>
+#include <string>
 
 
 
@@ -32,8 +33,12 @@ void Game::Init()
     skybox = new Skybox;
 
 //    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
-    tree = new Tree(glm::vec3(0,0,0));
-
+    tree = new Tree(glm::vec3(0,10,0));
+    cout<<"====debug===="<<endl;
+    cout<<tree->trees->at(0)<<endl;
+    cout<<tree->trees->at(1)<<endl;
+    cout<<tree->trees->at(2)<<endl;
+    cout<<"====debug===="<<endl;
     // terrain texture init
     SanDiego = HeightMap("./PPM/SanDiegoTerrain.ppm");
     Texture2D Text = ResourceManager::LoadTexture("./texture/sea.jpg", false, "sea");

@@ -13,7 +13,7 @@
 Tree::Tree(glm::vec3 pos) : Drawable(){
     this->pos = pos;
     this->angle = glm::radians(30.0f);
-    this->length = 0.5;
+    this->length = 0.05f;
     this->str = "X";
     this->trees = new vector<string>();
     this->active = glm::mat4(1.0f);
@@ -68,11 +68,11 @@ void Tree::init()
     glGenVertexArrays(2, &this->VAO1);
     glGenBuffers(2, &this->VBO1);
         GLfloat g_vertex_buffer_data[] = {
-            0.0f,  0.5f, 0.0f,
+            0.0f,  length, 0.0f,
             0.0f,  0.0f, 0.0f,
             0.0f,  0.0f, 0.2f,
-            0.0f,  0.5f, 0.0f,
-            0.0f,  0.5f, 0.2f,
+            0.0f,  length, 0.0f,
+            0.0f,  length, 0.2f,
             0.0f,  0.0f, 0.2f
         };
     
@@ -139,7 +139,7 @@ void Tree::pop()
 
 void Tree::rotL()
 {
-    modelStack.push_back(active);
+//    modelStack.push_back(active);
     active = glm::rotate(active, angle, glm::vec3(1, 0, 0));
     active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
     active = glm::rotate(active, angle, glm::vec3(0, 0, 1));
@@ -147,7 +147,7 @@ void Tree::rotL()
 
 void Tree::rotR()
 {
-    modelStack.push_back(active);
+//    modelStack.push_back(active);
     active = glm::rotate(active, - angle, glm::vec3(1, 0, 0));
     active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
     active = glm::rotate(active, - angle, glm::vec3(0, 0, 1));
@@ -159,7 +159,7 @@ void Tree::draw(Shader shader)
     this->active = glm::mat4(1.0f);
     this->active = glm::translate(active, this->pos);
     string ch = "";
-    string LSystem = trees->at(4);
+    string LSystem = trees->at(6);
     for (int i = 0; i < LSystem.length(); i++){
         ch = LSystem.at(i);
         
@@ -187,7 +187,7 @@ void Tree::drawLine(Shader shader)
     glUniform4fv(glGetUniformLocation(shader.ID, "color_calculate"), 1, glm::value_ptr(color));
     
     glBindVertexArray(VAO1);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 //    glEnableVertexAttribArray(0);
 //    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -207,8 +207,8 @@ void Tree::drawLine(Shader shader)
 //    
 //    glDisableVertexAttribArray(0);
     
-    modelStack.push_back(active);
-    active = glm::translate(active, glm::vec3(0,0.2,0));
+//    modelStack.push_back(active);
+    active = glm::translate(active, glm::vec3(0,length,0));
 }
 
 void Tree::leaf(Shader shader)
@@ -220,4 +220,6 @@ void Tree::leaf(Shader shader)
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);
+//    active = modelStack.back();
+//    modelStack.pop_back();
 }
