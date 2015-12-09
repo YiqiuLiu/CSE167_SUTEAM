@@ -33,6 +33,8 @@ public:
     void push();
     void rotL();
     void rotR();
+    void rotW();
+    void rotS();
     void draw(Shader);
     void drawLine(Shader);
     void init();

@@ -18,7 +18,7 @@ Tree::Tree(glm::vec3 pos) : Drawable(){
     this->trees = new vector<string>();
     this->active = glm::mat4(1.0f);
     this->active = glm::translate(active, this->pos);
-    this->lineWidth = 10;
+    this->lineWidth = 10.0f;
     this->depth = 6;
     for(int i = 0;i <= 6;++ i) {
         float num = (float) rand()/RAND_MAX;
@@ -70,10 +70,10 @@ void Tree::init()
         GLfloat g_vertex_buffer_data[] = {
             0.0f,  length, 0.0f,
             0.0f,  0.0f, 0.0f,
-            0.0f,  0.0f, 0.2f,
+            0.0f,  0.0f, lineWidth / 50,
             0.0f,  length, 0.0f,
-            0.0f,  length, 0.2f,
-            0.0f,  0.0f, 0.2f
+            0.0f,  length, lineWidth / 50,
+            0.0f,  0.0f, lineWidth / 50
         };
     
     glBindVertexArray(VAO1);
@@ -108,13 +108,17 @@ void  Tree::expand(float num){
             i = i + 1;
         } else if (ch.compare("X") == 0){
             
-            if (num < 0.4){
+            if (num < 0.25){
                 //LSystem.replace(i, 1, "D[LX]D[RX]LX");
                 str.replace(i, 1, "D[LXV]D[RXV]LX");
                 
-            } else {
+            } else if(num < 0.5){
                 //LSystem.replace(i, 1, "D[RX]D[LX]RX");
                 str.replace(i, 1, "D[RXV]D[LXV]RX");
+            } else if(num < 0.75){
+                str.replace(i, 1, "D[WXV]D[SXV]LX");
+            } else {
+                str.replace(i, 1, "D[SXV]D[WXV]LX");
             }
             i = i + 13;	//11
         } 
@@ -139,7 +143,6 @@ void Tree::pop()
 
 void Tree::rotL()
 {
-//    modelStack.push_back(active);
     active = glm::rotate(active, angle, glm::vec3(1, 0, 0));
     active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
     active = glm::rotate(active, angle, glm::vec3(0, 0, 1));
@@ -147,8 +150,21 @@ void Tree::rotL()
 
 void Tree::rotR()
 {
-//    modelStack.push_back(active);
     active = glm::rotate(active, - angle, glm::vec3(1, 0, 0));
+    active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
+    active = glm::rotate(active, - angle, glm::vec3(0, 0, 1));
+}
+
+void Tree::rotS()
+{
+    active = glm::rotate(active, - angle, glm::vec3(1, 0, 0));
+    active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
+    active = glm::rotate(active, angle, glm::vec3(0, 0, 1));
+}
+
+void Tree::rotW()
+{
+    active = glm::rotate(active, angle, glm::vec3(1, 0, 0));
     active = glm::rotate(active, 5 * angle, glm::vec3(0, 1, 0));
     active = glm::rotate(active, - angle, glm::vec3(0, 0, 1));
 }
@@ -175,6 +191,10 @@ void Tree::draw(Shader shader)
             rotR();
         } else if (ch.compare("L") == 0){
             rotL();
+        } else if (ch.compare("W") == 0){
+            
+        } else if (ch.compare("S") == 0){
+            
         }
     }
 }

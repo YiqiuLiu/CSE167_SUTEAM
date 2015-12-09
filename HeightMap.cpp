@@ -23,6 +23,10 @@ HeightMap::HeightMap(char* filename)
     tdata = LoadPPM(filename, width, height);
     if(tdata == NULL || width == 0 || height == 0 )
         std::cout<< "error reading ppm file, no data retrieved. " << std::endl;
+    mapScale = 1000.0;
+    scaleHeight = 30.0;
+    fTextureU = float(width)*0.1f;
+    fTextureV = float(height)*0.1f;
     
     buildMap();
 }
@@ -33,12 +37,8 @@ void HeightMap::buildMap()
     
     
     
-    float fTextureU = float(width)*0.1f;
-    float fTextureV = float(height)*0.1f;
-    
+
     float RED=0.3, GREEN=0.59, BLUE=0.11;
-    float scaleF = 1000.0;
-    scaleHeight = 30.0;
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -49,15 +49,15 @@ void HeightMap::buildMap()
                                         int(tdata[(i*width+j)*3+1])*GREEN +
                                         int(tdata[(i*width+j)*3+2])*BLUE)/255.0f;
             Vertex vtx;
-            vtx.Position = glm::vec3(scaleF*(-0.5f+fScaleC), scaleHeight * fVertexHeight, scaleF*(-0.5f+fScaleR));
+            vtx.Position = glm::vec3(mapScale*(-0.5f+fScaleC), scaleHeight * fVertexHeight, mapScale*(-0.5f+fScaleR));
             vtx.TexCoords = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
             vertices.push_back(vtx);
-            glm::vec3 prt = vtx.Position;
-            /**/
-            //if (!j)
-            //    std::cout << "{"
-            //    << prt.x << " " << prt.y << " " << prt.z
-            //    << "}"<<endl;
+//            glm::vec3 prt = vtx.Position;
+//            
+//            if (j==3 && i == 1)
+//                std::cout << "{"
+//                << prt.x << " " << prt.y << " " << prt.z
+//                << "}"<<endl;
         };
     }
     // normal calculation
@@ -271,4 +271,11 @@ void HeightMap::setupHeightMap()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, TexCoords));
     
     glBindVertexArray(0);
+}
+
+float HeightMap::getHeight(float x, float z)
+{
+    int j = (x / mapScale + 0.5f ) * (width - 1);
+    int i = (z / mapScale + 0.5f ) * (height - 1);
+    return vertices[i*width + j].Position.y;
 }
