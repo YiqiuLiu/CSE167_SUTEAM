@@ -127,7 +127,7 @@ void main()
     }
     else vTexColor = texture(gSampler4, fs_in.TexCoord);
     
-    Fragcolor = vTexColor;
+    //Fragcolor = vTexColor;
     //terrain shader done
     
 	// Ambient
@@ -149,7 +149,7 @@ void main()
     // Calculate shadow
     float shadow = ShadowCalculation(fs_in.FragPosLightSpace);                      
     shadow = min(shadow, 0.75); // reduce shadow strength a little: allow some diffuse/specular light in shadowed regions
-    vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * objectColor;      
+    vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * vTexColor;      
     
-    //Fragcolor = vec4(lighting, 1.0f);
+    Fragcolor = vec4(lighting, 1.0f);
 }
