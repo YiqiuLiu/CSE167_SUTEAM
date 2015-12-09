@@ -52,12 +52,12 @@ void HeightMap::buildMap()
             vtx.Position = glm::vec3(mapScale*(-0.5f+fScaleC), scaleHeight * fVertexHeight, mapScale*(-0.5f+fScaleR));
             vtx.TexCoords = glm::vec2(fTextureU*fScaleC, fTextureV*fScaleR);
             vertices.push_back(vtx);
-//            glm::vec3 prt = vtx.Position;
-//            
-//            if (j==3 && i == 1)
-//                std::cout << "{"
-//                << prt.x << " " << prt.y << " " << prt.z
-//                << "}"<<endl;
+            glm::vec3 prt = vtx.Position;
+           
+            if (j==3 && i == 1 && prt.y < 1)
+                std::cout << "{"
+                << prt.x << " " << prt.y << " " << prt.z
+                << "}"<<endl;
         };
     }
     // normal calculation
@@ -122,15 +122,14 @@ void HeightMap::buildMap()
     for (cS = 0; cS < width * height; cS += 1) {
         
         // Calculate current square position.
-        sX = cS % (width - 1);
-        sZ = (cS - sX) / (width - 1);
-        
+        sX = cS % (width -1);
+        sZ = (cS - sX) / (width - 1) ;
+        if (sZ == height || sZ == height -1 ) continue;
         // Calculate indices of each square corner.
         tl = (sZ * width) + sX;
         tr = (sZ * width) + (sX + 1);
         bl = ((sZ + 1) * width) + sX;
         br = ((sZ + 1) * width) + (sX + 1);
-        
         this->indices.push_back(bl);
         this->indices.push_back(tr);
         this->indices.push_back(tl);

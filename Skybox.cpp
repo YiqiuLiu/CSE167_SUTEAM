@@ -13,12 +13,12 @@
 
 Skybox::Skybox() : Drawable()
 {
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/right.png");
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/left.png");
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/up.png");
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/down.png");
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/back.png");
-    faces.push_back("/Users/lyqqq/Google Drive/study/fa15/cse167/finalProject/CSE167_SUTEAM/Skybox/front.png");
+    faces.push_back("./Skybox/right.png");
+    faces.push_back("./Skybox/left.png");
+    faces.push_back("./Skybox/up.png");
+    faces.push_back("./Skybox/down.png");
+    faces.push_back("./Skybox/back.png");
+    faces.push_back("./Skybox/front.png");
 
     cubemapTexture = loadCubemap(faces);
     GLfloat skyboxVertices[] = {
