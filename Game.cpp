@@ -89,7 +89,7 @@ void Game::Init()
 	float h = SanDiego.getHeight(pos.x,pos.z);
 
 
-	lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 100.0f);
+	lightProjection = glm::ortho(-10.0f, 15.0f, -5.0f, 15.0f, 1.0f, 100.0f);
 
 	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
