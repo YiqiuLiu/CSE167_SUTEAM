@@ -73,7 +73,12 @@ void main()
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
     
-    vec3 result = (ambient + diffuse + specular) * color_1.xyz;
-//    color = vec4(result, 1.0f);
-    color = color_1;
+    //vec3 result = (ambient + diffuse + specular) * color_1.xyz;
+	
+	float shadow = ShadowCalculation(FragPosLightSpace);                      
+    shadow = min(shadow, 0.75); // reduce shadow strength a little: allow some diffuse/specular light in shadowed regions
+    vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * color_1.xyz;
+
+   color = vec4(lighting, 1.0f);
+   // color = color_1;
 }

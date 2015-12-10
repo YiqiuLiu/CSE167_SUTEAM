@@ -210,6 +210,9 @@ void Game::RenderTank(Shader shader){
 	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
 	glUniform3fv(lightPosLoc, 1, glm::value_ptr(light.getDirection()));
 	glUniform3f(viewPosLoc, camera.Position.x, camera.Position.y, camera.Position.z);
+	glActiveTexture(GL_TEXTURE5);
+	glUniform1i(glGetUniformLocation(shader.ID, "shadowMap"), 5);
+	glBindTexture(GL_TEXTURE_2D, shadowMap.getShadowMap());
 	tank->draw(shader);
 }
 
@@ -255,6 +258,7 @@ void Game::RenderScene(){
 	shader.Use();
 	shader.SetMatrix4("view",view,false);
 	shader.SetMatrix4("projection", projection, false);
+	shader.SetMatrix4("lightSpaceMatrix", lightSpaceMatrix, true);
 //    bullet->draw(shader);
 	RenderTank(shader);
 
