@@ -62,7 +62,7 @@ void Tank::spinBot(GLfloat dt){
 }
 
 Bullet* Tank::fire(){
-	Bullet* bullet = new Bullet(this->position,this->topAngle,this->bulletModel);
+	Bullet* bullet = new Bullet(this->position,this->topAngle, this->selfRotate, this->bulletModel);
 	return bullet;
 }
 
