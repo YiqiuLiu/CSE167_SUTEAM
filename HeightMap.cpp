@@ -274,14 +274,53 @@ void HeightMap::setupHeightMap()
 
 float HeightMap::getHeight(float x, float z)
 {
+    //cout<<"x:"<<x<<"z:"<<z<<endl;
     int j = (x / mapScale + 0.5f ) * (width - 1);
     int i = (z / mapScale + 0.5f ) * (height - 1);
-    return vertices[i*width + j].Position.y;
+    float fj = (x / mapScale + 0.5f ) * (width - 1);
+    float fi = (z / mapScale + 0.5f ) * (height - 1);
+    //cout<< "i:" << i<< "fi:"<<fi << "j:"<<j<<"fj:"<<fj<<endl;
+    int i_p = i + 1;
+    int j_p = j + 1;
+    if (i_p >= width || j_p>=height)
+        return vertices[i*width + j].Position.y;
+    float tl,tr,bl,br;
+    bl = vertices[i*width + j].Position.y;
+    br = vertices[i_p*width + j].Position.y;
+    tl = vertices[i*width + j_p].Position.y;
+    tr = vertices[i_p*width + j_p].Position.y;
+    //cout<< "bl:" << bl<< "br:"<<br << "tl:"<<tl<<"tr:"<<tr<<endl;
+
+    float t_iter = tl+(fi - i)*(tr - tl);
+    float b_iter = bl+(fi - i)*(br - bl);
+    float result = b_iter + (fj - j)*(t_iter - b_iter);
+    //return vertices[i*width + j].Position.y;
+    //cout<<"result"<<result<<endl;
+    return result;
 }
 
 glm::vec3 HeightMap::getNormal(float x, float z)
 {
     int j = (x / mapScale + 0.5f ) * (width - 1);
     int i = (z / mapScale + 0.5f ) * (height - 1);
-    return vertices[i*width + j].Normal;
+    float fj = (x / mapScale + 0.5f ) * (width - 1);
+    float fi = (z / mapScale + 0.5f ) * (height - 1);
+    //cout<< "i:" << i<< "fi:"<<fi << "j:"<<j<<"fj:"<<fj<<endl;
+    int i_p = i + 1;
+    int j_p = j + 1;
+    if (i_p >= width || j_p>=height)
+        return vertices[i*width + j].Normal;
+    glm::vec3 tl,tr,bl,br;
+    bl = vertices[i*width + j].Normal;
+    br = vertices[i_p*width + j].Normal;
+    tl = vertices[i*width + j_p].Normal;
+    tr = vertices[i_p*width + j_p].Normal;
+    //cout<< "bl:" << bl<< "br:"<<br << "tl:"<<tl<<"tr:"<<tr<<endl;
+    
+    glm::vec3 t_iter = tl+(fi - i)*(tr - tl);
+    glm::vec3 b_iter = bl+(fi - i)*(br - bl);
+    glm::vec3 result = b_iter + (fj - j)*(t_iter - b_iter);
+    //return vertices[i*width + j].Position.y;
+    //cout<<"result"<<result<<endl;
+    return result;
 }

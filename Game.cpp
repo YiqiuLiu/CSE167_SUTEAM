@@ -157,6 +157,7 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 void Game::Render(){
 	buildShadowMap();
 	RenderScene();
+    //tankmov.play();
 	//RenderTest();
 
 }
@@ -303,7 +304,8 @@ void Game::Update(float dt){
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
-    tank->selfRotate = glm::rotate(temp, angle, axis);
+    if (angle != 0)
+        tank->selfRotate = glm::rotate(temp, angle, axis);
 	Drawable* del;
 	for (auto it = sceneList.begin(); it != sceneList.end();++it){
 		if ((*it) == 0){
