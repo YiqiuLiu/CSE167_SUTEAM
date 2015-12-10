@@ -21,6 +21,7 @@ class ParticleManager : public Drawable
 public:
     glm::vec3 position;
     glm::vec3 velocity;
+    glm::mat4 fixedTranslate;
     GLuint amount;
     ParticleManager(GLuint, glm::vec3, glm::vec3);
     ~ParticleManager();

@@ -37,8 +37,14 @@ void Game::Init()
 //    camera.updateCamera(tank->position);
     skybox = new Skybox;
 
-//    testParticle = new Particle(glm::vec3(0,0,0), glm::vec3(0.1, 0.1, 0.1), 1);
-    tree = new Tree(glm::vec3(0,10,0));
+
+    pm = new ParticleManager(1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+    bullet = new Bullet(glm::vec3(0, 0, 0), 0, bulletModel);
+    
+    tree1 = new Tree(glm::vec3(0,4,60));
+    tree2 = new Tree(glm::vec3(20,4,60));
+    tree3 = new Tree(glm::vec3(0,4,40));
+    tree4 = new Tree(glm::vec3(20,4,40));
 //    cout<<"====debug===="<<endl;
 //    cout<<tree->trees->at(0)<<endl;
 //    cout<<tree->trees->at(1)<<endl;
@@ -152,6 +158,9 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 
 
 void Game::Render(){
+    
+    
+    
 	buildShadowMap();
 	RenderScene();
 	//RenderTest();
@@ -241,7 +250,8 @@ void Game::RenderScene(){
 	shader.Use();
 	shader.SetMatrix4("view",view,false);
 	shader.SetMatrix4("projection", projection, false);
-	RenderTank(shader);
+    bullet->draw(shader);
+//	RenderTank(shader);
 
 	for (auto it : sceneList){
 		it->draw(shader);
@@ -257,21 +267,22 @@ void Game::RenderScene(){
 	terrainshader.SetMatrix4("projection", projection, true);
 	terrainshader.SetMatrix4("view", view, true);
 	terrainshader.SetMatrix4("lightSpaceMatrix", lightSpaceMatrix, true);
-	RenderTerrain(terrainshader);
+//	RenderTerrain(terrainshader);
 
 
-    Shader part_Shader = ResourceManager::GetShader("part");
 
-//
-//    
 //    
     Shader partShader = ResourceManager::GetShader("part");
 //
     partShader.Use();
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    tree->draw(part_Shader);
-    
+//    tree1->draw(partShader);
+//    tree2->draw(partShader);
+//    tree3->draw(partShader);
+//    tree4->draw(partShader);
+
+    pm->draw(partShader);
 
 }
 

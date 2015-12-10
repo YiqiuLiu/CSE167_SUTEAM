@@ -32,7 +32,10 @@ public:
 	Light light;
     HeightMap SanDiego;
     Skybox* skybox;
-    Tree* tree;
+    Tree* tree1;
+    Tree* tree2;
+    Tree* tree3;
+    Tree* tree4;
 	ShadowMap shadowMap;
     
 	GLboolean  Keys[1024];

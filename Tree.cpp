@@ -25,6 +25,7 @@ Tree::Tree(glm::vec3 pos) : Drawable(){
         this->expand(num);
     }
     this->init();
+    srand (time(NULL));
     
 }
 
