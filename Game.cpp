@@ -39,7 +39,7 @@ void Game::Init()
 
 
     pm = new ParticleManager(1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
-    bullet = new Bullet(glm::vec3(0, 0, 0), 0, bulletModel);
+//    bullet = new Bullet(glm::vec3(0, 0, 0), 0, bulletModel);
     
     tree1 = new Tree(glm::vec3(0,5.5,60));
     tree2 = new Tree(glm::vec3(20,5.5,60));
@@ -255,7 +255,7 @@ void Game::RenderScene(){
 	shader.Use();
 	shader.SetMatrix4("view",view,false);
 	shader.SetMatrix4("projection", projection, false);
-    bullet->draw(shader);
+//    bullet->draw(shader);
 	RenderTank(shader);
 
 	for (auto it : sceneList){
