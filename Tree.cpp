@@ -7,12 +7,17 @@
 //
 
 #include "Tree.h"
+#include "time.h"
 #include <GL/glew.h>
 #include <iostream>
 
 Tree::Tree(glm::vec3 pos) : Drawable(){
     this->pos = pos;
+#ifdef __APPLE__
     this->angle = glm::radians(30.0f);
+#else
+	this->angle = 30.0f;
+#endif
     this->length = 0.05f;
     this->str = "X";
     this->trees = new vector<string>();

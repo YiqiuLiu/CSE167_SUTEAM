@@ -28,7 +28,11 @@ void Bullet::draw(Shader shader){
 }
 
 void Bullet::update(float dt){
+#ifdef __APPLE__
 	position += glm::vec3(dt*speed*sinf(angle), 0, dt*speed*cosf(angle));
+#else
+	position += glm::vec3(dt*speed*sinf(glm::radians(angle)), 0, dt*speed*cosf(glm::radians(angle)));
+#endif
 //    std::cout<<"angle"<<angle<<std::endl;
 	deathCount--;
 	if (deathCount <= 0){
