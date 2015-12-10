@@ -278,3 +278,10 @@ float HeightMap::getHeight(float x, float z)
     int i = (z / mapScale + 0.5f ) * (height - 1);
     return vertices[i*width + j].Position.y;
 }
+
+glm::vec3 HeightMap::getNormal(float x, float z)
+{
+    int j = (x / mapScale + 0.5f ) * (width - 1);
+    int i = (z / mapScale + 0.5f ) * (height - 1);
+    return vertices[i*width + j].Normal;
+}

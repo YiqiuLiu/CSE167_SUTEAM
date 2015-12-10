@@ -61,3 +61,7 @@ Bullet* Tank::fire(){
 	Bullet* bullet = new Bullet(this->position,this->topAngle,this->bulletModel);
 	return bullet;
 }
+
+void Tank::setPosition(glm::vec3 newPos){
+	this->position = newPos;
+}

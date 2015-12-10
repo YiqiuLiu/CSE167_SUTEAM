@@ -32,9 +32,7 @@ void Game::Init()
     topModel = new Model("./obj/with_texture/tank_top_texture.obj");
     botModel = new Model("./obj/with_texture/tank_bottm_texture.obj");
     bulletModel = new Model("./obj/with_texture/missel_texture.obj");
-
-    
-    tank = new Tank(topModel,botModel,bulletModel);
+	
 //    camera.updateCamera(tank->position);
     skybox = new Skybox;
 
@@ -80,6 +78,15 @@ void Game::Init()
     SanDiego.textures.push_back(inputText);
     
     // texture init done
+    
+    //tankmov.init("./wav/offer_x.wav");
+
+	//tank init
+	tank = new Tank(topModel, botModel, bulletModel);
+	glm::vec3 pos = tank->position;
+	glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
+	float h = SanDiego.getHeight(pos.x,pos.z);
+	tank->setPosition(glm::vec3(pos.x, h+1.5, pos.z));
 }
 
 
@@ -142,6 +149,7 @@ void Game::Render(){
 	buildShadowMap();
 	RenderScene();
 	//RenderTest();
+
 }
 
 GLuint quadVAO = 0;
