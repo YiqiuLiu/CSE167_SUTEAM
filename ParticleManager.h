@@ -14,6 +14,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include "Particle.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 class ParticleManager : public Drawable
 {
@@ -27,6 +28,9 @@ public:
     void draw(Shader);
     void update(GLfloat, GLuint, glm::vec3);
     void init();
+    
+    GLuint  VAO;
+    GLuint  VBO;
     
     std::vector<Particle*> particles;
     

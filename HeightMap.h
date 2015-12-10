@@ -53,6 +53,7 @@ public:
     HeightMap(void);
     HeightMap(char* filename);
     float getHeight(float, float);
+    glm::vec3 getNormal(float x, float z);
 
     void buildMap();
     // Render the HeightMap
