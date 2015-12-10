@@ -176,7 +176,7 @@ void Tree::draw(Shader shader)
     this->active = glm::mat4(1.0f);
     this->active = glm::translate(active, this->pos);
     string ch = "";
-    string LSystem = trees->at(6);
+    string LSystem = trees->at(5);
     for (int i = 0; i < LSystem.length(); i++){
         ch = LSystem.at(i);
         
