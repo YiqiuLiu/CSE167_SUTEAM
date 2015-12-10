@@ -344,6 +344,10 @@ void Game::shadowRender(Shader shader){
 	shader.Use();
 	SanDiego.Draw(shader);
 	tank->draw(shader);
+	for (auto it : sceneList){
+		it->draw(shader);
+	}
+	tree->draw(shader);
 }
 
 void Game::computeLightView(glm::mat4 &view, glm::mat4 &projection, glm::mat4 trans){

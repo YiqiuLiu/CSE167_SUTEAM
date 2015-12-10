@@ -42,7 +42,7 @@ void Tank::draw(Shader shader)
     model = glm::mat4(1.0);
     rotate = glm::rotate(model, topAngle, glm::vec3(0.0, 1.0, 0.0));
 	trans = glm::translate(model, position);
-	model = trans*rotate*selfRotate*scale;
+	model = trans*selfRotate*rotate*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     top->Draw(shader);
 }
