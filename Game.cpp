@@ -87,18 +87,14 @@ void Game::Init()
 	glm::vec3 pos = tank->position;
 	glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
 	float h = SanDiego.getHeight(pos.x,pos.z);
-<<<<<<< HEAD
-	tank->setPosition(glm::vec3(pos.x, h+1.5, pos.z));
+
 
 	lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 400.0f);
-=======
 	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
     tank->selfRotate = glm::rotate(temp, angle, axis);
-    
->>>>>>> 77d56aac5a5426b80d10f49db3a40d8defffedcb
 }
 
 
@@ -239,11 +235,7 @@ void Game::RenderScene(){
 	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-<<<<<<< HEAD
-	//glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 200.0f);
-=======
-	glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 0.1f, 200.0f);
->>>>>>> 77d56aac5a5426b80d10f49db3a40d8defffedcb
+
 	glm::mat4 lightView = glm::lookAt(light.getDirection() + tank->position, tank->position, glm::vec3(1.0));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
