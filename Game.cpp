@@ -38,7 +38,7 @@ void Game::Init()
     skybox = new Skybox;
 
 
-    pm = new ParticleManager(1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
+    pm = new ParticleManager(1000, glm::vec3(0, 5, 0), glm::vec3(0, 0, 0));
 //    bullet = new Bullet(glm::vec3(0, 0, 0), 0, bulletModel);
     
     tree1 = new Tree(glm::vec3(0,4,20));
@@ -287,7 +287,7 @@ void Game::RenderScene(){
     tree3->draw(partShader);
     tree4->draw(partShader);
 
-//    pm->draw(partShader);
+    pm->draw(partShader);
 
 }
 

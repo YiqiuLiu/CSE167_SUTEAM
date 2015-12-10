@@ -26,9 +26,9 @@ void ParticleManager::init()
         GLfloat b = sqrt(1 - a * a);
         GLfloat x = level / 50.0f * (rand() % 100 - 50) / 50.0f * a;
         GLfloat z = level / 50.0f * (rand() % 100 - 50) / 50.0f * b;
-        glm::vec3 random(x, z, -level / 10.0f -  a);
-        glm::vec3 trans = glm::vec3(1, 0.25, 0);
-        this->particles.push_back(new Particle(this->position + random + trans, this->velocity, 1.0f - (level + 1) / 100.0f));
+        glm::vec3 random(x, level / 10.0f +  a, z);
+
+        this->particles.push_back(new Particle(this->position + random, this->velocity, 1.0f - (level + 1) / 100.0f));
     }
     
     glGenVertexArrays(1, &this->VAO);

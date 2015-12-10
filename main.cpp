@@ -39,6 +39,30 @@ int main()
 {
     // Init GLFW
     glfwInit();
+    
+    
+    int monitorCount;
+    
+    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
+    
+    GLFWmonitor* largestMonitor = monitors[0];
+    
+    const GLFWvidmode* largestVidmode = glfwGetVideoMode(largestMonitor);
+    
+    for (int i = 1; i < monitorCount; i += 1) {
+        const GLFWvidmode* vidmode = glfwGetVideoMode(monitors[i]);
+        
+        if (vidmode->width * vidmode->height > largestVidmode->width * largestVidmode->height) {
+            largestVidmode = vidmode;
+            
+            largestMonitor = monitors[i];
+        }
+    }
+    screenWidth = largestVidmode->width;
+    screenHeight = largestVidmode->height;
+    
+    myGame = Game(screenWidth, screenHeight);
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
