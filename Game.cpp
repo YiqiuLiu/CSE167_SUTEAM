@@ -286,7 +286,7 @@ void Game::RenderScene(){
     tree3->draw(partShader);
     tree4->draw(partShader);
 
-    pm->draw(partShader);
+//    pm->draw(partShader);
 
 }
 
@@ -358,7 +358,10 @@ void Game::shadowRender(Shader shader){
 	for (auto it : sceneList){
 		it->draw(shader);
 	}
-	tree->draw(shader);
+	tree1->draw(shader);
+    tree2->draw(shader);
+    tree3->draw(shader);
+    tree4->draw(shader);
 }
 
 void Game::computeLightView(glm::mat4 &view, glm::mat4 &projection, glm::mat4 trans){
