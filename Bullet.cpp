@@ -7,7 +7,7 @@ Bullet::Bullet(glm::vec3 position,float angle, glm::mat4 selfRotate, Model* mode
 	this->angle = angle;
     this->selfRotate = selfRotate;
 	this->bulletModel = model;
-	this->speed = 1.0;
+	this->speed = 4.0;
 	this->deathCount = 100;
 	//shader = &ResourceManager::GetShader("model");
 }

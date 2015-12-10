@@ -131,12 +131,14 @@ void Game::ProcessInput(GLfloat dt)
 	if (keys[GLFW_KEY_UP]){
 		tank->move(dt);
         camera.updateCamera(tank->position);
+        sound.unmuteMusic();
         sound.playMovSound();
 
 	}
 	if (keys[GLFW_KEY_DOWN]){
 		tank->move(-dt);
         camera.updateCamera(tank->position);
+        sound.unmuteMusic();
         sound.playMovSound();
 
 	}
@@ -144,10 +146,16 @@ void Game::ProcessInput(GLfloat dt)
 		tank->spinBot(dt);
         camera.updateCamera(tank->position);
 //        camera.RotateCamera(0.5 * dt, tank->position);
+        sound.unmuteMusic();
+        sound.playMovSound();
+
 	}
 	if (keys[GLFW_KEY_RIGHT]){
 		tank->spinBot(-dt);
         camera.updateCamera(tank->position);
+        sound.unmuteMusic();
+        sound.playMovSound();
+
 	}
 	if (keys[GLFW_KEY_SPACE]){
         
