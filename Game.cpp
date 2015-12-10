@@ -41,10 +41,10 @@ void Game::Init()
     pm = new ParticleManager(1000, glm::vec3(0, 0, 0), glm::vec3(0, 0, 0));
 //    bullet = new Bullet(glm::vec3(0, 0, 0), 0, bulletModel);
     
-    tree1 = new Tree(glm::vec3(0,5.5,60));
-    tree2 = new Tree(glm::vec3(20,5.5,60));
-//    tree3 = new Tree(glm::vec3(0,5.5,40));
-//    tree4 = new Tree(glm::vec3(20,5.5,40));
+    tree1 = new Tree(glm::vec3(0,4,20));
+    tree2 = new Tree(glm::vec3(20,4,60));
+    tree3 = new Tree(glm::vec3(0,4,40));
+    tree4 = new Tree(glm::vec3(20,4,40));
 //    cout<<"====debug===="<<endl;
 //    cout<<tree->trees->at(0)<<endl;
 //    cout<<tree->trees->at(1)<<endl;
@@ -98,7 +98,7 @@ void Game::Init()
 	//lightProjection = glm::ortho(-10.0f, 15.0f, -5.0f, 15.0f, 1.0f, 100.0f);
 	lightProjection = glm::ortho(-15.0f, 5.0f, -10.0f, 10.0f, 1.0f, 100.0f);
 
-	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
+	tank->setPosition(glm::vec3(pos.x, h + 0.3, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
@@ -284,8 +284,8 @@ void Game::RenderScene(){
     glUniformMatrix4fv(glGetUniformLocation(partShader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
     tree1->draw(partShader);
     tree2->draw(partShader);
-//    tree3->draw(partShader);
-//    tree4->draw(partShader);
+    tree3->draw(partShader);
+    tree4->draw(partShader);
 
 //    pm->draw(partShader);
 
@@ -312,7 +312,7 @@ void Game::Update(float dt){
     glm::vec3 pos = tank->position;
     glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
     float h = SanDiego.getHeight(pos.x,pos.z);
-    tank->setPosition(glm::vec3(pos.x, h + 0.1, pos.z));
+    tank->setPosition(glm::vec3(pos.x, h + 0.3, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
@@ -361,8 +361,8 @@ void Game::shadowRender(Shader shader){
 	}
 	tree1->draw(shader);
     tree2->draw(shader);
-//    tree3->draw(shader);
-//    tree4->draw(shader);
+    tree3->draw(shader);
+    tree4->draw(shader);
 }
 
 void Game::computeLightView(glm::mat4 &view, glm::mat4 &projection, glm::mat4 trans){
