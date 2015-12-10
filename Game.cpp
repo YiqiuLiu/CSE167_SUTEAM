@@ -95,7 +95,8 @@ void Game::Init()
 	float h = SanDiego.getHeight(pos.x,pos.z);
 
 
-	lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 400.0f);
+	lightProjection = glm::ortho(-10.0f, 15.0f, -5.0f, 15.0f, 1.0f, 100.0f);
+
 	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
@@ -343,7 +344,7 @@ void Game::buildShadowMap(){
 	lightSpaceMatrix = lightProjection * lightView;
 	
 	shader.SetMatrix4("lightSpaceMatrix",lightSpaceMatrix,true);
-	glViewport(0, 0,  1024, 1024);
+	glViewport(0, 0,  shadowMap.width, shadowMap.height);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap.getFBO());
 	glClear(GL_DEPTH_BUFFER_BIT);
 	shadowRender(shader);
