@@ -32,7 +32,6 @@ void Game::Init()
     botModel = new Model("./obj/with_texture/tank_bottm_texture.obj");
     bulletModel = new Model("./obj/with_texture/missel_texture.obj");
 
-    
     tank = new Tank(topModel,botModel,bulletModel);
 //    camera.updateCamera(tank->position);
     skybox = new Skybox;
@@ -79,6 +78,8 @@ void Game::Init()
     SanDiego.textures.push_back(inputText);
     
     // texture init done
+    
+    tankmov.init("./wav/offer_x.wav");
 }
 
 
@@ -140,6 +141,7 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 void Game::Render(){
 	buildShadowMap();
 	RenderScene();
+    tankmov.play();
 }
 
 GLuint quadVAO = 0;

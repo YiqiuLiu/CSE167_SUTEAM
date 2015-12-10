@@ -14,7 +14,7 @@
 #include "ShadowMap.h"
 #include "ParticleManager.h"
 #include "Tree.h"
-
+#include "Sound.h"
 class Game
 {
 public:
@@ -27,7 +27,7 @@ public:
 	Bullet* bullet;
 	Tank* tank;
 	std::vector<Drawable*> sceneList;
-
+    Sound tankmov;
 	Camera camera;
 	Light light;
     HeightMap SanDiego;
