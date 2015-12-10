@@ -15,8 +15,8 @@ void Game::Init()
 {
 
     camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
-	light = Light(glm::vec3(10.0f, 50.0f, 0.0f));
-	shadowMap = ShadowMap(Width,Height);
+	light = Light(glm::vec3(10.0f, 10.0f, 0.0f));
+	shadowMap = ShadowMap(1024,1024);
 
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
     ResourceManager::LoadShader("./shader/sky.vs", "./shader/sky.frag", nullptr, "sky");
@@ -313,7 +313,7 @@ void Game::buildShadowMap(){
 	lightSpaceMatrix = lightProjection * lightView;
 	
 	shader.SetMatrix4("lightSpaceMatrix",lightSpaceMatrix,true);
-	glViewport(0, 0, 1024, 1024);
+	glViewport(0, 0,  1024, 1024);
 	glBindFramebuffer(GL_FRAMEBUFFER, shadowMap.getFBO());
 	glClear(GL_DEPTH_BUFFER_BIT);
 	shadowRender(shader);

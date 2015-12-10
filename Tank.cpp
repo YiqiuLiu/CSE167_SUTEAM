@@ -15,7 +15,7 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     this->bot = bot;
 	this->bulletModel = bullet;
     //shader = ResourceManager::GetShader("model");
-    position = glm::vec3(0.0, 10.0, 0.0);
+    position = glm::vec3(0.0, 20.0, 0.0);
     topAngle = 0.0;
 	botAngle = 0.0;
 	moveSpeed = 3.0;
