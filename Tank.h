@@ -22,9 +22,8 @@ public:
 	Tank(Model* top, Model*bot,Model* bullet);
     ~Tank();
     glm::mat4 world;
-	glm::mat4 rotate;
+	glm::mat4 selfRotate;
     glm::vec3 position;
-    glm::vec3 up;
 	float topAngle;
 	float botAngle;
 
