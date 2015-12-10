@@ -36,7 +36,7 @@ void Tank::draw(Shader shader)
     scale = glm::scale(scale, glm::vec3(0.2,0.2,0.2));
 	glm::mat4 rotate = glm::rotate(model, botAngle, glm::vec3(0.0, 1.0, 0.0));
 	glm::mat4 trans = glm::translate(model, position);
-	model = trans*rotate*selfRotate*scale;
+	model = trans*selfRotate*rotate*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     bot->Draw(shader);
     model = glm::mat4(1.0);

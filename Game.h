@@ -38,6 +38,8 @@ public:
     Tree* tree4;
 	ShadowMap shadowMap;
     
+	glm::mat4 lightProjection;
+
 	GLboolean  Keys[1024];
 	GLuint	   Width, Height;
 	// Constructor/Destructor
