@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtx/string_cast.hpp>
 #include <string>
+#include <vector>
 
 
 
@@ -14,7 +15,7 @@ void Game::Init()
 {
 
     camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
-	light = Light(glm::vec3(-10.0f, 50.0f, -12.0f));
+	light = Light(glm::vec3(10.0f, 50.0f, 0.0f));
 	shadowMap = ShadowMap(Width,Height);
 
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
@@ -140,6 +141,7 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 void Game::Render(){
 	buildShadowMap();
 	RenderScene();
+	//RenderTest();
 }
 
 GLuint quadVAO = 0;
@@ -171,73 +173,80 @@ void RenderQuad()
 	glBindVertexArray(0);
 }
 
+void Game::RenderTank(Shader shader){
+	GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(shader.ID, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(shader.ID, "lightPos");
+	GLint viewPosLoc = glGetUniformLocation(shader.ID, "viewPos");
+	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
+	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
+	glUniform3fv(lightPosLoc, 1, glm::value_ptr(light.getDirection()));
+	glUniform3f(viewPosLoc, camera.Position.x, camera.Position.y, camera.Position.z);
+	tank->draw(shader);
+}
 
-void Game::RenderScene(){
-	Shader shader = ResourceManager::GetShader("model");
-    Shader skyshader = ResourceManager::GetShader("sky");
-    Shader terrainshader = ResourceManager::GetShader("do_nothing");
-    Shader part_Shader = ResourceManager::GetShader("part");
+void Game::RenderTerrain(Shader terrainshader){
+	terrainshader.SetVector3f("viewPos", camera.Position, true);
+	terrainshader.SetVector3f("lightPos", light.direction);
+	terrainshader.SetVector3f("objectColor", 1.0f, 0.5f, 0.31f, false);
+	terrainshader.SetVector3f("lightColor", light.getColor(), false);
+	terrainshader.SetFloat("fRenderHeight", SanDiego.scaleHeight);
+	terrainshader.SetFloat("fMaxTextureU", float(SanDiego.height)*0.1f);
+	terrainshader.SetFloat("fMaxTextureV", float(SanDiego.width)*0.1f);
 
+	SanDiego.Draw(terrainshader);
+}
+
+void Game::RenderTest(){
 	glViewport(0, 0, Width, Height);
-    
-	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
 
-    
-    
+	Shader test = ResourceManager::GetShader("test");
+	test.Use();
+	glm::mat4 model = glm::mat4(1.0);
+	test.SetMatrix4("model",model,true);
+	test.SetMatrix4("projection", projection, true);
+	test.SetMatrix4("view", view, true);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D,shadowMap.getShadowMap());
+	RenderQuad();
+}
 
+void Game::RenderScene(){
+	glViewport(0, 0, Width, Height);
 
-	terrainshader.Use();
-	terrainshader.SetVector3f("viewPos", camera.Position, true);
+	// Projection and view matrix
+	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
+	glm::mat4 view = camera.GetViewMatrix();
+	glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 200.0f);
+	glm::mat4 lightView = glm::lookAt(light.getDirection() + tank->position, tank->position, glm::vec3(1.0));
+	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+
+	Shader shader = ResourceManager::GetShader("model");
+	shader.Use();
+	shader.SetMatrix4("view",view,false);
+	shader.SetMatrix4("projection", projection, false);
+	RenderTank(shader);
+
+	for (auto it : sceneList){
+		it->draw(shader);
+	}
+
+    Shader skyshader = ResourceManager::GetShader("sky");
+	skyshader.Use();
+	skyshader.SetMatrix4("projection", projection, true);
+	skyshader.SetMatrix4("view", view, true);
+	skybox->draw(skyshader);
+
+    Shader terrainshader = ResourceManager::GetShader("do_nothing");
 	terrainshader.SetMatrix4("projection", projection, true);
 	terrainshader.SetMatrix4("view", view, true);
-	terrainshader.SetVector3f("lightPos", light.position);
-	terrainshader.SetVector3f("viewPos", camera.Position);
-	glm::mat4 lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, 1.0f, 100.0f);
-	glm::mat4 lightView = glm::lookAt(light.getPosition(), tank->position, glm::vec3(1.0));
-	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 	terrainshader.SetMatrix4("lightSpaceMatrix", lightSpaceMatrix, true);
-	
-	terrainshader.SetVector3f("objectColor", 1.0f, 0.5f, 0.31f, false);
-	terrainshader.SetVector3f("lightColor", light.getColor(), false);
-    terrainshader.SetFloat("fRenderHeight", SanDiego.scaleHeight);
-    terrainshader.SetFloat("fMaxTextureU", float(SanDiego.height)*0.1f);
-    terrainshader.SetFloat("fMaxTextureV", float(SanDiego.width)*0.1f);
-	
-	SanDiego.Draw(terrainshader);
-    
-    
-        shader.Use();
-        //uniform
-        GLint objectColorLoc = glGetUniformLocation(shader.ID, "objectColor");
-        GLint lightColorLoc  = glGetUniformLocation(shader.ID, "lightColor");
-        GLint lightPosLoc    = glGetUniformLocation(shader.ID, "lightPos");
-        GLint viewPosLoc     = glGetUniformLocation(shader.ID, "viewPos");
-        glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-        glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
-        glUniform3fv(lightPosLoc, 1,glm::value_ptr(light.getPosition()));
-        glUniform3f(viewPosLoc,     camera.Position.x, camera.Position.y, camera.Position.z);
-    	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    
-    
-    	shader.SetVector3f("objectColor",1.0f,0.5f,0.31f,false);
-    	shader.SetVector3f("lightColor", light.getColor(), false);
-    	shader.SetVector3f("lightPos", light.getPosition(), false);
-    	shader.SetVector3f("viewPos", camera.Position, false);
-    	shader.SetMatrix4("projection", projection, true);
-    	shader.SetMatrix4("view", view, true);
-        tank->draw(shader);
-        for (auto it : sceneList){
-            it->draw(shader);
-        }
-    
-    
-    skyshader.Use();
-    skyshader.SetMatrix4("projection", projection,true);
-    skyshader.SetMatrix4("view", view, true);
-    skybox->draw(skyshader);
+	RenderTerrain(terrainshader);
+
+
+    Shader part_Shader = ResourceManager::GetShader("part");
 
 //
 //    
@@ -256,7 +265,7 @@ void Game::setLight(GLuint sID){
 	GLint lightColorLoc = glGetUniformLocation(sID, "lightColor");
 	GLint lightPosLoc = glGetUniformLocation(sID, "lightPos");
 	glUniform3fv(lightColorLoc, 1, glm::value_ptr(light.getColor()));
-	glUniform3fv(lightPosLoc, 1, glm::value_ptr(light.getPosition()));
+	glUniform3fv(lightPosLoc, 1, glm::value_ptr(light.getDirection()));
 }
 
 void Game::setPVmatrix(GLuint sID){
@@ -285,13 +294,14 @@ void Game::Update(float dt){
 }
 
 void Game::buildShadowMap(){
+
 	Shader shader = ResourceManager::GetShader("shadowMap");
 	glm::mat4 lightProjection, lightView;
 	glm::mat4 lightSpaceMatrix;
 	GLfloat near_plane = 1.0f;
-	GLfloat far_plane = 100.0f;
-	lightProjection = glm::ortho(-20.0f,20.0f,-20.0f,20.0f,near_plane,far_plane);
-	lightView = glm::lookAt(light.getPosition(), tank->position, glm::vec3(1.0));
+	GLfloat far_plane = 200.0f;
+	lightProjection = glm::ortho(-20.0f,30.0f,-10.0f,30.0f,near_plane,far_plane);
+	lightView = glm::lookAt(light.getDirection()+tank->position, tank->position, glm::vec3(1.0));
 	lightSpaceMatrix = lightProjection * lightView;
 	
 	shader.SetMatrix4("lightSpaceMatrix",lightSpaceMatrix,true);
@@ -306,4 +316,21 @@ void Game::shadowRender(Shader shader){
 	shader.Use();
 	SanDiego.Draw(shader);
 	tank->draw(shader);
+}
+
+void Game::computeLightView(glm::mat4 &view, glm::mat4 &projection, glm::mat4 trans){
+	glm::vec4 position = glm::vec4(tank->position + light.direction,1.0);
+	std::vector<glm::vec4> points;
+	points.push_back(trans*glm::vec4(1.0, 1.0, 1.0, 1.0));
+	points.push_back(trans*glm::vec4(1.0, 1.0, -1.0, 1.0));
+	points.push_back(trans*glm::vec4(1.0, -1.0, 1.0, 1.0));
+	points.push_back(trans*glm::vec4(1.0, -1.0, -1.0, 1.0));
+	points.push_back(trans*glm::vec4(-1.0, 1.0, 1.0, 1.0));
+	points.push_back(trans*glm::vec4(-1.0, 1.0, -1.0, 1.0));
+	points.push_back(trans*glm::vec4(-1.0, -1.0, 1.0, 1.0));
+	points.push_back(trans*glm::vec4(-1.0, -1.0, -1.0, 1.0));
+
+	glm::vec4 dir = glm::vec4(light.direction,0.0);
+
+
 }
