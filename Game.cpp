@@ -14,7 +14,7 @@ Game::Game(GLuint width, GLuint height){
 void Game::Init()
 {
 
-    camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
+    camera = Camera(glm::vec3(0.0f, 6.0f, -6.0f));
 	light = Light(glm::vec3(10.0f, 50.0f, 0.0f));
 	shadowMap = ShadowMap(Width,Height);
 
@@ -82,11 +82,11 @@ void Game::Init()
     //tankmov.init("./wav/offer_x.wav");
 
 	//tank init
-	tank = new Tank(topModel, botModel, bulletModel);
+    tank = new Tank(topModel, botModel, bulletModel);
 	glm::vec3 pos = tank->position;
 	glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
 	float h = SanDiego.getHeight(pos.x,pos.z);
-	tank->setPosition(glm::vec3(pos.x, h+1.5, pos.z));
+	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
 }
 
 

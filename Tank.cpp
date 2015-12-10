@@ -14,6 +14,7 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     this->top = top;
     this->bot = bot;
 	this->bulletModel = bullet;
+    this->up = glm::vec3(0.0, 1.0, 0.0);
     //shader = ResourceManager::GetShader("model");
     position = glm::vec3(0.0, 10.0, 0.0);
     topAngle = 0.0;
@@ -30,15 +31,17 @@ Tank::~Tank()
 void Tank::draw(Shader shader)
 {
     glm::mat4 model = glm::mat4(1.0);
+    glm::mat4 scale;
+    scale = glm::scale(scale, glm::vec3(0.2,0.2,0.2));
 	glm::mat4 rotate = glm::rotate(model, botAngle, glm::vec3(0.0, 1.0, 0.0));
 	glm::mat4 trans = glm::translate(model, position);
-	model = trans*rotate;
+	model = trans*rotate*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     bot->Draw(shader);
     model = glm::mat4(1.0);
     rotate = glm::rotate(model, topAngle, glm::vec3(0.0, 1.0, 0.0));
 	trans = glm::translate(model, position);
-	model = trans*rotate;
+	model = trans*rotate*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     top->Draw(shader);
 }

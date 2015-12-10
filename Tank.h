@@ -24,6 +24,7 @@ public:
     glm::mat4 world;
 	glm::mat4 rotate;
     glm::vec3 position;
+    glm::vec3 up;
 	float topAngle;
 	float botAngle;
 

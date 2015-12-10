@@ -151,7 +151,7 @@ void main()
     // Calculate shadow
     float shadow = ShadowCalculation(fs_in.FragPosLightSpace);                      
     shadow = min(shadow, 0.75); // reduce shadow strength a little: allow some diffuse/specular light in shadowed regions
-    vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * vTexColor;      
+    vec3 lighting = (ambient + (1.0 - shadow) * (diffuse + specular)) * vTexColor.xyz;
     
     Fragcolor = vec4(lighting, 1.0f);
 }
