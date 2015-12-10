@@ -17,7 +17,7 @@ Particle::Particle(glm::vec3 pos, glm::vec3 vel, GLfloat li) : Drawable()
     this->life = li;
     this->setup();
     this->moveSpeed = 0.1f;
-    this->dieSpeed = 0.05f;
+    this->dieSpeed = 0.1f;
 }
 
 Particle::~Particle()
@@ -29,8 +29,10 @@ void Particle::draw(Shader shader)
 {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glm::mat4 model;
+    glm::mat4 model1;
     model = glm::translate(model, this->position);
-    model = glm::scale(model, glm::vec3(3, 3, 3));
+    model1 = glm::scale(model1, glm::vec3(3, 3, 3));
+    model = model * model1;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glm::vec3 color_yellow(1.0, 1.0, 0.0);
     glm::vec3 color_red(1.0, 0, 0);
@@ -45,7 +47,7 @@ void Particle::draw(Shader shader)
 
 void Particle::update(GLfloat dt)
 {
-    this->position += dt * moveSpeed * this->velocity;
+    this->position += dt *  this->velocity;
     this->life -= dt * dieSpeed;
 }
 

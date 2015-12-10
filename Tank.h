@@ -22,6 +22,7 @@ public:
 	Tank(Model* top, Model*bot,Model* bullet);
     ~Tank();
     glm::mat4 world;
+	glm::mat4 selfRotate;
     glm::vec3 position;
 	float topAngle;
 	float botAngle;
@@ -30,6 +31,7 @@ public:
     void move(float dt);
     void spinTop(GLfloat angle);
 	void spinBot(GLfloat dt);
+	void setPosition(glm::vec3);
 	Bullet* fire();
 private:
     Model* bot;

@@ -14,7 +14,7 @@
 #include "ShadowMap.h"
 #include "ParticleManager.h"
 #include "Tree.h"
-#include "Sound.h"
+//#include "Sound.h"
 class Game
 {
 public:
@@ -27,7 +27,7 @@ public:
 	Bullet* bullet;
 	Tank* tank;
 	std::vector<Drawable*> sceneList;
-    Sound tankmov;
+    //Sound tankmov;
 	Camera camera;
 	Light light;
     HeightMap SanDiego;
@@ -63,6 +63,11 @@ private:
 	void setPVmatrix(GLuint);
 	void buildShadowMap();
 	void RenderScene();
+	void RenderTank(Shader);
+	void RenderTerrain(Shader);
 	void shadowRender(Shader);
+	void RenderSky(Shader);
+	void RenderTest();
+	void computeLightView(glm::mat4 &view,glm::mat4 &projection,glm::mat4 trans);
 };
 #endif

@@ -1,9 +1,9 @@
 #include "Light.h"
 
 
-Light::Light(glm::vec3 position,glm::vec3 lightColor)
+Light::Light(glm::vec3 direction,glm::vec3 lightColor)
 {
-	this->position = position;
+	this->direction = direction;
 	this->lightColor = lightColor;
 }
 
@@ -12,8 +12,8 @@ Light::~Light()
 {
 }
 
-glm::vec3 Light::getPosition(){
-	return position;
+glm::vec3 Light::getDirection(){
+	return direction;
 }
 
 glm::vec3 Light::getColor(){
