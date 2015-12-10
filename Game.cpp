@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <GLFW/glfw3.h>
 #include <glm/gtx/string_cast.hpp>
+#include <glm/gtx/vector_angle.hpp>
 #include <string>
 #include <vector>
 
@@ -82,13 +83,22 @@ void Game::Init()
     //tankmov.init("./wav/offer_x.wav");
 
 	//tank init
-	tank = new Tank(topModel, botModel, bulletModel);
+    tank = new Tank(topModel, botModel, bulletModel);
 	glm::vec3 pos = tank->position;
 	glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
 	float h = SanDiego.getHeight(pos.x,pos.z);
+<<<<<<< HEAD
 	tank->setPosition(glm::vec3(pos.x, h+1.5, pos.z));
 
 	lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 400.0f);
+=======
+	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
+    float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
+    glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
+    glm::mat4 temp = glm::mat4();
+    tank->selfRotate = glm::rotate(temp, angle, axis);
+    
+>>>>>>> 77d56aac5a5426b80d10f49db3a40d8defffedcb
 }
 
 
@@ -229,7 +239,11 @@ void Game::RenderScene(){
 	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
+<<<<<<< HEAD
 	//glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 200.0f);
+=======
+	glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 0.1f, 200.0f);
+>>>>>>> 77d56aac5a5426b80d10f49db3a40d8defffedcb
 	glm::mat4 lightView = glm::lookAt(light.getDirection() + tank->position, tank->position, glm::vec3(1.0));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
@@ -287,6 +301,16 @@ void Game::setPVmatrix(GLuint sID){
 
 void Game::Update(float dt){
     //testParticle->update(dt);
+    
+    //tank position
+    glm::vec3 pos = tank->position;
+    glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
+    float h = SanDiego.getHeight(pos.x,pos.z);
+    tank->setPosition(glm::vec3(pos.x, h + 0.1, pos.z));
+    float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
+    glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
+    glm::mat4 temp = glm::mat4();
+    tank->selfRotate = glm::rotate(temp, angle, axis);
 	Drawable* del;
 	for (auto it = sceneList.begin(); it != sceneList.end();++it){
 		if ((*it) == 0){
@@ -308,7 +332,7 @@ void Game::buildShadowMap(){
 	Shader shader = ResourceManager::GetShader("shadowMap");
 	glm::mat4 lightView;
 	glm::mat4 lightSpaceMatrix;
-	GLfloat near_plane = 1.0f;
+	GLfloat near_plane = 0.1f;
 	GLfloat far_plane = 200.0f;
 	lightView = glm::lookAt(light.getDirection()+tank->position, tank->position, glm::vec3(1.0));
 	lightSpaceMatrix = lightProjection * lightView;
