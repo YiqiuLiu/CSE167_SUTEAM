@@ -7,12 +7,17 @@
 //
 
 #include "Tree.h"
+#include "time.h"
 #include <GL/glew.h>
 #include <iostream>
 
 Tree::Tree(glm::vec3 pos) : Drawable(){
     this->pos = pos;
+#ifdef __APPLE__
     this->angle = glm::radians(30.0f);
+#else
+	this->angle = 30.0f;
+#endif
     this->length = 0.05f;
     this->str = "X";
     this->trees = new vector<string>();
@@ -202,7 +207,9 @@ void Tree::draw(Shader shader)
 
 void Tree::drawLine(Shader shader)
 {
-    glm::mat4 model = active;
+	glm::mat4 scale = glm::mat4();
+	scale = glm::scale(scale,glm::vec3(0.8,0.8,0.8));
+	glm::mat4 model = active*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glm::vec4 color(0.55, 0.27, 0.07, 1.0);
     glUniform4fv(glGetUniformLocation(shader.ID, "color_calculate"), 1, glm::value_ptr(color));
@@ -229,12 +236,14 @@ void Tree::drawLine(Shader shader)
 //    glDisableVertexAttribArray(0);
     
 //    modelStack.push_back(active);
-    active = glm::translate(active, glm::vec3(0,length,0));
+    active = glm::translate(active, glm::vec3(0,length*0.8,0));
 }
 
 void Tree::leaf(Shader shader)
 {
-    glm::mat4 model = active;
+	glm::mat4 scale = glm::mat4();
+	scale = glm::scale(scale, glm::vec3(0.5, 0.5, 0.5));
+    glm::mat4 model = active*scale;
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     glm::vec4 color(0.50, 1.0, 0.0, 1.0);
     glUniform4fv(glGetUniformLocation(shader.ID, "color_calculate"), 1, glm::value_ptr(color));

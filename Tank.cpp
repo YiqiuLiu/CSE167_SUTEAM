@@ -21,7 +21,11 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     topAngle = 0.0;
 	botAngle = 0.0;
 	moveSpeed = 3.0;
+#ifdef __APPLE__
 	spinSpeed = 0.1;
+#else
+	spinSpeed = 10.0;
+#endif
 }
 
 Tank::~Tank()
@@ -30,7 +34,7 @@ Tank::~Tank()
 }
 
 void Tank::draw(Shader shader)
-{
+{	
     glm::mat4 model = glm::mat4(1.0);
     glm::mat4 scale;
     scale = glm::scale(scale, glm::vec3(0.5,0.5,0.5));
@@ -49,12 +53,23 @@ void Tank::draw(Shader shader)
 
 void Tank::move(GLfloat dt)
 {
+#ifdef __APPLE__
 	float scale = dt*moveSpeed;
 	this->position += glm::vec3(scale*sinf(botAngle), 0, scale*cosf(botAngle));
+#else
+	float scale = dt*moveSpeed;
+	this->position += glm::vec3(scale*sinf(glm::radians(botAngle)), 0, scale*cosf(glm::radians(botAngle)));
+#endif
+
 }
 void Tank::spinTop(GLfloat angle)
 {
+#ifdef __APPLE__
     this->topAngle += angle*spinSpeed;
+#else
+	this->topAngle += angle*spinSpeed/10.0;
+#endif
+
 }
 
 void Tank::spinBot(GLfloat dt){
@@ -62,7 +77,7 @@ void Tank::spinBot(GLfloat dt){
 }
 
 Bullet* Tank::fire(){
-	Bullet* bullet = new Bullet(this->position,this->topAngle,this->bulletModel);
+	Bullet* bullet = new Bullet(this->position,this->topAngle, this->selfRotate, this->bulletModel);
 	return bullet;
 }
 

@@ -9,6 +9,7 @@ class Bullet :
 {
 public:
 	glm::vec3 position;
+    glm::mat4 selfRotate;
 	float angle;
 	Model* bulletModel;
 
@@ -16,7 +17,7 @@ public:
 	float speed;
 
 	//Shader* shader;
-	Bullet(glm::vec3, float, Model*);
+    Bullet(glm::vec3, float, glm::mat4, Model*);
 	~Bullet();
 	void draw(Shader);
 	void update(float dt);
