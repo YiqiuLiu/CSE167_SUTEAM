@@ -19,7 +19,7 @@ Bullet::~Bullet()
 void Bullet::draw(Shader shader){
 	glm::mat4 model = glm::mat4(1.0);
     glm::mat4 scale;
-    scale = glm::scale(scale, glm::vec3(0.2,0.2,0.2));
+    scale = glm::scale(scale, glm::vec3(0.5,0.5,0.5));
 	glm::mat4 rotate = glm::rotate(model, angle, glm::vec3(0.0, 1.0, 0.0));
 	glm::mat4 trans = glm::translate(model, position);
 	model = trans*rotate*scale;

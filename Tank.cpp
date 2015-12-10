@@ -21,7 +21,7 @@ Tank::Tank(Model* top, Model*bot, Model* bullet) : Drawable()
     topAngle = 0.0;
 	botAngle = 0.0;
 	moveSpeed = 3.0;
-	spinSpeed = 0.5;
+	spinSpeed = 0.1;
 }
 
 Tank::~Tank()
@@ -33,7 +33,7 @@ void Tank::draw(Shader shader)
 {
     glm::mat4 model = glm::mat4(1.0);
     glm::mat4 scale;
-    scale = glm::scale(scale, glm::vec3(0.2,0.2,0.2));
+    scale = glm::scale(scale, glm::vec3(0.5,0.5,0.5));
 	glm::mat4 rotate = glm::rotate(model, botAngle, glm::vec3(0.0, 1.0, 0.0));
 	glm::mat4 trans = glm::translate(model, position);
 	model = trans*selfRotate*rotate*scale;
