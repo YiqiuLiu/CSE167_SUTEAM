@@ -23,4 +23,4 @@ DerivedData
 *.suo
 *.vcxproj
 *.filters
-*.pbxproj
+/TankBattle.xcodeproj/*

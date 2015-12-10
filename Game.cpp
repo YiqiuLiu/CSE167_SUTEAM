@@ -79,7 +79,7 @@ void Game::Init()
     
     // texture init done
     
-    tankmov.init("./wav/offer_x.wav");
+    //tankmov.init("./wav/offer_x.wav");
 }
 
 
@@ -141,7 +141,7 @@ void Game::ProcessMouseScroll(GLfloat yoffset)
 void Game::Render(){
 	buildShadowMap();
 	RenderScene();
-    tankmov.play();
+    //tankmov.play();
 }
 
 GLuint quadVAO = 0;
