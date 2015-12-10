@@ -15,8 +15,8 @@ Game::Game(GLuint width, GLuint height){
 void Game::Init()
 {
 
-    camera = Camera(glm::vec3(0.0f, 6.0f, -6.0f));
-	light = Light(glm::vec3(100.0f, 100.0f, 0.0f));
+    camera = Camera(glm::vec3(0.0f, 10.0f, -10.0f));
+	light = Light(glm::vec3(10.0f, 8.0f, 0.0f));
 	shadowMap = ShadowMap(1024,1024);
 
     ResourceManager::LoadShader("./shader/model_loading.vs", "./shader/model_loading.frag", nullptr, "model");
@@ -87,12 +87,14 @@ void Game::Init()
 	glm::vec3 pos = tank->position;
 	glm::vec3 normal = SanDiego.getNormal(pos.x, pos.z);
 	float h = SanDiego.getHeight(pos.x,pos.z);
+
+
+	lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 1.0f, 400.0f);
 	tank->setPosition(glm::vec3(pos.x, h + 1, pos.z));
     float angle = -glm::angle(normal, glm::vec3(0, 1, 0));
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
     tank->selfRotate = glm::rotate(temp, angle, axis);
-    
 }
 
 
@@ -234,7 +236,7 @@ void Game::RenderScene(){
 	// Projection and view matrix
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)Width / (float)Height, 0.1f, 1000.0f);
 	glm::mat4 view = camera.GetViewMatrix();
-	glm::mat4 lightProjection = glm::ortho(-20.0f, 30.0f, -10.0f, 30.0f, 0.1f, 200.0f);
+
 	glm::mat4 lightView = glm::lookAt(light.getDirection() + tank->position, tank->position, glm::vec3(1.0));
 	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
@@ -322,11 +324,10 @@ void Game::Update(float dt){
 void Game::buildShadowMap(){
 
 	Shader shader = ResourceManager::GetShader("shadowMap");
-	glm::mat4 lightProjection, lightView;
+	glm::mat4 lightView;
 	glm::mat4 lightSpaceMatrix;
 	GLfloat near_plane = 0.1f;
 	GLfloat far_plane = 200.0f;
-	lightProjection = glm::ortho(-20.0f,30.0f,-10.0f,30.0f,near_plane,far_plane);
 	lightView = glm::lookAt(light.getDirection()+tank->position, tank->position, glm::vec3(1.0));
 	lightSpaceMatrix = lightProjection * lightView;
 	
