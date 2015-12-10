@@ -101,10 +101,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
     
-    if(action == GLFW_PRESS)
+    if(action == GLFW_PRESS) {
+        if (key == GLFW_KEY_UP) myGame.sound.unmuteMusic();
         myGame.keys[key] = true;
+    }
     else if(action == GLFW_RELEASE)
+    {
         myGame.keys[key] = false;
+        myGame.sound.muteMusic();
+    }
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)

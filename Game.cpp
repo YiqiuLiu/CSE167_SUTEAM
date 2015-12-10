@@ -102,6 +102,10 @@ void Game::Init()
     glm::vec3 axis = glm::cross(normal, glm::vec3(0, 1, 0));
     glm::mat4 temp = glm::mat4();
     tank->selfRotate = glm::rotate(temp, angle, axis);
+    
+    //sound
+    sound.initOpenAL();
+    
 }
 
 
@@ -126,10 +130,14 @@ void Game::ProcessInput(GLfloat dt)
 	if (keys[GLFW_KEY_UP]){
 		tank->move(dt);
         camera.updateCamera(tank->position);
+        sound.playMovSound();
+
 	}
 	if (keys[GLFW_KEY_DOWN]){
 		tank->move(-dt);
         camera.updateCamera(tank->position);
+        sound.playMovSound();
+
 	}
 	if (keys[GLFW_KEY_LEFT]){
 		tank->spinBot(dt);
@@ -141,6 +149,8 @@ void Game::ProcessInput(GLfloat dt)
         camera.updateCamera(tank->position);
 	}
 	if (keys[GLFW_KEY_SPACE]){
+        
+        sound.playfireSound();
 		sceneList.push_back(tank->fire());
 	}
 //    std::cout<<glm::to_string(tank->position)<<std::endl;

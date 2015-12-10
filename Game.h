@@ -14,6 +14,7 @@
 #include "ShadowMap.h"
 #include "ParticleManager.h"
 #include "Tree.h"
+#include "Sound.h"
 //#include "Sound.h"
 class Game
 {
@@ -23,7 +24,7 @@ public:
 	Model* botModel;
 	Model* topModel;
 	Model* bulletModel;
-
+    Sound sound;
 	Bullet* bullet;
 	Tank* tank;
 	std::vector<Drawable*> sceneList;
